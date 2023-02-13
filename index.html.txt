@@ -7,6 +7,12 @@
 
 <h1>Hello world!</h1>
 <p>This is the first file in my new Git Repo.</p>
+
 <p>Fix emergency and merge </p>
+
+<h1>curry is always big </h1>
+<h1>curry is always big for second time</h1>
+
+
 </body>
 </html>
