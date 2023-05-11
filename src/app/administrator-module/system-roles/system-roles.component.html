@@ -1,0 +1,183 @@
+
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">User Groups Management.</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    [dataSource]="paramDataSet"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    [columnAutoWidth]="true"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id"
+    height="funcpopHeigt(datagridHeight)">
+
+    <dxo-search-panel [visible]="true">
+      </dxo-search-panel>
+      <dxo-paging [pageSize]="100"></dxo-paging>
+      <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName={{title}} [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxi-column
+    caption="Group Id"
+        dataField="id"
+        [width]="100">
+    </dxi-column>
+    <dxi-column
+        caption="Group Code"
+        dataField="code">
+    </dxi-column>
+    <dxi-column
+    caption="Group Description"
+    dataField="desc">
+</dxi-column>
+
+
+    <dxi-column
+    caption="Action"
+    dataType="string"
+    cellTemplate="cellTemplateEnabled">
+    <div *dxTemplate="let d of 'cellTemplateEnabled'">
+
+      <div class="text-center">
+          <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Group Privileges" (click)="onGetUserGroupPrivileges(d.data, 1)"><i class="fa fa-eye" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-success ml-2" data-toggle="tooltip" data-placement="top" title="Add Group Privilege" (click)="filterUserGroups(d.data)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-danger ml-2" data-toggle="tooltip" data-placement="top" title="Remove Group Privilege" (click)="onGetUserGroupPrivileges(d.data, 2)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+      </div>
+
+    </div>
+  </dxi-column>
+  </dx-data-grid>
+  </div>
+</div>
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(50)" [height]="funcpopHeigt(55)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showViewGrpPrivs">
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <dx-data-grid
+      [dataSource]="userGroupPrivileges"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      [columnAutoWidth]="true"
+      [showRowLines] = "true"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="true"
+      keyExpr="id"
+      height="funcpopHeigt(datagridHeight)">
+
+      <dxo-search-panel [visible]="false">
+        </dxo-search-panel>
+        <dxo-paging [pageSize]="100"></dxo-paging>
+        <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+      <dxo-export [enabled]="false" fileName='User Groups Privileges' [allowExportSelectedData]="true"></dxo-export>
+      <dxo-selection mode="single"></dxo-selection>
+
+      <dxi-column
+      caption="Id"
+          dataField="id"
+          [width]="100">
+      </dxi-column>
+      <dxi-column
+          caption="Code"
+          dataField="code">
+      </dxi-column>
+      <dxi-column
+      caption="Description"
+      dataField="desc">
+  </dxi-column>
+
+
+    </dx-data-grid>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(50)" [height]="funcpopHeigt(55)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showAddGrpPrivs">
+  <div *dxTemplate="let data of 'content'">
+    <form [formGroup]="paramwinfrm">
+
+        <dx-tag-box
+        formControlName="privileges"
+        [dataSource]="unavailablePrivilegesList"
+        [showSelectionControls]="true"
+        applyValueMode="useButtons"
+        displayExpr="description"
+        valueExpr="id"
+        placeholder="Choose Privileges...">
+      </dx-tag-box>
+
+      <div class="border p-3 mt-2">
+        <div class="d-flex flex-nowrap flex-row-reverse">
+          <div class="order-1 pr-2">
+            <dx-button
+              text="Assign Privileges"
+              icon="fa fa-plus-circle"
+              type="success"
+              (click)="addPrivileges()">
+           </dx-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</dx-popup>
+
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(50)" [height]="funcpopHeigt(55)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showRemGrpPrivs">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <dx-data-grid
+      id="gridContainer"
+      keyExpr="id"
+      [dataSource]="userGroupPrivileges"
+      [showBorders]="false"
+      [focusedRowEnabled]="false"
+      [columnAutoWidth]="true"
+      [showRowLines]="true"
+      (onRowRemoving)="logEvent($event)"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="false">
+      <dxo-search-panel [visible]="false"> </dxo-search-panel>
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+      <dxo-export [enabled]="false" fileName="Members List" [allowExportSelectedData]="true">
+      </dxo-export>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-header-filter [visible]="false"></dxo-header-filter>
+      <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+      <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-editing
+      mode="row"
+      [allowAdding]="false"
+      [allowUpdating]="false"
+      [allowDeleting]="true">
+      </dxo-editing>
+
+      <dxi-column
+      caption="Id"
+          dataField="id"
+          [width]="100">
+      </dxi-column>
+      <dxi-column
+          caption="Code"
+          dataField="code">
+      </dxi-column>
+      <dxi-column
+      caption="Description"
+      dataField="desc">
+  </dxi-column>
+
+    </dx-data-grid>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

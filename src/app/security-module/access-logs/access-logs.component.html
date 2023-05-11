@@ -1,0 +1,29 @@
+
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">Invoice Summary.</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    id="gridContainer2"
+    [dataSource]="paramDataSet"
+    keyExpr="invId"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Invoice Summary" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+></dxo-pager>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+</dx-data-grid>
+      </div>
+</div>

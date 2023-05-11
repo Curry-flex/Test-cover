@@ -1,0 +1,127 @@
+<div class="content-block row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{ title }}
+      </div>
+      <div class="card-body card-nopadding">
+
+        <form [formGroup]="searchForm">
+
+          <div class="row p-3">
+            <div class="col-12 col-md-4">
+            <label for="date">Date</label>
+            <dx-text-box id="date" formControlName="date" placeholder="Date format (yyyy-MM-dd) eg. 2022-02-09">
+            </dx-text-box>
+          </div>
+
+            <div class="col-12 col-md-4">
+              <label for="employerNo">Employer Number</label>
+              <dx-text-box id="employerNo" formControlName="employerNo" placeholder="Enter employer number">
+              </dx-text-box>
+            </div>
+
+
+            <div class="col-12 col-md-4">
+              <label for="controlNo">Control Number</label>
+              <dx-text-box id="controlNo" formControlName="controlNo" placeholder="Enter control number">
+              </dx-text-box>
+            </div>
+
+          </div>
+
+          <div class="row p-3">
+            <div class="col-12 col-md-4">
+            <label for="memberNo">Member Number</label>
+            <dx-text-box id="memberNo" formControlName="memberNo" placeholder="Enter member number">
+            </dx-text-box>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="invoiceNo">Invoice Number</label>
+              <dx-text-box id="invoiceNo" formControlName="invoiceNo" placeholder="Enter invoice No">
+              </dx-text-box>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="payStatus">Payment Status</label>
+              <dx-select-box
+              id="payStatus"
+              valueExpr="id"
+              displayExpr="value"
+              formControlName="payStatus"
+              [dataSource]="paymentStatusDatasource"
+              placeholder="Select...">
+            </dx-select-box>
+            </div>
+          </div>
+
+          <div class="row p-3">
+            <div class="col-12">
+              <dx-button
+              id="action"
+              text="Search Record"
+              type="default"
+              [useSubmitBehavior]="false"
+              (click)="contributionInvoicesList()">
+              </dx-button>
+            </div>
+          </div>
+        </form>
+        <div>
+          <dx-data-grid
+          id="gridContainer2"
+          keyExpr="invoiceNo"
+          [dataSource]="datasource"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          [columnAutoWidth]="true"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false">
+          <dxo-search-panel [visible]="true"> </dxo-search-panel>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+          <dxo-export [enabled]="true" fileName="Contribution Invoices List" [allowExportSelectedData]="true">
+          </dxo-export>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-header-filter [visible]="false"></dxo-header-filter>
+          <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+          <!-- <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling> -->
+
+          <dxi-column dataField="invoiceNo"></dxi-column>
+          <dxi-column dataField="trackNo"></dxi-column>
+          <dxi-column dataField="invType"></dxi-column>
+          <dxi-column dataField="employerNo"></dxi-column>
+          <dxi-column dataField="employerName"></dxi-column>
+          <dxi-column dataField="memberNo"></dxi-column>
+          <dxi-column dataField="memberName"></dxi-column>
+          <dxi-column dataField="invoiceAmount" dataType="number">
+            <dxo-format [precision]="2" type="fixedPoint"></dxo-format>
+          </dxi-column>
+          <dxi-column dataField="amountPaid" dataType="number">
+            <dxo-format [precision]="2" type="fixedPoint"></dxo-format>
+          </dxi-column>
+          <dxi-column dataField="currencyCode"></dxi-column>
+          <dxi-column dataField="branchCode"></dxi-column>
+          <dxi-column dataField="createdBy"></dxi-column>
+          <dxi-column dataField="payStatus"></dxi-column>
+          <dxi-column dataField="creationDate" dataType="date" format="yyyy-MM-dd HH:mm:ss a"></dxi-column>
+          <dxi-column dataField="invoiceDesc"></dxi-column>
+
+        <!-- SUMMARY -->
+        <dxo-summary [recalculateWhileEditing]="true">
+          <dxi-total-item
+              column="invoiceNo"
+              summaryType="count"
+              valueFormat="fixedPoint">
+          </dxi-total-item>
+      </dxo-summary>
+
+        </dx-data-grid>
+        </div>
+
+      </div>
+    </div>
+  </div>

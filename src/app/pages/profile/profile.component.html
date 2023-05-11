@@ -1,0 +1,139 @@
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+      <div class="card-body card-nopadding">
+        <div class="container-fluid">
+          <div class="row">
+            <form [formGroup]="accountDetailsForm">
+              <div class="col-12">
+                <fieldset>
+                  <!-- <legend>User's system information</legend> -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="">User ID</label>
+                      <dx-text-box formControlName="id" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">System ID</label>
+                      <dx-text-box formControlName="systemId" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Account Created At</label>
+                      <dx-text-box formControlName="createdAt" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Account Created By</label>
+                      <dx-text-box formControlName="createdBy" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Account Last Modified At</label>
+                      <dx-text-box formControlName="modifiedAt" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Account Last Modified By</label>
+                      <dx-text-box formControlName="modifiedBy" readOnly="true"></dx-text-box>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-12">
+                <fieldset>
+                  <!-- <legend>User's personal information</legend> -->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="firstName">First Name</label>
+                      <dx-text-box  formControlName="firstName"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="middleName">Middle Name</label>
+                      <dx-text-box formControlName="middleName"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="lastName">Last Name</label>
+                      <dx-text-box formControlName="lastName"></dx-text-box>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="">Email</label>
+                      <dx-text-box formControlName="email"></dx-text-box>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="">Account Status</label>
+                      <dx-text-box formControlName="status" readOnly="true"></dx-text-box>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                      <label for="">User Role</label>
+                      <dx-text-box formControlName="userGroup" readOnly="true"></dx-text-box>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <!-- <div class="col-12">
+                <fieldset>
+                  <table class="table table-striped table-bordered" style="width: 100%;">
+                    <thead class="thead-primary">
+                      <tr>
+                        <th>#</th>
+                        <th>Phone Number</th>
+                        <th>Type</th>
+                        <th>Main</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor = "let phoneDetails of phones; let indexOfElement = index">
+                          <th scope="row">{{indexOfElement + 1}}</th>
+                          <td scope="row">{{phoneDetails.number}}</td>
+                          <td>{{phoneDetails.type}}</td>
+                          <td>{{phoneDetails.main == 1 ? 'Yes' : 'No'}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </fieldset>
+              </div> -->
+
+              <div class="col-12 p-3">
+                <button  type="button" class="btn btn-primary" (click)="funcChangeUserPassword()">Change Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<dx-popup class="popup" [width]="funcpopWidth(30)" [height]="380" [showTitle]="true" title="Change Password"
+  [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="changePasswordWin">
+
+  <div *dxTemplate="let data of 'content'">
+    <form [formGroup]="changePasswordFrm" class="col-lg-12 row div-nopadding" style="background: #fff;"
+      enctype="multipart/form-data" role="form" autocomplete="off">
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">Old password</label>
+        <dx-text-box formControlName="oldPassword" mode="password" placeholder="Old Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">New password</label>
+        <dx-text-box formControlName="newPassword" mode="password" placeholder="New Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">Confirm password</label>
+        <dx-text-box formControlName="confirmPassword" mode="password" placeholder="Confirm Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <hr />
+        <dx-button text="Change Password" type="success" icon="check" [elementAttr]="{ class: 'custom-btn pull-right' }"
+          (click)="OnPasswordReset()">
+        </dx-button>
+      </div>
+    </form>
+  </div>
+</dx-popup>

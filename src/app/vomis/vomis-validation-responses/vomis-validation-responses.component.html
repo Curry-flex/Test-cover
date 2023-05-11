@@ -1,0 +1,84 @@
+<div class="col div-nopadding">
+  <dx-data-grid
+  id="gridContainer2"
+  keyExpr="id"
+  [dataSource]="vomisDataSet"
+  [showBorders]="false"
+  [focusedRowEnabled]="true"
+  [columnAutoWidth]="true"
+  (onToolbarPreparing)="onToolBarVomisPreparing($event, vomisApiReqRes, 'Vomis API Validation Responses')"
+  height="funcpopHeigt(datagridHeight)"
+  [showRowLines]="true"
+  [allowColumnResizing]="true"
+  [columnHidingEnabled]="true">
+  <dxo-search-panel [visible]="true"> </dxo-search-panel>
+  <dxo-paging [pageSize]="100"></dxo-paging>
+  <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+  <dxo-filter-row [visible]="false"></dxo-filter-row>
+  <dxo-export [enabled]="true" fileName="VOMIS API VALIDATION RESPONSES" [allowExportSelectedData]="true">
+  </dxo-export>
+  <dxo-selection mode="single"></dxo-selection>
+  <dxo-header-filter [visible]="false"></dxo-header-filter>
+  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  <dxo-load-panel [enabled]="true"></dxo-load-panel>
+  <!-- <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling> -->
+
+  <dxi-column
+  caption="ID"
+  dataField="id"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  caption="Op Date"
+  dataField="txnDate"
+  dataType="date"
+  format="yyyy-MM-dd hh:mm:ss a">
+  </dxi-column>
+
+  <dxi-column
+  dataField="memberNumber"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  dataField="memberName"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  dataField="memberType"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  caption="Request ID"
+  dataField="reqId"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  caption="Response ID"
+  dataField="resId"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  caption="Status Code"
+  dataField="code"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  caption="Status Message"
+  dataField="message"
+  dataType="string">
+  </dxi-column>
+
+  <dxi-column
+  dataField="rawData">
+</dxi-column>
+
+  </dx-data-grid>
+</div>
+

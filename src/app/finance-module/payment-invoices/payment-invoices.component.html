@@ -1,0 +1,550 @@
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    id="gridContainer2"
+    (onToolbarPreparing)="onToolBarPreparing($event)"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    [dataSource]="datasource"
+    [focusedRowEnabled]="true"
+    [showBorders]="true"
+    [showRowLines]="true"
+    height="funcpopHeigt(datagridHeight)"
+    keyExpr="INVOICE_NO">
+
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager [allowedPageSizes]="[5, 10, 20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [allowExportSelectedData]="true" [enabled]="true" fileName="Bills List"></dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+    <!-- <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling> -->
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+    <dxi-column caption="Invoice Number" dataField="INVOICE_NO"></dxi-column>
+
+    <dxi-column caption="Control Number" dataField="CONTROL_NUMBER"></dxi-column>
+    <dxi-column caption="Date Created" dataField="CREATION_DATE" dataType="date" format="yyyy-MM-dd h:mm a"></dxi-column>
+
+    <dxi-column caption="ZM CNO" dataField="ZM_CONTROL_NO"></dxi-column>
+    <dxi-column caption="ZM CNO Issue Date" dataField="ZM_CREATED_AT" dataType="date" format="yyyy-MM-dd h:mm a"></dxi-column>
+    <dxi-column caption="ZM CNO Expire Date" dataField="ZM_CNO_EXPIRE_DATE" dataType="date" format="yyyy-MM-dd h:mm a"></dxi-column>
+
+    <dxi-column caption="Amount" dataField="AMOUNT" dataType="number">
+      <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+    </dxi-column>
+
+    <dxi-column caption="Currency" dataField="CURRENCY"></dxi-column>
+
+    <dxi-column caption="Customer Number" dataField="CUSTOMER_NO"></dxi-column>
+
+    <dxi-column caption="Customer Name" dataField="PAYER_NAME"></dxi-column>
+
+
+    <dxi-column
+          dataField="STATUS"
+          caption="Payment Status"
+          dataType="string"
+          cellTemplate="cellTemplateIsPayed">
+          <div *dxTemplate="let d of 'cellTemplateIsPayed'">
+            <div *ngIf="d.data.STATUS == 0" class="text-center">
+              <span class="text-white bg-danger rounded pl-2 pr-2">Waiting for payment</span>
+            </div>
+            <div *ngIf="d.data.STATUS == 1" class="text-center">
+              <span class="text-white bg-success rounded pl-2 pr-2">Invoice paid</span>
+            </div>
+          </div>
+        </dxi-column>
+
+  <dxi-column
+        caption="Print"
+        dataType="string"
+        cellTemplate="cellTemplateReceipt">
+        <div *dxTemplate="let d of 'cellTemplateReceipt'">
+          <div *ngIf="d.data.STATUS == 1 && checkUserAccessRight(['DELETE', 'EDIT'])" class="text-center">
+            <button type="button" name="" id="" class="btn btn-success btn-sm" (click)="printPaymentReceipt(d.data)"><i class="fa fa-print" aria-hidden="true"></i> Receipt</button>
+            <button *ngIf="!hidePrintMembers" type="button" name="" id="" class="btn btn-primary btn-sm ml-3" (click)="getMembersList(d.data, 1)"><i class="fa fa-users" aria-hidden="true"></i> Members</button>
+           </div>
+
+          <div *ngIf="d.data.STATUS == 0 && checkUserAccessRight(['DELETE', 'EDIT'])" class="text-center">
+            <button type="button" name="" id="" class="btn btn-secondary btn-sm" (click)="printBillInvoice(d.data)"><i class="fa fa-print" aria-hidden="true"></i> Order Form</button>
+            <button *ngIf="!hidePrintMembers" type="button" name="" id="" class="btn btn-primary btn-sm ml-3" (click)="getMembersList(d.data, 0)"><i class="fa fa-users" aria-hidden="true"></i> Members</button>
+            </div>
+        </div>
+      </dxi-column>
+
+
+
+    <dxi-column caption="Payment Date" dataField="CLEARANCE_DATE" dataType="date" format="yyyy-MM-dd hh:mm:ss a"></dxi-column>
+
+    <dxi-column caption="Payment Ref" dataField="PSP_REFERENCE_ID"></dxi-column>
+
+    <dxi-column caption="Nav Receipt" dataField="NAV_RECEIPT"></dxi-column>
+
+    <dxi-column
+    caption="Action"
+    dataType="string"
+    cellTemplate="cellTemplateEnabled2">
+    <div *dxTemplate="let d of 'cellTemplateEnabled2'">
+
+      <div class="text-center" *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+        <div *ngIf="d.data.STATUS != 1 && !hideDeleteButton" class="text-center">
+          <button type="button" class="btn btn-danger btn-sm" title="Delete Invoice" (click)="onControlNumberDelete(d.data)"><i class="fa fa-minus-circle" aria-hidden="true"></i> Delete Control Number</button>
+        </div>
+      </div>
+
+    </div>
+  </dxi-column>
+    <dxi-column caption="Payment Dec" dataField="DESCRIPTION"></dxi-column>
+
+    <!-- <dxi-column caption="Description" dataField="DESCRIPTION"></dxi-column> -->
+  </dx-data-grid>
+      </div>
+</div>
+
+
+
+<!-- style="display: none;" -->
+<div id="print-container2" class="invoice_wrapper" style="display: none;">
+  <div class="app">
+    <!-- <img src="./assets/images/zssf.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|} cover" alt=""> -->
+
+    <div class="container p-3">
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                <img src="./assets/img/zssf.png" class="img-fluid ${3|rounded-top,rounded-right,rounded-bottom,rounded-left,rounded-circle,|}" alt="ZSSF logo">
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-12">
+                <div class="p-3">
+                    <h1 class="text-center">ZANZIBAR SOCIAL SECURITY FUND</h1>
+                    <p class="text-center">
+                        <span>
+                        Headquarters P.O.Box 2716, ZSSF Building, Kilmani, Mnara wa mbao, Unguja Zanzibar
+                        </span>
+                    <span>
+                        Tel +255 24 2230242, Fax +255 24 223 2820, Email: info@zssf.or.tz Website: www.zssf.or.tz
+                            </span>
+                    <span>
+                        <strong>Pemba Branch:</strong> P.O.Box 293, Tibirinzi, Chake Chake Pemba Zanzibar
+                            </span>
+                    <span>
+                        Tel: +255 24 2452050, Fax: +255 24 2452132, Email: info@zssf.or.tz, Website: www.zssf.or.tz
+                            </span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-xs-12">
+              <img src="./assets/img/received.png" class="paid img-fluid" alt="Received logo" />
+            </div>
+        </div>
+        <div class="row pb-2">
+          <div class="container">
+            <div class="">
+              <div class="d-flex justify-content-start">
+                <label class="recieved-from">
+                    <strong>RECIEVED FROM:  </strong>
+                </label>
+                <span><i>{{employerName}}</i></span>
+            </div>
+            <div  class="d-flex justify-content-end">
+              <div class="flex-column">
+                <div>No:
+                  <label class="font-weight-bold">{{navReceipt}}</label>
+              </div>
+                <div>Invoice Number:
+                  <label class="font-weight-bold">{{invoiceNumber}}</label>
+              </div>
+              <!-- MMMM d, y, h:mm:ss a z -->
+              <div>Date of Payment:
+                  <label class="font-weight-bold">{{clearanceDate | date:'MMMM d, y.'}}</label>
+              </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row pb-4">
+          <div class="container">
+            <label class="respect">
+              <strong>IN RESPECT OF:</strong>
+          </label>
+          <span>
+              <i>{{description}}</i>
+          </span>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="container">
+            <table border="1" class="full_table">
+              <thead>
+                  <tr>
+                      <td><strong>Employer No.</strong></td>
+                      <td><strong>Control Number</strong></td>
+                      <td><strong>Payment Option</strong></td>
+                      <td><strong>Currency Code</strong></td>
+                      <td><strong>Amount</strong></td>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>{{employerNumber}}</td>
+                      <td>{{controlNumber}}</td>
+                      <td>{{paymentOpt}}</td>
+                      <td>{{currency}}</td>
+                      <td>{{amount | currency:'USD':''}}</td>
+                  </tr>
+              </tbody>
+          </table>
+          </div>
+        </div>
+        <!-- <div class="row pb-3">
+            <label class="amount-words">
+                <strong>AMOUNT IN WORDS:</strong>
+            </label>
+            <span>
+                   ****ONE MILLION EIGHT HUNDRED EIGHTY THREE THOUSAND FOUR HUNDRED AND ZERO CENTS****
+            </span>
+        </div> -->
+        <div class="row justify-content-between mt-5">
+            <div class="stamp">
+                <!-- <span><input type="text" class="reciever-name"></span> -->
+                <span>Recieved with thanks</span>
+                <span><i>For: Zanzibar Social Security Fund</i></span>
+                <!-- <span>
+                    <strong><i>This reciept is only valid if it has ZSSF Stamp</i></strong>
+                </span> -->
+            </div>
+            <div class="">
+              <span class="font-weight-bold" style="color: #489463;">{{receiptNumber}}</span>
+                <!-- <input type="text" class="form-control" [value]="receiptNumber"> -->
+            </div>
+        </div>
+</div>
+</div>
+</div>
+
+
+<div id="print-container3" class="invoice_wrapper" style="display: none;">
+  <div class="invoice">
+    <div class="logo__block">
+      <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+      <p>Zanzibar Social Security Fund</p>
+      <p>Order Form</p>
+    </div>
+    <div class="invoice__head row">
+      <div class="invoice__head__child col-12 col-md-6">
+        <table class="table table-responsive">
+          <tbody>
+            <tr>
+              <td>Control Number: </td>
+              <td><strong>{{controlNumber}}</strong> </td>
+            </tr>
+            <tr>
+              <td>Total Amount: </td>
+              <td><strong>{{totalAmountContributed | currency:'USD':'' }} {{invoiceCurrency}}</strong></td>
+            </tr>
+            <tr>
+              <td>Date:</td>
+              <td><strong>{{invoiceDate | date: "yyyy - MM -d h:mm:ss a"}}</strong></td>
+            </tr>
+            <tr *ngIf="!hideViewControls">
+              <td>Employer Number: </td>
+              <td><strong>{{employerNumber}}</strong></td>
+            </tr>
+
+            <tr *ngIf="hideViewControls">
+              <td>Individual Contributor Number: </td>
+              <td><strong>{{employerNumber}}</strong></td>
+            </tr>
+
+            <tr *ngIf="!hideViewControls">
+              <td>Employer Name: </td>
+              <td><strong>{{employerName}}</strong></td>
+            </tr>
+
+            <tr *ngIf="hideViewControls">
+              <td>Individual Contributor Name: </td>
+              <td><strong>{{employerName}}</strong></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div class="invoice__head__child_contacts col-12 col-md-6 text-right">
+        <div *ngIf="!hideQrCode">
+          <!-- place the actual qr code here -->
+          <qrcode [level]="1" [qrvalue]="qrCodeString"></qrcode>
+        </div>
+      </div>
+    </div>
+    <p
+      style="text-align: center; border-bottom: 1px dotted #4d88bb; border-top: 1px dotted #4d88bb; padding: .5rem;">
+      Bill Details</p>
+      <div class="divide">
+        <div class="invoice__body">
+          <table class="full_table table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Currency</th>
+                <th style="text-align: end;">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- individualBillDescription -->
+              <!-- hideViewControls -->
+              <tr *ngFor="let item of invoiceBillItems">
+                <td>{{item.ID}}</td>
+                <td *ngIf = "!hideViewControls">{{item.DESCRIPTION}}</td>
+                <td *ngIf = "hideViewControls">{{individualBillDescription}}</td>
+                <td>{{invoiceCurrency}}</td>
+                <td>
+                  <p style="text-align: end; color: #000;">
+                    {{item.AMOUNT | currency:'USD':''}}
+                  </p>
+                </td>
+              </tr>
+              <tr *ngIf="isPenaltyInvoice">
+                <td>{{ID}}</td>
+                <td>{{DESCRIPTION}}</td>
+                <td>{{CURRENCY}}</td>
+                <td>
+                  <p style="text-align: end; color: #000;">
+                    {{AMOUNT | currency:'USD':''}}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- HOW TO PAY INSTRUCTIONS -->
+        <div class="invoice__how_to_pay row">
+          <div class="col-12 col-md-6">
+            <hr>
+            <table class="table table-responsive">
+              <tbody>
+                <tr>
+                  <td colspan="2">Jinsi ya Kulipa</td>
+                </tr>
+                <tr>
+                  <td colspan="2">1. Kupitia Benki: Fika tawi lolote
+                    au wakala wa benki ya {{payableBanks}}. Namba ya kumbukumbu: <strong>{{controlNumber}}</strong>
+                  </td>
+                  <td colspan="2">NB: Kupitia Benki CRDB: Fika tawi lolote
+                    ,wakala wa benki ya CRDB au kutumia Simbanking (USSD & Mobile App) . Namba ya kumbukumbu: <strong>ZS{{controlNumber}}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12 col-md-6">
+            <hr>
+            <table class="table table-responsive">
+              <tbody>
+                <tr>
+                  <td colspan="2">How to Pay</td>
+                </tr>
+                <tr>
+                  <td colspan="2">Via Bank: Visit any branch or bank agent of {{payableBanks}}.
+                    Reference Number: <strong>{{controlNumber}}</strong>
+                  </td>
+                  <td colspan="2">NB: Through CRDB Bank: Visit at any branch
+                    ,CRDB banking agent or using Simbanking (USSD & Mobile App). Reference number: <strong>ZS{{controlNumber}}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    <hr>
+    <p class="footer">Zanzibar Social Security Find &copy; {{currentYear}} All Rights Reserved (ZSSF)</p>
+  </div>
+</div>
+
+
+<!-- FOR PRINTING LIST OF MEMBER -->
+<div *ngIf="true">
+  <div id="print-container4" style="display: none" class="invoice_wrapper">
+    <div class="invoice">
+      <div class="logo__block">
+        <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+        <p>Zanzibar Social Security Fund</p>
+        <p>List of Members Contributed</p>
+      </div>
+      <div class="invoice__body" style="border: none;">
+          <table class="table full_table">
+            <thead>
+              <tr>
+                <th>Employer Number</th>
+                <th>Employer Name</th>
+                <th>Printed On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>{{employerNumber}}</strong></td>
+                <td><strong>{{employerName | titlecase}}</strong></td>
+                <td><strong>{{now | date: "yyyy - MM -d h:mm:ss a"}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="row mb-4">
+        <div class="container">
+          <table border="1" class="full_table">
+            <thead>
+                <tr>
+                    <td><strong>Control Number</strong></td>
+                    <td><strong>Payment Option</strong></td>
+                    <td><strong>Currency Code</strong></td>
+                    <td><strong>Amount</strong></td>
+                    <td><strong>Date of Payment</strong></td>
+                    <td><strong>Receipt</strong></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!-- <td>{{employerNumber}}</td> -->
+                    <td>{{controlNumber}}</td>
+                    <td>{{paymentOpt}}</td>
+                    <td>{{currency}}</td>
+                    <td>{{amount | currency:'USD':''}}</td>
+                    <td>{{clearanceDate | date: "yyyy - MM -d h:mm:ss a"}}</td>
+                    <td>{{navReceipt}}</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="invoice__body">
+        <table class="full_table table">
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Member Number</th>
+              <th>Member Names</th>
+              <th style="text-align: end;">Member Salary</th>
+              <th>Year</th>
+              <th>Month</th>
+              <th style="text-align: end;">Amount</th>
+              <th>Currency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of contributedMembers">
+              <td>{{item.counter}}</td>
+              <td>{{item.memberNumber}}</td>
+              <td>{{item.memberNames | titlecase }}</td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.memberSalary | currency:'USD':''}}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.contributionYear }}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.contributionMonth }}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.amountContributed | currency:'USD':''}}
+                </p>
+              </td>
+              <td><p style="text-align: center; color: #000;">TZS</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <hr> -->
+      <!-- <p class="footer">Zanzibar Social Security Find &copy; {{currentYear}} All Rights Reserved (ZSSF)</p> -->
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="true">
+  <div id="print-container5" style="display: none" class="invoice_wrapper">
+    <div class="invoice">
+      <div class="logo__block">
+        <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+        <p>Zanzibar Social Security Fund</p>
+        <p>List of Members Contributed</p>
+      </div>
+      <div class="invoice__body" style="border: none;">
+          <table class="table full_table">
+            <thead>
+              <tr>
+                <th>Employer Number</th>
+                <th>Employer Name</th>
+                <th>Printed On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>{{employerNumber}}</strong></td>
+                <td><strong>{{employerName | titlecase}}</strong></td>
+                <td><strong>{{now | date: "yyyy - MM -d h:mm:ss a"}}</strong></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      <div class="invoice__body">
+        <table class="full_table table">
+          <thead>
+            <tr>
+              <th>S/N</th>
+              <th>Member Number</th>
+              <th>Member Names</th>
+              <th style="text-align: end;">Member Salary</th>
+              <th>Year</th>
+              <th>Month</th>
+              <th style="text-align: end;">Amount</th>
+              <th>Currency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of contributedMembers">
+              <td>{{item.counter}}</td>
+              <td>{{item.memberNumber}}</td>
+              <td>{{item.memberNames | titlecase }}</td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.memberSalary | currency:'USD':''}}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.contributionYear }}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.contributionMonth }}
+                </p>
+              </td>
+              <td>
+                <p style="text-align: end; color: #000;">
+                  {{item.amountContributed | currency:'USD':''}}
+                </p>
+              </td>
+              <td><p style="text-align: center; color: #000;">TZS</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <hr> -->
+      <!-- <p class="footer">Zanzibar Social Security Find &copy; {{currentYear}} All Rights Reserved (ZSSF)</p> -->
+    </div>
+  </div>
+</div>

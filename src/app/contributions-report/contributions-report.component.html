@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+
+      <div class="card-body card-nopadding">
+        <dx-data-grid
+          id="gridContainer2"
+          keyExpr="rctId"
+          [dataSource]="contributionsReportDatasource"
+          (onToolbarPreparing)="toolBarPreparing($event, this.getContributionsReport)"
+          [allowColumnReordering]="true"
+          [focusedRowEnabled]="true"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          height="funcpopHeigt(datagridHeight)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false">
+
+        <dxi-column dataField="ctrlNo"></dxi-column>
+        <dxi-column dataField="invNo"></dxi-column>
+        <dxi-column dataField="rctDate" dataType="date" format="yyyy-MM-dd"></dxi-column>
+        <dxi-column dataField="rctNo"></dxi-column>
+
+        <dxi-column dataField="pspRefNo"></dxi-column>
+
+        <dxi-column dataField="rctAmt" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+
+        <dxi-column dataField="rctItemDtls"></dxi-column>
+
+        <dxi-column dataField="rctItemAmt" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+
+        <dxi-column dataField="memberNo"></dxi-column>
+        <dxi-column dataField="memberName"></dxi-column>
+        <dxi-column dataField="empNo"></dxi-column>
+        <dxi-column dataField="empName"></dxi-column>
+        <dxi-column dataField="fumisRcptsItems"></dxi-column>
+        <dxi-column dataField="conYear"></dxi-column>
+        <dxi-column dataField="conMonth"></dxi-column>
+        <dxi-column dataField="rctItemDtls"></dxi-column>
+        <dxi-column dataField="billId"></dxi-column>
+
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Contribution Report" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-load-panel [enabled]="true"> </dxo-load-panel>
+      </dx-data-grid>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+

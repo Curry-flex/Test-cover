@@ -1,0 +1,223 @@
+/*just bg and body style*/
+
+::ng-deep .widget-container {
+  min-width: 320px;
+}
+::ng-deep .content h4 {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 18px;
+}
+::ng-deep .content {
+  margin-top: 9px;
+  margin-left: 10px;
+}
+::ng-deep .selected-item {
+  margin-bottom: 20px;
+}
+::ng-deep #selected-files {
+  display: none;
+}
+::ng-deep #gridContainer {
+  height: 400px;
+}
+::ng-deep .dx-data-row .cell-highlighted-member-name {
+  background-color: #fded08;
+}
+
+
+::ng-deep .dx-data-row .cell-highlighted-member-number {
+  background-color: #da0303;
+}
+
+
+// .cell-highlighted-member-name {
+//   background-color: #fded08;
+// }
+// .cell-highlighted-member-number {
+//   background-color: #da0303;
+// }
+
+// ::ng-deep .dx-header-row .cell-highlighted-member-number {
+//   color: gray;
+//   font-style: italic;
+// }
+
+.tooltip2 {
+  position: relative;
+  // display: inline-block;
+  // border-bottom: 1px dotted rgb(134, 5, 5);
+}
+
+/* tooltip2 text */
+.tooltip2 .tooltip2text {
+  visibility: hidden;
+  min-width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  top: -5px;
+  left: 105%;
+  position: absolute;
+  z-index: 1;
+
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+/* Show the tooltip2 text when you mouse over the tooltip2 container */
+.tooltip2:hover .tooltip2text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip2:hover {
+  cursor: pointer;
+}
+
+.tooltip2 .tooltip2text::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip2 */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+#grid {
+  height: 100%;
+}
+#extraSpace {
+  margin-left: 2rem;
+}
+.container{
+  background-color:#ffffff;
+  padding-bottom:20px;
+  margin-top:10px;
+  margin-bottom:10px;
+  border-radius:5px;
+  }
+  .center{
+  text-align:center;
+  }
+  #top{
+  margin-top:20px;
+  }
+  .btn-container{
+  background:#fff;
+  border-radius:5px;
+  padding: 20px;
+  margin-bottom:20px;
+  }
+  .white{
+  color:white;
+  }
+  .fileUpload{
+  color:#1E2832;
+  padding-top:40px;
+  font-size:7em;
+  }
+  #namefile{
+  color:black;
+  }
+  h4>strong{
+  color:#ff3f3f
+  }
+  .btn-primary{
+  // border-color: #ff3f3f !important;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  /*these two are set to not display at start*/
+  .fileUpload.ok{
+  display:none;
+  color:green;
+  }
+  .fileUpload.stop{
+  display:none;
+  color:red;
+  }
+
+
+  /*this sets the actual file input to overlay our button*/
+  #fileup{
+  opacity: 0;
+  -moz-opacity: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+  width:200px;
+  cursor: pointer;
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 40px;
+  height: 50px;
+  }
+
+  /*switch between input and not active input*/
+  #submitbtn{
+    padding:5px 50px;
+    display:none;
+  }
+  #fakebtn{
+    padding:5px 40px;
+  }
+
+  #sign{
+    color:#1E2832;
+    position:fixed;
+    right:10px;
+    bottom:10px;
+    text-shadow:0px 0px 0px #1E2832;
+    transition: all 3s;
+    -webkit-transition: all 3s;
+    -moz-transition: all 3s;
+    -ms-transition: all 3s;
+    -o-transition: all 3s;
+}
+  #sign:hover{
+    color:#1E2832;
+    text-shadow:0px 0px 5px #1E2832;
+  }
+
+  .data_entering_btn{
+    width: 170px;
+    height: 87px;
+    padding: 10px;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+    margin-right: 1rem;
+  }
+  .data_entering_btn:hover{
+    cursor:pointer;
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 0 #CECFD1;
+  }
+  .data_entering_btn:last-child{
+    margin-right: 0px;
+  }
+  .btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .back_btn {
+    color: #fff;
+    background-color: #627789;
+    border-radius: 2px;
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+
+.back_btn:hover {
+    cursor: pointer;
+    background-color: #8a96a0;
+}

@@ -1,0 +1,15 @@
+{
+  "items": [
+      {
+          "key": "@base-accent",
+          "value": "rgba(91, 155, 180, 1)"
+      }
+  ],
+  "baseTheme": "generic.light",
+  "assetsBasePath": "../../../node_modules/devextreme/dist/css/",
+  "outputColorScheme": "base",
+  "base": true,
+  "makeSwatch": false,
+  "version": "20.1.6",
+  "widgets": []
+}

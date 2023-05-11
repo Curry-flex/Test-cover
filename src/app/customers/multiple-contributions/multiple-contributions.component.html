@@ -1,0 +1,179 @@
+<!-- MULTIPLE CONTRIBUTIONS ONE INVOICE -->
+<!-- <div class="headerWrapper">
+  <div class=" div-pagetitle ">
+    <h5 class="">{{title}}</h5>
+  </div>
+</div> -->
+
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+      <div class="card-body pl-5 pr-5 pb-3 pt-3">
+
+        <div class="d-flex flex-nowrap">
+          <div class="order-1 pr-3">
+            <dx-button
+            *ngIf="!hideCreateInvoiceButton"
+            stylingMode="contained"
+            icon="fa fa-check-square-o"
+            text="Confirm Invoice"
+            type="default"
+            (onClick)="onSubmitContributionList()">
+            </dx-button>
+          </div>
+          <div class="order-2 pr-3">
+            <dx-button
+          *ngIf="!hideCancelInvoiceButton"
+          stylingMode="contained"
+          icon="clear"
+          text="Delete Invoice"
+          type="danger"
+          (onClick)="onCancelContributionList()">
+          </dx-button>
+        <!-- <span class="d-block">Cancel List</span> -->
+          </div>
+        </div>
+        <hr />
+        <div class="dx-fieldset-header container-fluid">
+          <div class="row d-flex">
+            <div class="text-left col-6">
+              Your Contributions list
+            </div>
+            <div class="text-right col-6" *ngIf="!hideViewControls">
+              <dx-button
+              stylingMode="outlined"
+              icon="fa fa-plus-square"
+              text="Add"
+              type="default"
+              (onClick)="addContributionToExistingInvoice()">
+              </dx-button>
+            </div>
+          </div>
+        </div>
+        <!-- <dx-list
+        id="list"
+        keyExpr="invoiceId"
+        [dataSource]="multipleContributionsDatasource"
+        height="funcpopHeigt(datagridHeight)"
+        [allowItemDeleting]="allowDeleting"
+        [itemDeleteMode]="deleteType"
+        [showSelectionControls]="true"
+        selectionMode="all"
+        [searchEnabled]="true"
+        searchExpr="contributionMonth"
+        searchMode="contains"
+        (onItemDeleting)="onItemDeleting($event)"
+        (onItemHold)="onItemHold($event)"
+        (onItemContextMenu)="onContextItemClick($event)"
+        [(selectedItems)]="selectedItems">
+          <div *dxTemplate="let item of 'item'">
+              <table class="table table-striped table-hover table-responsive">
+                <thead class="thead-primary">
+                  <tr>
+                    <th>Month</th>
+                    <th>Amount</th>
+                    <th>Year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ contributionService.getMonthsDataset()[(item.contributionMonth - 1)].text  }}</td>
+                    <td>{{ item.amountPaid | currency: " ":"code" }}</td>
+                    <td>{{ item.contributionYear }}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </dx-list> -->
+
+        <dx-data-grid
+        keyExpr="id"
+        [dataSource]="multipleContributionsDatasource"
+        [allowColumnReordering]="true"
+        [focusedRowEnabled]="false"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        height="funcpopHeigt(datagridHeight)"
+        [showRowLines]="true"
+        [allowColumnResizing]="true"
+        [columnHidingEnabled]="false">
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxi-column dataField="contributionYear" caption="Year" width="70"></dxi-column>
+        <dxi-column
+        [calculateCellValue]="contributionInWords"
+        dataField="contributionMonth"
+        caption="Month">
+      </dxi-column>
+      <dxi-column dataField="id" caption="Contribution ID" [visible]="false"></dxi-column>
+      <dxi-column dataField="amountReceivable">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column dataField="amountReceivableInLocal">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column dataField="amountPaid" caption="Amount Paid">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+
+      <dxi-column dataField="dateCreated" caption="Submission Date" dataType="date" width="200"></dxi-column>
+
+      <dxi-column
+      caption="Actions"
+      name="command-editing"
+      [allowFiltering]="false"
+      [allowSorting]="false"
+      cellTemplate="cellTemplateAttempStatus">
+      <div *dxTemplate="let d of 'cellTemplateAttempStatus'">
+        <div class="text-center">
+          <button  *ngIf="!hideViewControls" type="button" (click)="viewContributionDetails(d.data)" class="btn btn-secondary mr-1">view</button>
+
+          <!-- <button type="button" class="btn btn-info mr-1">update</button> -->
+
+          <button *ngIf="!hideDeleteOnOneInvoiceEntry" type="button" class="btn btn-danger mr-1" (click)="DeleteContributionDetails(d.data)">delete</button>
+      </div>
+    </div>
+      </dxi-column>
+
+      <dxo-summary [recalculateWhileEditing]="true">
+        <dxi-total-item
+          column="amountReceivable"
+          summaryType="sum"
+          valueFormat="fixedPoint">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-total-item>
+        <dxi-total-item
+          column="amountReceivableInLocal"
+          summaryType="sum"
+          valueFormat="fixedPoint">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-total-item>
+        <dxi-total-item
+          column="amountPaid"
+          summaryType="sum"
+          valueFormat="fixedPoint">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-total-item>
+      </dxo-summary>
+
+      </dx-data-grid>
+
+        <dx-context-menu
+          [dataSource]="contextItems"
+          [width]="200"
+          target="#list"
+          (onItemClick)="onContextItemClick($event)">
+          <div *dxTemplate="let e of 'item'">
+            <div>
+                <span [ngClass]="e.icon"></span>
+                <span *ngIf="e.items" class="dx-icon-spinright"></span> {{e.text}}
+            </div>
+        </div>
+        </dx-context-menu>
+
+      </div>
+    </div>
+  </div>
+</div>

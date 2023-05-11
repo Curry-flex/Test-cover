@@ -1,0 +1,98 @@
+.logos-container {
+  margin: 20px 0 40px 0;
+  text-align: center;
+  svg {
+    display: inline-block;
+  }
+}
+
+.devextreme-logo {
+  width: 200px;
+  height: 34px;
+  margin-bottom: 13px;
+}
+
+.angular-logo {
+  width: 220px;
+  height: 62px;
+}
+
+.plus {
+  margin: 15px 10px;
+  width: 22px;
+  height: 22px;
+}
+
+:host-context(.screen-x-small) .logos-container {
+  svg {
+    width: 100%;
+    display: block;
+    &.plus {
+      margin: 0;
+    }
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.card-header {
+  background-color: #036d19!important;
+}
+
+
+ul{
+  width: fit-content;
+  list-style: none;
+  // background: #e6e6ea;
+  padding: 0;
+  border-radius: 5px;
+}
+ul li {
+  width: 200px;
+}
+ul li:first-child{
+  background: #036d19;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 9px;
+  border-radius: 5px;
+  color: #fff;
+}
+
+::ng-deep #chart {
+  height: 440px;
+}
+
+::ng-deep .tooltip-header {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #c5c5c5;
+}
+
+::ng-deep .tooltip-body {
+  width: 170px;
+}
+
+::ng-deep .tooltip-body .series-name {
+  font-weight: normal;
+  opacity: 0.6;
+  display: inline-block;
+  line-height: 1.5;
+  padding-right: 10px;
+  width: 126px;
+}
+
+::ng-deep .tooltip-body .value-text {
+  display: inline-block;
+  line-height: 1.5;
+  width: 30px;
+}
+
+::ng-deep .pie {
+  height: 440px;
+}

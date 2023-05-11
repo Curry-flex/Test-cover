@@ -1,0 +1,292 @@
+<div class="content-block row">
+  <div class="col" *ngIf="hideSingleViewPenaltyData">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{ title }}
+      </div>
+      <div class="card-body card-nopadding">
+
+        <form [formGroup]="searchPenaltyExemptionForm">
+
+          <div class="row p-3">
+            <div class="col-12 col-md-4">
+            <label for="date">Date</label>
+            <dx-text-box id="date" formControlName="date" placeholder="Date format (yyyy-MM-dd) eg. 2022-02-09">
+            </dx-text-box>
+          </div>
+
+            <div class="col-12 col-md-4">
+              <label for="employerNo">Employer Number</label>
+              <dx-text-box id="employerNo" formControlName="employerNo" placeholder="Enter employer number">
+              </dx-text-box>
+            </div>
+
+
+            <div class="col-12 col-md-4">
+              <label for="controlNo">Control Number</label>
+              <dx-text-box id="controlNo" formControlName="controlNo" placeholder="Enter control number">
+              </dx-text-box>
+            </div>
+
+          </div>
+
+          <div class="row p-3">
+            <div class="col-12 col-md-4">
+            <label for="penNo">Penalty Number</label>
+            <dx-text-box id="penNo" formControlName="penNo" placeholder="Enter penalty number">
+            </dx-text-box>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="invoiceNo">Invoice Number</label>
+              <dx-text-box id="invoiceNo" formControlName="invoiceNo" placeholder="Enter invoice No">
+              </dx-text-box>
+            </div>
+
+            <div class="col-12 col-md-4">
+              <label for="payStatus">Penalty Payment Status</label>
+              <dx-select-box
+              id="payStatus"
+              valueExpr="id"
+              displayExpr="value"
+              formControlName="payStatus"
+              [dataSource]="penaltyPaymentStatusDatasource"
+              placeholder="Select...">
+            </dx-select-box>
+            </div>
+          </div>
+
+          <div class="row p-3">
+            <div class="col-12">
+              <dx-button
+              id="action"
+              text="Search Record"
+              type="default"
+              [useSubmitBehavior]="false"
+              (click)="penaltyExemptionList()">
+              </dx-button>
+            </div>
+          </div>
+        </form>
+
+        <div>
+          <dx-data-grid
+          id="gridContainer2"
+          keyExpr="penNo"
+          [dataSource]="penaltyExemptionDatasource"
+          [showBorders]="false"
+          [focusedRowEnabled]="false"
+          [columnAutoWidth]="true"
+          (onRowClick)="getPenaltyPreviewDetails($event)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false">
+          <dxo-search-panel [visible]="true"> </dxo-search-panel>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+          <dxo-export [enabled]="true" fileName="Penalty Exemption List" [allowExportSelectedData]="true">
+          </dxo-export>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-header-filter [visible]="false"></dxo-header-filter>
+          <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+          <!-- <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling> -->
+
+          <dxi-column dataField="penNo" caption="Penalty Number"></dxi-column>
+          <dxi-column dataField="penInvNo" caption="Penalty Inv No."></dxi-column>
+          <dxi-column dataField="penInvCtrlNo" caption="Penalty Inv Control No."></dxi-column>
+          <dxi-column dataField="ogInvNo" caption="Originating Inv No"></dxi-column>
+          <dxi-column dataField="ogCtrlNo" caption="Originating Inv Control No"></dxi-column>
+          <dxi-column dataField="empNo" caption="Employer Number"></dxi-column>
+          <dxi-column dataField="empName" caption="Employer Name"></dxi-column>
+          <dxi-column dataField="paymentStatus" caption="Payment Status"></dxi-column>
+          <dxi-column dataField="penDesc" caption="Penalty Description"></dxi-column>
+          <dxi-column dataField="penPercent" caption="Penalty Percent"></dxi-column>
+          <dxi-column dataField="createdBy" caption="Penalty Creator User ID"></dxi-column>
+          <dxi-column dataField="createdAt" caption="Penalty Creation Timestamp" dataType="date" format="yyyy-MM-dd HH:mm:ss a"></dxi-column>
+          <dxi-column
+            caption="Action"
+            dataType="string"
+            cellTemplate="cellTemplateAction">
+            <div *dxTemplate="let d of 'cellTemplateAction'">
+              <div class="text-center">
+                <!-- <span class="text-white bg-danger rounded pl-2 pr-2">View More</span> -->
+                <button class="btn btn-primary" (click)="getPenaltyDetails(d.data.penNo)">View More</button>
+              </div>
+            </div>
+          </dxi-column>
+
+        <!-- SUMMARY -->
+        <dxo-summary [recalculateWhileEditing]="true">
+          <dxi-total-item
+              column="penNo"
+              summaryType="count"
+              valueFormat="fixedPoint">
+          </dxi-total-item>
+      </dxo-summary>
+
+        </dx-data-grid>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="!hideSingleViewPenaltyData">
+
+    <div class="mt-3 mb-3 ml-2">
+      <button class="btn btn-success" (click)="backButton()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+    </div>
+    <table class="table table-striped table-inverse table-bordered">
+        <tbody>
+          <tr>
+            <td>Penalty Number</td>
+            <td>{{singleViewPenaltyData.penNo}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Invoice Number</td>
+            <td>{{singleViewPenaltyData.penInvNo}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Invoice Control Number</td>
+            <td>{{singleViewPenaltyData.penInvCtrlNo}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Invoice Desc</td>
+            <td>{{singleViewPenaltyData.penInvDesc}}</td>
+          </tr>
+          <tr>
+            <td>Originating Invoice Number</td>
+            <td>{{singleViewPenaltyData.ogInvNo}}</td>
+          </tr>
+          <tr>
+            <td>Originating Invoice Control Number</td>
+            <td>{{singleViewPenaltyData.ogCtrlNo}}</td>
+          </tr>
+          <tr>
+            <td>Originating Invoice description</td>
+            <td>{{singleViewPenaltyData.ogInvDesc}}</td>
+          </tr>
+          <tr>
+            <td>Employer Number</td>
+            <td>{{singleViewPenaltyData.empNo}}</td>
+          </tr>
+          <tr>
+            <td>Employer Name</td>
+            <td>{{singleViewPenaltyData.empName}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Amount</td>
+            <td>{{singleViewPenaltyData.penAmount | currency: 'USD': ''}}</td>
+          </tr>
+          <tr>
+            <td>Originating Invoice Amount</td>
+            <td>{{singleViewPenaltyData.ogAmount}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Total Amount</td>
+            <td>{{singleViewPenaltyData.totalAmount | currency: 'USD':''}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Paid Amount</td>
+            <td>{{singleViewPenaltyData.paidAmount}}</td>
+          </tr>
+          <tr>
+            <td>Payment Status</td>
+            <td>{{singleViewPenaltyData.paymentStatus}}</td>
+          </tr>
+          <tr *ngIf="singleViewPenaltyData.paymentStatus != 'EXEMPTED' && singleViewPenaltyData.paymentStatus != null">
+            <td colspan="2">
+              <form [formGroup]="penaltyExemptForm">
+                 <table class="table">
+                   <thead>
+                     <th>Reason For Exemption</th>
+                     <th>Action</th>
+                   </thead>
+                   <tbody>
+                     <tr>
+                       <td>
+                        <dx-select-box
+                        id="exp"
+                        valueExpr="id"
+                        displayExpr="reason"
+                        formControlName="resonId"
+                        [dataSource]="penaltyExemptionReasonDatasource"
+                        placeholder="Select reason">
+                      </dx-select-box>
+                       </td>
+                       <td>
+                         <button class="btn btn-warning" (click)="penaltyExempt(singleViewPenaltyData.penNo)">Submit</button>
+                       </td>
+                     </tr>
+                   </tbody>
+                 </table>
+              </form>
+            </td>
+          </tr>
+          <tr *ngIf="singleViewPenaltyData.paymentStatus == 'PENDING EXEMPTION'">
+            <td colspan="2">
+              <form [formGroup]="penaltyExemptForm">
+                 <table class="table">
+                   <thead>
+                     <th>Penalty Exemption Approval</th>
+                     <th>Action</th>
+                   </thead>
+                   <tbody>
+                     <tr>
+                       <td>
+                        <dx-select-box
+                        valueExpr="id"
+                        displayExpr="value"
+                        formControlName="exmStatus"
+                        [dataSource]="approvalDatasource"
+                        placeholder="Select action">
+                      </dx-select-box>
+                       </td>
+                       <td>
+                         <button class="btn btn-warning" (click)="penaltyExemptApproval(singleViewPenaltyData.penNo)">Submit</button>
+                       </td>
+                     </tr>
+                   </tbody>
+                 </table>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td>Penalty Description</td>
+            <td>{{singleViewPenaltyData.penDesc}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Percent</td>
+            <td>{{singleViewPenaltyData.penPercent}}</td>
+          </tr>
+          <tr>
+            <td>Exemption Status Flag</td>
+            <td>{{singleViewPenaltyData.exmStatus}}</td>
+          </tr>
+          <tr>
+            <td>Exemption Reason</td>
+            <td>{{singleViewPenaltyData.exmReason}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Creator User ID</td>
+            <td>{{singleViewPenaltyData.createdBy}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Creation Timestamp</td>
+            <td>{{singleViewPenaltyData.createdAt}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Modifier User ID</td>
+            <td>{{singleViewPenaltyData.modifiedBy}}</td>
+          </tr>
+          <tr>
+            <td>Penalty Modification Timestamp</td>
+            <td>{{singleViewPenaltyData.modifiedAt}}</td>
+          </tr>
+        </tbody>
+    </table>
+
+  </div>
+</div>

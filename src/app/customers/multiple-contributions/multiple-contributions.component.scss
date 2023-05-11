@@ -1,0 +1,23 @@
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border: none !important;
+}
+
+.btn_control_block{
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+
+::ng-deep .dx-menu-item-content span {
+  margin-right: 5px;
+}
+::ng-deep .dx-menu-item .dx-icon-spinright {
+  position: absolute;
+  top: 7px;
+  right: 2px;
+}
+

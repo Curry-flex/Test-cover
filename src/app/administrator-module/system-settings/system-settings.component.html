@@ -1,0 +1,110 @@
+
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">System Settings Management.</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    [dataSource]="paramDataSet"
+    keyExpr="id"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    (onRowClick)="previewDetails($event, 'Settings')"
+    [showRowLines] = "true"
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="System Settings" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+></dxo-pager>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <!--   mode="form"  -->
+    <!-- <dxo-editing
+        mode="popup"
+        refreshMode="full"
+        [allowUpdating]="true"
+        [allowAdding]="true"
+        [allowDeleting]="true">
+        <dxo-popup
+            title="System Settings"
+            [showTitle]="true"
+            [width]="funcpopWidth(50)"
+            [height]="funcpopHeigt(40)"
+            [position]="{ my: 'top', at: 'top'}">
+        </dxo-popup>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="1" [colSpan]="2">
+              <dxi-item dataField="name"></dxi-item>
+              <dxi-item dataField="value"></dxi-item>
+          </dxi-item>
+      </dxo-form>
+    </dxo-editing> -->
+
+    <dxi-column dataField="id" caption="Setting ID" [width]="110"></dxi-column>
+    <dxi-column dataField="name" caption="Setting Name" dataType="string">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="value" caption="Setting Value" dataType="string">
+      <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+</dx-data-grid>
+      </div>
+</div>
+
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(45)" [height]="funcpopHeigt(55)" [showTitle]="true" title="{{title}}" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="paramswinpnl">
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <form [formGroup]="paramwinfrm" class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form" (ngSubmit)="onSaveParamsDetails()">
+        <div class="col-lg-12">
+          <label class="control-label">Setting Name</label>
+          <dx-text-box formControlName="name" placeholder="Setting Name" [showClearButton]="true">
+          </dx-text-box>
+        </div>
+        <div class="col-lg-12">
+          <label class="control-label">Setting Value</label>
+          <dx-text-box formControlName="value" placeholder="Setting Value" [showClearButton]="true">
+          </dx-text-box>
+        </div>
+
+        <input type='hidden' formControlName="id"/>
+        <input type='hidden' formControlName="settingId"/>
+
+          <div class="col-lg-12">
+            <hr />
+            <div class="btn">
+              <dx-button
+              [visible]="hideSaveButton"
+              text="Add Setting"
+              type="success"
+              icon="fa fa-save"
+              (onClick)="onSaveParamsDetails('SETTING_CREATE')">
+          </dx-button>
+            </div>
+            <div class="btn">
+              <dx-button
+              [visible]="hideButton"
+              text="Update Setting"
+              type="default"
+              icon="fa fa-pencil-square-o"
+              (onClick)="onSaveParamsDetails('SETTING_UPDATE')">
+          </dx-button>
+            </div>
+            <!-- <div class="btn">
+              <dx-button
+              [visible]="hideButton"
+              text="Delete Setting"
+              type="danger"
+              icon="fa fa-times-circle-o"
+              (onClick)="onCrudActionsClick('delete', currentData)">
+          </dx-button>
+            </div> -->
+          </div>
+    </form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

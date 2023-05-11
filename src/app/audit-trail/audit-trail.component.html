@@ -1,0 +1,119 @@
+
+<div class="content-block" *ngIf="hideViewDetailsTable">
+  <h4 class="header_title mb-3 p-2">Audit Trail.</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    id="gridContainer2"
+    [dataSource]="paramDataSet"
+    keyExpr="id"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    (onRowClick)="onViewAdditionalDetails($event)"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Audit Trail" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+></dxo-pager>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+</dx-data-grid>
+      </div>
+</div>
+
+
+
+
+<div class="content-block" *ngIf="!hideViewDetailsTable">
+  <h4 class="header_title mb-3 p-2">Audit Trail Log Item details.</h4>
+  <div class="dx-card responsive-paddings">
+
+    <dx-button
+    class="mb-3 mt-3"
+    icon="fa fa-arrow-left"
+    text="Back"
+    type="default"
+    (onClick)="onCloseViewDetailsTable()">
+
+    </dx-button>
+
+    <table class="table table-striped table-inverse table-bordered mb-3 mt-3">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Id</th>
+          <th>Table Name</th>
+          <th>App User</th>
+          <th>DB User</th>
+          <th>Event Type</th>
+          <th>Event Desc</th>
+          <th>Event Date</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{id}}</td>
+            <td>{{tableName}}</td>
+            <td>{{appUser}}</td>
+            <td>{{dbUser}}</td>
+            <td>{{eventType}}</td>
+            <td>{{eventDesc}}</td>
+            <td>{{eventDate}}</td>
+          </tr>
+        </tbody>
+    </table>
+
+    <dx-data-grid
+    id="gridContainer2"
+    class=" mb-3 mt-3"
+    [dataSource]="originalData"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Audit Trail item log original data" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+></dxo-pager>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+</dx-data-grid>
+
+<dx-data-grid
+id="gridContainer2"
+class=" mb-3 mt-3"
+[dataSource]="modifiedData"
+[showBorders]="true"
+[focusedRowEnabled]="false"
+[showRowLines] = "true"
+[allowColumnResizing]="true"
+[columnAutoWidth]="true"
+[columnHidingEnabled]="false"
+height="funcpopHeigt(datagridHeight)">
+<dxo-export [enabled]="true" fileName="Audit Trail item log modified data" [allowExportSelectedData]="true"></dxo-export>
+<dxo-paging [pageSize]="100"></dxo-paging>
+<dxo-load-panel [enabled]="true"></dxo-load-panel>
+<dxo-pager
+[showPageSizeSelector]="true"
+[allowedPageSizes]="allowedPageSises"
+></dxo-pager>
+<dxo-search-panel [visible]="false"></dxo-search-panel>
+<dxo-filter-row [visible]="false"></dxo-filter-row>
+
+</dx-data-grid>
+      </div>
+</div>

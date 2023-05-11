@@ -1,0 +1,44 @@
+
+<div class="content-block" *ngIf="hideViewDetailsTable">
+    <h4 class="header_title mb-3 p-2">Employers Registration Report</h4>
+    <div class="dx-card responsive-paddings">
+      <dx-data-grid
+      id="gridContainer2"
+      [dataSource]="responseData"
+      keyExpr="empNo"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      [showRowLines] = "true"
+      [allowColumnResizing]="true"
+      [columnAutoWidth]="true"
+      [columnHidingEnabled]="false"
+      (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+      height="funcpopHeigt(datagridHeight)">
+      <dxo-export [enabled]="true" fileName="Employer Registration" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-paging [pageSize]="100"></dxo-paging>
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="allowedPageSises"
+  ></dxo-pager>
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+
+      <dxi-column caption="Employer Number" dataField="empNo"></dxi-column>
+      <dxi-column caption="Employer Name" dataField="empName" ></dxi-column>
+      <dxi-column caption="District Name" dataField="disName"></dxi-column>
+      <dxi-column caption="Region Name" dataField="rgName"></dxi-column>
+      <dxi-column caption="Sector Name" dataField="sector"></dxi-column>
+      <dxi-column caption="Operation Date" dataField="foDate"></dxi-column>
+      <dxi-column caption="Portal Registered" dataField="poReg"></dxi-column>
+      <dxi-column caption="Portal Reg Date" dataField="poRegDate"></dxi-column>
+  
+  </dx-data-grid>
+        </div>
+  </div>
+  
+  
+  
+
+  

@@ -1,0 +1,183 @@
+<div class="headerWrapper">
+  <div class=" div-pagetitle ">
+    <h5 class="">{{title}}</h5>
+  </div>
+  <!-- <app-bill-details (onClick)="funLinkTab($event, '/report')"></app-bill-details> -->
+</div>
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <!-- <div class="card-header card_header_background">
+        {{ title }}
+      </div> -->
+      <div class="card-body card-nopadding">
+
+          <dx-tab-panel
+          #tabPanel
+          [height]="funcpopHeigt(84)"
+          [dataSource]="tab_paneldata"
+          [selectedIndex]="tabIndex"
+          [loop]="false"
+          [animationEnabled]="true"
+          [swipeEnabled]="true">
+
+          <div *dxTemplate="let tab_paneldata of 'title'">
+            <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+            <span>{{ tab_paneldata.name }}</span>
+          </div>
+          <div *dxTemplate="let tab_paneldata of 'item'">
+            <!-- <dx-scroll-view> -->
+            <div class="tabpanel-item  row col-lg-12 div-nopadding">
+              <!-- TAB PANEL ONE -->
+              <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 1">
+                  <dx-data-grid
+                  keyExpr="reconItemId"
+                  class="div-nopadding gridContainer"
+                  [dataSource]="reconciliedTransactions"
+                  [showBorders]="false"
+                  [focusedRowEnabled]="true"
+                  [columnAutoWidth]="true"
+                  height="funcpopHeigt(datagridHeight)"
+                  (onToolbarPreparing)="onReconciliationToolBarPreparing($event, this.getReconciledTxns)"
+                  [showRowLines]="false"
+                  [hoverStateEnabled]="true"
+                  [rowAlternationEnabled]="true"
+                  [allowColumnResizing]="true"
+                  [columnHidingEnabled]="true"
+                  [repaintChangesOnly]="true">
+
+                  <dxo-search-panel [visible]="true"> </dxo-search-panel>
+
+                  <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+
+                  <dxo-scrolling  mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+                  <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+
+                  <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+                  <dxo-export [enabled]="true" fileName="Reconcilied Transactions" [allowExportSelectedData]="true"></dxo-export>
+
+                  <dxo-selection mode="single"></dxo-selection>
+
+                  <dxo-header-filter [visible]="false"></dxo-header-filter>
+
+                  <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+                  <!-- COLUMNS START -->
+
+                  <dxi-column caption="Transaction Date" dataField="clearanceDate" dataType="date" format="yyyy-MM-dd hh:mm:ss a" sortOrder="desc">
+                  </dxi-column>
+
+                 <dxi-column caption="Control Number" dataField="controlNo">
+                   </dxi-column>
+
+                   <dxi-column caption="Amount" dataField="amount" dataType="number">
+                    <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+                  </dxi-column>
+
+                  <dxi-column dataField="currency">
+                  </dxi-column>
+
+
+                  <dxi-column dataField="pspRef">
+                  </dxi-column>
+
+                  <dxi-column dataField="pspAlias">
+                  </dxi-column>
+
+                  <dxi-column  dataField="pspType">
+                  </dxi-column>
+
+                  <dxi-column dataField="accNo">
+                  </dxi-column>
+
+                  <dxi-column caption="Recon Date" dataField="reconDate" dataType="date" format="yyyy-MM-dd">
+                  </dxi-column>
+
+                  <dxo-load-panel
+                  [enabled]="true">
+                 </dxo-load-panel>
+                </dx-data-grid>
+             </div>
+             <!-- TAB PANEL TWO -->
+             <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 2">
+              <dx-data-grid
+              class="div-nopadding gridContainer"
+              [dataSource]="unReconciliedTransactions"
+              [showBorders]="false"
+              [focusedRowEnabled]="false"
+              [columnAutoWidth]="true"
+              (onToolbarPreparing)="onReconciliationToolBarPreparing($event, this.getUnReconciledTxns)"
+              height="funcpopHeigt(datagridHeight)"
+              [showRowLines]="false"
+              [hoverStateEnabled]="true"
+              [rowAlternationEnabled]="true"
+              [allowColumnResizing]="true"
+              [columnHidingEnabled]="true"
+              [repaintChangesOnly]="true">
+
+              <dxo-search-panel [visible]="true"> </dxo-search-panel>
+
+              <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+
+              <dxo-scrolling  mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+              <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+
+              <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+              <dxo-export [enabled]="true" fileName="UnReconciled Transactions" [allowExportSelectedData]="true"></dxo-export>
+
+              <dxo-selection mode="single"></dxo-selection>
+
+              <dxo-header-filter [visible]="false"></dxo-header-filter>
+
+              <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+              <!-- COLUMNS START -->
+
+              <dxi-column caption="Transaction Date" dataField="clearanceDate" dataType="date" format="yyyy-MM-dd hh:mm:ss a" sortOrder="desc">
+              </dxi-column>
+
+             <dxi-column caption="Control Number" dataField="controlNo">
+               </dxi-column>
+
+               <dxi-column caption="Amount" dataField="amount" dataType="number">
+                <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+              </dxi-column>
+
+              <dxi-column dataField="currency">
+              </dxi-column>
+
+              <dxi-column dataField="pspRef">
+              </dxi-column>
+
+              <dxi-column dataField="pspAlias">
+              </dxi-column>
+
+              <dxi-column  dataField="pspType">
+              </dxi-column>
+
+              <dxi-column caption="Days Unreconcilied" dataField="daysDiff">
+              </dxi-column>
+
+              <dxi-column caption="Unreconcilied Reason" dataField="failReson">
+              </dxi-column>
+
+              <!-- COLUMNS ENDS -->
+
+              <dxo-load-panel
+              [enabled]="true">
+             </dxo-load-panel>
+            </dx-data-grid>
+         </div>
+         </div>
+         </div>
+        </dx-tab-panel>
+      </div>
+    </div>
+  </div>
+</div>
+
+

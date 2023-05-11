@@ -1,0 +1,132 @@
+  <div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+
+      <div class="card-body card-nopadding">
+        <dx-data-grid
+          id="gridContainer2"
+          keyExpr="employerID"
+          [dataSource]="employersListDatasource"
+          (onToolbarPreparing)="toolBarPreparing($event, this.getEmployeesList)"
+          [allowColumnReordering]="true"
+          [focusedRowEnabled]="false"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          height="funcpopHeigt(datagridHeight)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="true">
+
+
+          <dxo-search-panel [visible]="true">
+          </dxo-search-panel>
+          <dxo-paging [pageSize]="20"></dxo-paging>
+          <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+          <dxo-export [allowExportSelectedData]="true" [enabled]="true" fileName="Employers Allotment"></dxo-export>
+          <dxo-selection mode="single"></dxo-selection>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+          <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+
+
+        <dxi-column dataField="employerNumber"></dxi-column>
+        <dxi-column dataField="employerName" sortOrder="asc"></dxi-column>
+
+        <dxi-column dataField="effectiveDate" dataType="date" format="yyyy-MM-dd"></dxi-column>
+        <dxi-column dataField="branchCode"></dxi-column>
+
+        <dxi-column dataField="telephoneOffice"></dxi-column>
+        <dxi-column dataField="telephoneMobile"></dxi-column>
+
+
+        <dxi-column
+        caption="Employer Status"
+        dataField="isActive"
+        dataType="string"
+        cellTemplate="cellTemplateisActive">
+        <div *dxTemplate="let d of 'cellTemplateisActive'">
+          <div *ngIf="d.data.isActive == 1" class="text-start">
+            <strong class="text-white bg-success pl-2 pr-2">Active</strong>
+          </div>
+          <div *ngIf="d.data.isActive != 1" class="text-start">
+            <strong class="text-white bg-danger pl-2 pr-2">Not Active</strong>
+          </div>
+        </div>
+      </dxi-column>
+
+      <dxi-column
+      caption="Auto Allotment"
+      dataField="autoAllot"
+      dataType="string"
+      cellTemplate="cellTemplateAutoAllot">
+      <div *dxTemplate="let d of 'cellTemplateAutoAllot'">
+        <div *ngIf="d.data.autoAllot == 1" class="text-start">
+          <strong class="text-white bg-success pl-2 pr-2">Enabled</strong>
+        </div>
+        <div *ngIf="d.data.autoAllot != 1" class="text-start">
+          <strong class="text-white bg-danger pl-2 pr-2">Disabled</strong>
+        </div>
+      </div>
+    </dxi-column>
+
+    <dxi-column
+    caption="Nultiple Installments"
+    dataField="multInstallments"
+    dataType="string"
+    cellTemplate="cellTemplatemultInstallments">
+    <div *dxTemplate="let d of 'cellTemplatemultInstallments'">
+      <div *ngIf="d.data.multInstallments == 1" class="text-start">
+        <!-- <strong class="text-white bg-success pl-2 pr-2">Enabled</strong> -->
+        <button type="button" class="btn btn-danger btn-sm mr-2" (click)="updateMultiInstallment(d.data, '0')">Disable</button>
+      </div>
+      <div *ngIf="d.data.multInstallments != 1" class="text-start">
+        <!-- <strong class="text-white bg-danger pl-2 pr-2">Disabled</strong> -->
+        <button type="button" class="btn btn-success btn-sm mr-2" (click)="updateMultiInstallment(d.data, '1')">Enable</button>
+      </div>
+    </div>
+  </dxi-column>
+
+        <dxi-column
+          dataField="autoAllot"
+          caption="Action"
+          dataType="string"
+          cellTemplate="cellTemplateAutoAllotUpdate">
+          <div *dxTemplate="let d of 'cellTemplateAutoAllotUpdate'">
+            <div *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+              <div *ngIf="d.data.autoAllot == 1" class="text-center">
+                <button type="button" class="btn btn-danger btn-sm mr-2" (click)="updateAllotment(d.data, '0')">Disabled Auto Allotment</button>
+              </div>
+
+              <div *ngIf="d.data.autoAllot != 1" class="text-center">
+                <button type="button" class="btn btn-success btn-sm mr-2" (click)="updateAllotment(d.data, '1')">Enable Auto Allotment</button>
+              </div>
+            </div>
+          </div>
+        </dxi-column>
+
+
+  <dxo-summary [recalculateWhileEditing]="true">
+    <dxi-total-item
+        column="employerNumber"
+        summaryType="count"
+        valueFormat="fixedPoint">
+    </dxi-total-item>
+</dxo-summary>
+
+
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Employers auto allotment settings" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-load-panel [enabled]="true"> </dxo-load-panel>
+      </dx-data-grid>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,353 @@
+<div class="">
+  <div class="dx-card">
+    <h4 class="header_title mb-1 p-1">Create Target</h4>
+    <div class="container-fluid">
+      <form [formGroup]="targetForm" (ngSubmit)="onSubmitTargetData()">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Revenue Source</td>
+                <td>
+                <dx-select-box
+                [dataSource]="revenueDataDource"
+                placeholder="Choose Revenue Source"
+                valueExpr="id"
+                displayExpr="text"
+                formControlName="revenueSource">
+                </dx-select-box>
+                </td>
+              </tr>
+              <tr>
+                <td>Financial Year</td>
+                <td>
+                <dx-select-box
+                [dataSource]="years"
+                placeholder="Choose Financial Year"
+                formControlName="financialYear"
+                displayExpr="year"
+                valueExpr="year">
+                </dx-select-box>
+              </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-12 col-md-4">
+
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>January:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="jan"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  invalidValueMessage="Amount should be a positve number"
+                  (onInput)="updateBalanceOnContentChange($event)"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>February:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="feb"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>March:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="mar"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>April:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="apr"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="col-12 col-md-4">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>May;</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="may"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>June:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="jun"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>July:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="jul"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>August:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="aug"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-12 col-md-4">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>September:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="sep"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>October:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="oct"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>November:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="nov"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+              <tr>
+                <td>December:</td>
+                <td>
+                  <dx-number-box
+                  class="metal"
+                  formControlName="dec"
+                  placeholder="TZS 0.00"
+                  [rtlEnabled] = "rtlEnabled"
+                  format="TZS #,##0.00"
+                  [showClearButton]="true">
+
+                  </dx-number-box>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-around">
+        <div class="col-12 col-md-6 d-flex justify-content-between">
+          <div>
+            <label for="">Balance:</label>
+          </div>
+          <div>
+            <dx-number-box
+            class="metal text_amt"
+            placeholder="TZS 0.00"
+            [readOnly]="true"
+            [rtlEnabled] = "rtlEnabled"
+            format="TZS #,##0.00"
+            formControlName="balance">
+
+            </dx-number-box>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-end">
+          <dx-button
+          stylingMode="contained"
+          type="danger"
+          text="Clear"
+          (onClick)="onClearTargetData()"
+          icon="close">
+        </dx-button>
+
+          <dx-button
+          class="ml-1"
+          stylingMode="contained"
+          type="default"
+          text="Submit"
+          icon="save"
+          [useSubmitBehavior]="true">
+        </dx-button>
+        </div>
+
+      </div>
+    </form>
+      <hr />
+      <div class="row">
+        <div class="col-12 mb-2">
+          <dx-data-grid
+          class="div-nopadding data-area"
+          [dataSource]="targetDataSource"
+          [showBorders]="true"
+          [focusedRowEnabled]="false"
+          [columnAutoWidth]="true"
+          [showRowLines]="false"
+          [hoverStateEnabled]="true"
+          [rowAlternationEnabled]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          keyExpr="id"
+          [repaintChangesOnly]="true">
+          <dxo-search-panel [visible]="true"> </dxo-search-panel>
+          <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+          <dxo-scrolling mode="standard"></dxo-scrolling>
+          <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises">
+          </dxo-pager>
+
+
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+          <dxo-export [enabled]="true" fileName="Users Feedback" [allowExportSelectedData]="true">
+          </dxo-export>
+          <dxo-selection mode="single"></dxo-selection>
+
+          <dxi-column dataField="id" caption="Target ID" dataType="string" >
+          </dxi-column>
+          <dxi-column dataField="financialYear" dataType="string"> </dxi-column>
+
+          <dxi-column dataField="dateSubmitted" caption="Date Created" dataType="date" format="yyyy-MM-dd h:mm:ss"> </dxi-column>
+          <dxi-column dataField="totalTarget"> </dxi-column>
+
+          <dxi-column caption="Total Collected Amount" dataField="collections"> </dxi-column>
+
+          <dxi-column dataField="Description" dataType="string" width="150"> </dxi-column>
+          <dxi-column
+          caption="Status"
+          dataType="string"
+          dataField="status"
+          cellTemplate="cellTemplateActive">
+          <div *dxTemplate="let d of 'cellTemplateActive'">
+
+            <div *ngIf="d.data.status == 1"  class="text-center">
+                <span class="text-white bg-success rounded pl-2 pr-2">Target Concilied</span>
+            </div>
+
+            <div *ngIf="d.data.status == 0"  class="text-center">
+              <span class="text-white bg-danger rounded pl-2 pr-2">Waiting Target </span>
+            </div>
+
+          </div>
+        </dxi-column>
+
+          <dxi-column
+          caption="Action"
+          dataType="string"
+          [allowSorting]="false"
+          [width]="90"
+          cellTemplate="cellTemplateAttempStatus">
+          <div *dxTemplate="let d of 'cellTemplateAttempStatus'">
+            <div class="d-flex text-center">
+
+              <div class="text-center mr-3 clickable" title="View">
+                <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+              </div>
+
+              <div *ngIf="d.data.status == 0" class="text-center mr-3 clickable" title="Reply">
+                <i class="fa fa-reply text-success" aria-hidden="true"></i>
+              </div>
+
+            </div>
+        </div>
+          </dxi-column>
+        </dx-data-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

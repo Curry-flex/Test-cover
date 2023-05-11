@@ -1,0 +1,248 @@
+<!-- PUBLISHED INVOICES -->
+<div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+
+      <div class="card-body card-nopadding">
+      <div class="row pl-3">
+        <form [formGroup]="customerForm">
+          <table class="table table-responsive">
+            <tbody>
+              <tr>
+                <td>Customer Type</td>
+                <td>
+                  <dx-radio-group
+                  formControlName="customerType"
+                  [dataSource]="customerType"
+                  layout="horizontal"
+                  displayExpr="text"
+                  valueExpr="value"
+                  (onValueChanged)="onCustomerTypeValueChange($event)">
+                  </dx-radio-group>
+                </td>
+
+                <td colspan="2">
+                  <dx-text-box formControlName="customerNumber" placeholder="Enter customer number">
+                    <dx-validator>
+                      <dxi-validation-rule type="required" message="Customer number is required">
+                      </dxi-validation-rule>
+                    </dx-validator>
+                  </dx-text-box>
+                </td>
+
+                <td colspan="2">
+                  <dx-button
+                  text="Save Number"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="updateCustomerNumber()">
+                  </dx-button>
+                </td>
+
+                <td>
+                  <p class="text-danger" *ngIf="!customerNumberSaved">No saved Customer Number</p>
+                  <p class="text-muted"*ngIf="customerNumberSaved">Saved Customer Number: {{currrentEmployerNumber}}</p>
+                </td>
+
+                <td>
+                  <p class="text-danger" *ngIf="!customerNumberSaved">No saved Customer Name</p>
+                  <p class="text-muted"*ngIf="customerNumberSaved">Saved Customer Name: {{currentCustomerName}}</p>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+      </div>
+
+
+      <!-- Employer -->
+      <div class="card-body card-nopadding" *ngIf="!hideEmpDataGrid">
+        <dx-data-grid
+          keyExpr="id"
+          id="gridContainer2"
+          [dataSource]="invoiceGeneratedByEmployerDataSource"
+          [(selectedRowKeys)]="selectedRows"
+          (onToolbarPreparing)="toolBarPreparing($event, this.getListOfGeneratedInvoices)"
+          [allowColumnReordering]="true"
+          [focusedRowEnabled]="false"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          height="funcpopHeigt(datagridHeight)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="true">
+
+        <dxi-column dataField="invoiceNo" caption="Invoice Number"></dxi-column>
+
+        <dxi-column dataField="dateCreated" caption="Date Published" dataType="date" format="yyyy-MM-dd hh:mm:ss a" sortOrder="desc"></dxi-column>
+
+        <dxi-column
+        dataField="invoiceGroupID"
+        caption="Invoice Type"
+        dataType="string"
+        cellTemplate="cellTemplateInvoiceGroupID">
+        <div *dxTemplate="let d of 'cellTemplateInvoiceGroupID'">
+          <div *ngIf="d.data.invoiceGroupID == 1" class="text-start">
+            <strong class="text-muted pl-2 pr-2">Contribution Invoice</strong>
+          </div>
+          <div *ngIf="d.data.invoiceGroupID == 2" class="text-start">
+            <strong class="text-muted pl-2 pr-2">Penalty Invoice</strong>
+          </div>
+        </div>
+      </dxi-column>
+      <dxi-column dataField="invoiceAmount" caption="Amount Receivable" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column dataField="currencyCode" caption="Currency" width="70"></dxi-column>
+        <dxi-column dataField="amountPaid" caption="Amount Paid" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+        <!-- <dxi-column dataField="contributionYear" caption="Year" width="70"></dxi-column>
+        <dxi-column dataField="contributionMonth" [groupIndex]="0" caption="Month" [visible]="false"></dxi-column> -->
+        <!-- *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" -->
+        <dxi-column
+          dataField="isPosted"
+          caption="Invoice Status"
+          dataType="string"
+          cellTemplate="cellTemplateIsPosted">
+          <div *dxTemplate="let d of 'cellTemplateIsPosted'">
+            <div *ngIf="(d.data.isPosted == 0 || d.data.isPosted === null) && (d.data.status == 0 || d.data.status === null)" class="text-center">
+              <button *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" type="button" class="btn btn-primary btn-sm mr-2" (click)="getControlNumber(d.data)">Get Control Number</button>
+              <button *ngIf="d.data.invoiceGroupID == 1 && checkUserAccessRight(['DELETE'])" type="button" name="" id="" class="btn btn-danger btn-sm ml-3" (click)="deleteInvoice(d.data)"> Cancel Invoice</button>
+            </div>
+
+            <div *ngIf="d.data.isPosted == 1 || d.data.status == 1" class="text-center">
+              <span class="text-white bg-success rounded pl-2 pr-2">Invoice paid</span>
+            </div>
+            <div *ngIf="(d.data.isPosted == 0 || d.data.isPosted === null) && d.data.status == 2" class="text-center">
+              <span class="text-white bg-secondary rounded pl-2 pr-2">Waiting for payment</span>
+            </div>
+          </div>
+        </dxi-column>
+        <!-- <dxi-column
+        caption="Actions"
+        cellTemplate="cellTemplateActions">
+        <div *dxTemplate="let d of 'cellTemplateActions'">
+          <div *ngIf="d.data.isPosted == 0" class="text-center">
+            <span class="text-white bg-primary rounded pl-2 pr-2">
+      <i class="fa fa-paper-plane action-buttons" (click)="generateControlNumber(d.data)"></i>
+      </span>
+          </div>
+          <div *ngIf="d.data.isPosted == 1" class="text-center">
+            <span class="text-white bg-primary rounded pl-2 pr-2">
+      <i class="fa fa-print action-buttons" aria-hidden="true" (click)="printPaymentReceipt(da.data)"></i>
+      </span>
+          </div>
+          <div *ngIf="d.data.isPosted == 2" class="text-center">
+            <span class="text-white bg-primary rounded pl-2 pr-2">
+      <i class="fa fa-external-link action-buttons" aria-hidden="true" (click)="viewInvoiceDetails(d.data)"></i>
+      </span>
+          </div>
+        </div>
+      </dxi-column> -->
+
+        <dxi-column dataField="invoiceDescription" caption="Description"></dxi-column>
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Published Invoices" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection
+        [selectAllMode]="allMode"
+        [showCheckBoxesMode]="checkBoxesMode"
+        mode="single">
+      </dxo-selection>
+      <dxo-load-panel [enabled]="true"> </dxo-load-panel>
+
+      <dxo-summary>
+        <dxi-total-item column="invoiceNo" summaryType="count"> </dxi-total-item>
+      </dxo-summary>
+
+      </dx-data-grid>
+      </div>
+
+      <!-- Individual Contributor -->
+      <div class="card-body card-nopadding" *ngIf="hideEmpDataGrid">
+        <dx-data-grid
+          keyExpr="id"
+          [dataSource]="invoiceGeneratedByIndividualDataSource"
+          [(selectedRowKeys)]="selectedRows"
+          (onToolbarPreparing)="toolBarPreparing($event, this.getIndividualContributorInvoices)"
+          [allowColumnReordering]="true"
+          [focusedRowEnabled]="false"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          height="funcpopHeigt(datagridHeight)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="true">
+
+        <dxi-column dataField="invoiceNo" caption="Invoice Number"></dxi-column>
+        <dxi-column dataField="dateCreated" caption="Date Published" dataType="date" format="yyyy-MM-dd h:mm a"></dxi-column>
+
+        <dxi-column
+        dataField="invoiceGroupID"
+        caption="Invoice Type"
+        dataType="string"
+        cellTemplate="cellTemplateInvoiceGroupID">
+        <div *dxTemplate="let d of 'cellTemplateInvoiceGroupID'">
+          <div *ngIf="d.data.invoiceGroupID == 1" class="text-start">
+            <strong class="text-dark pl-2 pr-2">Contribution Invoice</strong>
+          </div>
+          <div *ngIf="d.data.invoiceGroupID == 2" class="text-start">
+            <strong class="text-dark pl-2 pr-2">Penalty Invoice</strong>
+          </div>
+        </div>
+      </dxi-column>
+      <dxi-column dataField="invoiceAmount" caption="Amount Receivable" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column dataField="currencyCode" caption="Currency" width="70"></dxi-column>
+        <dxi-column dataField="amountPaid" caption="Amount Paid" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+
+        <!-- No contro no : IsPosted(0 or null) AND Status (0 or null)
+        Contro nnumber Generated:  IsPosted(0 or null) AND Status (2)
+        Alredy paid : IsPosted(1) or Status (1) -->
+        <!-- *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" -->
+        <dxi-column
+          dataField="isPosted"
+          caption="Invoice Status"
+          dataType="string"
+          cellTemplate="cellTemplateIsPosted">
+          <div *dxTemplate="let d of 'cellTemplateIsPosted'">
+            <div *ngIf="(d.data.isPosted == 0 || d.data.isPosted === null) && (d.data.status == 0 || d.data.status === null)" class="text-center">
+              <button *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" type="button" class="btn btn-primary mr-2" (click)="getControlNumber(d.data)"> Get Control Number</button>
+              <button *ngIf="d.data.invoiceGroupID == 1 && checkUserAccessRight(['DELETE', 'EDIT'])" type="button" name="" id="" class="btn btn-danger ml-3" (click)="deleteInvoice(d.data)"> Cancel Invoice</button>
+            </div>
+            <div *ngIf="d.data.isPosted == 1 || d.data.status == 1" class="text-center">
+              <span class="text-white bg-success rounded pl-2 pr-2">Invoice paid</span>
+            </div>
+            <div *ngIf="(d.data.isPosted == 0 || d.data.isPosted === null) && (d.data.status == 2)" class="text-center">
+              <span class="text-white bg-danger rounded pl-2 pr-2">Waiting for payment</span>
+            </div>
+          </div>
+        </dxi-column>
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Published Invoices" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection
+        [selectAllMode]="allMode"
+        [showCheckBoxesMode]="checkBoxesMode"
+        mode="single">
+      </dxo-selection>
+      <dxo-load-panel [enabled]="true"> </dxo-load-panel>
+      </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>
+

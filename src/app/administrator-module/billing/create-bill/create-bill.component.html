@@ -1,0 +1,208 @@
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">Generate control number of all other incomes.</h4>
+  <div class="dx-card responsive-paddings">
+    <form [formGroup]="billCreateForm">
+
+      <div class="card">
+        <div class="card-header metal">
+          Payer Info
+        </div>
+        <div class="card-body card-nopadding">
+          <div class="container-fluid metal">
+            <div class="row d-flex justify-content-betwen">
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <!-- <tr>
+                      <td>Payer Number:</td>
+                      <td>
+                        <dx-text-box placeholder="Payer registration number" formControlName="payerNumber">
+                        </dx-text-box>
+                      </td>
+                    </tr> -->
+                    <tr>
+                      <td>
+                        Payer Name:
+                      </td>
+                      <td>
+                        <dx-text-box placeholder="Payer full name" formControlName="payerName"></dx-text-box>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Email Address:
+                      </td>
+                      <td>
+                        <dx-text-box placeholder="Payer email address" formControlName="email"></dx-text-box>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        Bill Description:
+                      </td>
+                      <td>
+                        <dx-text-area [height]="70" formControlName="billDescription" [maxLength]="maxLength"
+                          placeholder="Describe the bill information e.g Bill for house rent">
+                        </dx-text-area>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Phone Number:</td>
+                      <td>
+                        <dx-text-box placeholder="Payer phone number" formControlName="phone"></dx-text-box>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-header metal">
+          Bill Info
+        </div>
+        <div class="card-body card-nopadding">
+          <div class="container-fluid metal">
+            <div class="row d-flex justify-content-betwen">
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Currency:</td>
+                      <td>
+                        <dx-select-box [dataSource]="currencyDts" formControlName="currency" valueExpr="id" #CurrencyselectBox
+                          displayExpr="text" [searchEnabled]="true" placeholder="--Select--">
+                        </dx-select-box>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Payment Type:
+                      </td>
+                      <td>
+                        <dx-select-box [dataSource]="paymentTypeDts" formControlName="paymentType" valueExpr="id"
+                          displayExpr="text" [searchEnabled]="true" placeholder="--Select--">
+                        </dx-select-box>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Exchange Rate:</td>
+                      <td>
+                        <dx-text-box [readOnly]="true" formControlName="exchangeRate"></dx-text-box>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        Amount:
+                      </td>
+                      <td>
+                        <dx-number-box [(value)]="amount" formControlName="billAmount"></dx-number-box>
+                      </td>
+                      <td>
+                        <p class="text-right text-danger">{{amount | currency:'USD':'' }} <span class="text-success">{{CurrencyselectBox.value}}</span></p>
+                      </td>
+                    </tr>
+                    <!-- <tr>
+                      <td>Expire Date:</td>
+                      <dx-number-box formControlName="billExpireDate" placeholder="Days"></dx-number-box>
+                      <dx-date-box
+                          [value]="now"
+                          [min]="now"
+                          [readOnly]="true"
+                          formControlName="billExpireDate"
+                          type="date"
+                          displayFormat="yyyy-MM-dd hh:mm:ss">
+                        <dx-validator>
+                        <dxi-validation-rule message="Please choose the bill expiry date" type="required"></dxi-validation-rule>
+                        </dx-validator>
+                      </dx-date-box>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card mt-2">
+        <div class="card-header metal">
+          Revenue Info
+        </div>
+        <div class="card-body card-nopadding">
+          <div class="container-fluid metal">
+            <div class="row d-flex justify-content-betwen">
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>Revenue Source:</td>
+                      <td>
+                        <dx-select-box [dataSource]="revenueSource" formControlName="revenueSource" valueExpr="id"
+                          displayExpr="text" [searchEnabled]="true" placeholder="--Select--">
+                        </dx-select-box>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <table class="table">
+                  <tbody>
+                    <!-- <tr>
+                      <td>
+                        Amount:
+                      </td>
+                      <td>
+                        <dx-number-box [(value)]="amount" formControlName="billAmount"></dx-number-box>
+                      </td>
+                      <td>
+                        <p class="text-right text-danger">{{amount | currency:'USD':'' }} <span class="text-success">TZS</span></p>
+                      </td>
+                    </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-2">
+        <div class="card-body card-nopadding">
+          <div class="container-fluid metal">
+            <div class="row">
+              <div class="col-12 d-flex justify-content-end p-2">
+                <dx-button class="mr-1" text="Reset" type="danger" icon="fa fa-recycle"
+                (onClick)="onFormReset()">
+                </dx-button>
+
+                <dx-button text="Create Bill" type="default" icon="fa fa-pencil" (onClick)="createBill()">
+                </dx-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

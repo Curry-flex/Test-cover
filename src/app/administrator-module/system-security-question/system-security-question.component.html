@@ -1,0 +1,91 @@
+
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    [dataSource]="paramDataSet"
+    keyExpr="id"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    (onRowClick)="previewDetails($event, 'Questions')"
+    [showRowLines] = "true"
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Security Questions" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxi-column dataField="id" caption="Question ID" [width]="110"></dxi-column>
+    <dxi-column dataField="question" caption="Question" dataType="string">
+    </dxi-column>
+    <dxi-column dataField="createdBy" dataType="string" [width]="130">
+    </dxi-column>
+    <dxi-column dataField="createdAt" dataType="date">
+    </dxi-column>
+    <dxi-column dataField="modifiedBy"  [width]="130">
+    </dxi-column>
+    <dxi-column dataField="modifiedAt" dataType="date">
+    </dxi-column>
+</dx-data-grid>
+      </div>
+</div>
+
+<dx-popup class="popup"  [width]="funcpopWidth(45)" [height]="funcpopHeigt(30)" [showTitle]="true" title="{{title}}" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="paramswinpnl">
+
+  <div *dxTemplate="let data of 'content'" >
+    <dx-scroll-view>
+      <form [formGroup]="paramwinfrm" class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form" (ngSubmit)="onSaveParamsDetails()">
+        <div class="col-lg-12">
+          <label class="control-label">Type Security Question</label>
+          <dx-text-area formControlName="question" placeholder="Ex. What was your childhood name">
+          </dx-text-area>
+        </div>
+
+        <input type='hidden' formControlName="id"/>
+        <input type='hidden' formControlName="questionId"/>
+
+          <div class="col-lg-12">
+            <hr />
+          <div class="row">
+
+            <div class="btn">
+              <dx-button
+              [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+              [visible]="hideSaveButton"
+              text="Add security question"
+              type="success"
+              icon="fa fa-save"
+              (onClick)="onSaveParamsDetails()">
+          </dx-button>
+            </div>
+            <div class="btn">
+              <dx-button
+              [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+              [visible]="hideButton"
+              text="Update security question"
+              type="default"
+              icon="fa fa-pencil-square-o"
+              (onClick)="onSaveParamsDetails()">
+          </dx-button>
+            </div>
+            <div class="btn">
+              <dx-button
+              [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+              [visible]="hideButton"
+              text="Delete security question"
+              type="danger"
+              icon="fa fa-times-circle-o"
+              (onClick)="onCrudActionsClick('delete', currentData)">
+          </dx-button>
+            </div>
+          </div>
+          </div>
+      </form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

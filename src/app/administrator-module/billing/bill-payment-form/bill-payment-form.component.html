@@ -1,0 +1,120 @@
+<div class="headerWrapper content-block">
+  <div class="container space">
+    <div class="row d-flex justify-content-center">
+      <div class="btn" *ngIf="!hidePrintBtn">
+        <dx-button text="Print Invoice" icon="print" stylingMode="contained" type="default"
+          (onClick)="printInvoiceReceipt()">
+        </dx-button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <dx-scroll-view>
+    <div id="print-container2" class="invoice_wrapper">
+      <div class="invoice">
+        <div class="logo__block">
+          <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+          <p>Zanzibar Social Security Fund</p>
+          <p>Bill Payment Form</p>
+        </div>
+        <div class="invoice__head row">
+          <div class="invoice__head__child col-12 col-md-6">
+            <table class="table table-responsive">
+              <tbody>
+                <tr>
+                  <td>Control Number: </td>
+                  <td><strong>{{controlNumber}}</strong> </td>
+                </tr>
+                <tr>
+                  <td>Total Amount: </td>
+                  <td><strong>{{totalAmountContributed | currency:'USD':'' }} {{invoiceCurrency}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Issue At:</td>
+                  <td><strong>{{billCreationDate | date: "yyyy - MM -d h:mm:ss a"}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Payer Name: </td>
+                  <td><strong>{{payerName}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="invoice__head__child_contacts col-12 col-md-6 text-right">
+            <div *ngIf="!hideQrCode">
+              <!-- place the actual qr code here -->
+              <qrcode [level]="1" [qrvalue]="qrCodeString"></qrcode>
+            </div>
+          </div>
+        </div>
+        <p
+          style="text-align: center; border-bottom: 1px dotted #4d88bb; border-top: 1px dotted #4d88bb; padding: .5rem;">
+          Bill Details</p>
+          <div class="divide">
+            <div class="invoice__body">
+              <table class="full_table table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Currency</th>
+                    <th style="text-align: end;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let item of invoiceBillItems">
+                    <td>{{item.ID}}</td>
+                    <td>{{item.DESCRIPTION}}</td>
+                    <td>{{invoiceCurrency}}</td>
+                    <td>
+                      <p style="text-align: end; color: #000;">
+                        {{item.AMOUNT | currency:'USD':''}}
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- HOW TO PAY INSTRUCTIONS -->
+            <div class="invoice__how_to_pay row">
+              <div class="col-12 col-md-6">
+                <hr>
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td colspan="2">Jinsi ya Kulipa</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">1. Kupitia Benki: Fika tawi lolote
+                        au wakala wa benki ya {{payableBanks}}. Namba ya kumbukumbu: <strong>{{controlNumber}}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-md-6">
+                <hr>
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td colspan="2">How to Pay</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">Via Bank: Visit any branch or bank agent of {{payableBanks}}.
+                        Reference Number: <strong>{{controlNumber}}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <hr>
+        <p class="footer">Zanzibar Social Security Find &copy; {{currentYear}} All Rights Reserved (ZSSF)</p>
+      </div>
+    </div>
+  </dx-scroll-view>
+</div>
