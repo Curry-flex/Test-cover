@@ -1,0 +1,63 @@
+
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+            COMPENSATION CLAIM LIST
+        </div>
+        <div class="card-body card-nopadding">
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="claimList"
+          keyExpr="id"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          (onRowClick)="previewDetailsu($event)"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="claim-List" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+          ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>

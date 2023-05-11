@@ -1,0 +1,99 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          PENSIONERS LIST
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="pensionersListForm">
+  
+          
+  
+            <div class="row p-3">
+
+
+                  <div class="col-12 col-md-3">
+                    <label for="scope">Filter By</label>
+                    <dx-select-box
+                    id="scope"
+                    valueExpr="name"
+                    displayExpr="name"
+                    formControlName="status"
+                    [dataSource]="pensionersStatus"
+                    placeholder="Choose">
+                  </dx-select-box>
+                  </div>
+
+                  
+ 
+                   
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Search"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="getList()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="pensionersDatasource"
+          keyExpr="PensionerNo"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          (onRowClick)="previewDetailsu($event)"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="pensioners-list" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>

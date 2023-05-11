@@ -1,0 +1,365 @@
+<!--<p>bill-validation-tigo works!</p>-->
+<div class="headerWrapper">
+    <div class=" div-pagetitle ">
+  
+    </div>
+  
+  </div>
+  
+  <div class="container-fluid mt-3">
+    <!-- start of container -->
+  
+    <!-- Bill Validation -->
+    <div class="row mb-3" *ngIf="showLookup">
+      <div class="col">
+        <div class="card card_border">
+          <h6 class="card-header card_header_background">Lookup</h6>
+          <div class="card-body fix-side">
+            <form [formGroup]="lookupForm" class="col-lg-12  div-nopadding"
+              style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+              (ngSubmit)="lookup()">
+              <div class="dx-field d-flex justify-content-center">
+                <div class="data-field">
+                   
+
+                     <div class="tipsUI">
+                      <label for="">Control Number</label>
+                      <dx-text-box placeholder="Enter control number" formControlName="controlNo" width="280" style="padding-right: 10px;">
+                    </dx-text-box>
+                    </div>
+                  
+                    <div class="tipsUI">
+                        <label for="">Amount</label>
+                        <dx-text-box placeholder="Enter amount" formControlName="amount" width="280" style="padding-right: 10px;">
+                     </dx-text-box>
+                    </div>
+                  
+                    
+                    <div class="validatebtn">
+                        <dx-button [elementAttr]="{ class: 'btn ml-3' }" name="search" text="submit" type="default"  id="btn-fetch"
+                        [useSubmitBehavior]="true">
+                      </dx-button>
+                    </div>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!---------LOOKUP RESULT-->
+   <div class="row mb-3">
+    <div class="col" *ngIf="lookupDetails">
+    
+        <div class="card card_border">
+          <h6 class="card-header card_header_background ">Lookup Details</h6>
+          <div class="card-body fix-side">
+          
+            <div class="col-12">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mergeRight">
+                    <div class="card card_border">
+                      <!-- <div class="card-header card_header_background ">Reciever Details</div> -->
+                      <form class="col-lg-12  div-nopadding"
+                      style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+                      >
+                      <div class="card-body">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>Control Number:</td>
+                              <td style="padding-left: 1rem;"> <strong>{{controlNo}}</strong></td>
+                            </tr>
+                            <tr>
+                              <td>New Amount:</td>
+                              <td style="padding-left: 1rem;"><strong>{{newAmount | number:'2.'}}</strong></td>
+                            </tr>
+                            <tr>
+                              <td>Bill Amount:</td>
+                              <td style="padding-left: 1rem;"> <strong>{{billAmount  | number:'2.'}}</strong></td>
+                            </tr>
+                             <tr>
+                                <td>Invoice Amount:</td>
+                                <td style="padding-left: 1rem;"> <strong>{{invAmount | number:'2.'}}</strong></td>
+                              </tr>
+                              <tr>
+                                <td>Invoice Detail Amount:</td>
+                                <td style="padding-left: 1rem;"> <strong>{{invDetAmount | number:'2.'}}</strong></td>
+                              </tr>
+        
+                              <tr>
+                                <td>Total Individual Contributions:</td>
+                                <td style="padding-left: 1rem;"> <strong>{{iciTotAmount | number:'2.'}}</strong></td>
+                              </tr>
+        
+                       
+                          </tbody>
+                        </table>
+          
+                      </div>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+  
+  
+     
+      </div>
+      </div>
+  </div>
+
+
+      <div class="container-fluid mt-3" *ngIf="requestLookup">
+        <!-- start of container -->
+      
+        <!-- Bill Validation -->
+        <div class="row mb-3">
+          <div class="col">
+            <div class="card card_border">
+              <h5 class="card-header card_header_background">Correct Request</h5>
+              <div class="card-body fix-side">
+                <form [formGroup]="requestForm" class="col-lg-12  div-nopadding"
+                  style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+                  (ngSubmit)="correctRequest()">
+                  <div class="dx-field d-flex justify-content-center">
+                    <div class="data-field">
+                       
+    
+                         <div class="tipsUI">
+                          <label for="">Control Number</label>
+                          <dx-text-box placeholder="Enter control number" formControlName="controlNo" width="280" style="padding-right: 10px;">
+                        </dx-text-box>
+                        </div>
+                      
+                        <div class="tipsUI">
+                            <label for="">Amount</label>
+                            <dx-text-box placeholder="Enter amount" formControlName="amount" width="280" style="padding-right: 10px;">
+                         </dx-text-box>
+                        </div>
+                      
+                        
+                        <div class="validatebtn">
+                            <dx-button [elementAttr]="{ class: 'btn ml-3' }" name="search" text="submit" type="default"  id="btn-fetch"
+                            [useSubmitBehavior]="true">
+                          </dx-button>
+                        </div>
+                      
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        
+         </div>
+
+      <!----END LOOKUP RESULT-->
+<!------Tab start-->
+<dx-tab-panel #tabPanel [height]="" [dataSource]="tab_paneldata" *ngIf="showTabs" class="mx-3"  id="tab"
+[selectedIndex]="tabIndex" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+<div *dxTemplate="let tab_paneldata of 'title'">
+  <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+  <span>{{ tab_paneldata.name }}</span>
+</div>
+<div *dxTemplate="let tab_paneldata of 'item'">
+  <!-- <dx-scroll-view> -->
+  <div class="tabpanel-item  row col-lg-12 div-nopadding">
+
+
+    <div class="col-lg-12 div-nopadding" *ngIf="tab_paneldata.ID == 1">
+
+
+      <div class="col">
+        <div class="card card_border">
+            <div class="card-body card-nopadding">
+
+                <div class=" col-lg-12 div-nopadding">
+                    <dx-data-grid
+                    keyExpr="id"
+                    class="div-nopadding gridContainer"
+                    [dataSource]="pendingListDatasource"
+                    (onToolbarPreparing)="onToolBarPreparing($event)"
+                    [showBorders]="false"
+                    [focusedRowEnabled]="false"
+                    id="pending"
+                    [columnAutoWidth]="true"
+                    height="funcpopHeigt(datagridHeight)"
+                    [showRowLines]="false"
+                    [hoverStateEnabled]="true"
+                    [rowAlternationEnabled]="true"
+                    [allowColumnResizing]="true"
+                    [columnHidingEnabled]="false"
+                    [repaintChangesOnly]="true">
+
+                    <dxo-search-panel [visible]="true"> </dxo-search-panel>
+
+                    <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+
+                    <dxo-scrolling  mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+
+                    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+
+                    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+                    <dxo-export [enabled]="true" [fileName]="title" [allowExportSelectedData]="true"></dxo-export>
+
+                    <dxo-selection mode="multiple"></dxo-selection>
+
+                    <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+                    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+
+                    <dxi-column dataField="id" caption="ID" dataType="string" ></dxi-column>
+                    <dxi-column dataField="controlNo" caption="Control Number" ></dxi-column>
+                    <dxi-column dataField="statusId" caption="Status ID" ></dxi-column>
+                    <dxi-column dataField="statusMsg" caption="Status Message" ></dxi-column>
+                    <dxi-column dataField="newAmount" caption="New Amount" ></dxi-column>
+                    <dxi-column dataField="billAmount" caption="Bill Amount" dataType="string" ></dxi-column>
+                    <dxi-column dataField="createdAt" caption="Created At" dataType="string" ></dxi-column>
+                    <dxi-column dataField="createdBy" caption="Created By" dataType="string" ></dxi-column>
+                    <dxi-column dataField="checkedAt" caption="Checked At" dataType="string" ></dxi-column>
+                    <dxi-column dataField="checkedBy" caption="Checked By" dataType="string" ></dxi-column>
+
+                    <dxi-column dataField="statusMsg" caption="Status" 
+                    cellTemplate="cellTemplateStatus">
+                  <div *dxTemplate="let d of 'cellTemplateStatus'">
+                   
+        
+                    <div *ngIf="d.data.statusMsg == 'PENDING' " class="d-flex text-center">
+                      <button class="btn btn-outline-primary btn-sm" 
+                      (click)="approve(d.data)"
+                      >Approve/Decline</button>
+                    </div>
+                    </div>
+                    
+                  </dxi-column>
+
+
+                    <dxo-load-panel
+                    [enabled]="true">
+                   </dxo-load-panel>
+                  </dx-data-grid>
+               </div>
+
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-12 div-nopadding" *ngIf="tab_paneldata.ID == 2">
+
+
+        <div class="col">
+          <div class="card card_border">
+              <div class="card-body card-nopadding">
+  
+                  <div class=" col-lg-12 div-nopadding">
+                      <dx-data-grid
+                      keyExpr="id"
+                      class="div-nopadding gridContainer"
+                      [dataSource]="approvedListDatasource"
+                      (onToolbarPreparing)="onToolBarPreparingApproved($event)"
+                      [showBorders]="false"
+                      [focusedRowEnabled]="false"
+                      [columnAutoWidth]="true"
+                      id="pending"
+                      height="funcpopHeigt(datagridHeight)"
+                      [showRowLines]="false"
+                      [hoverStateEnabled]="true"
+                      [rowAlternationEnabled]="true"
+                      [allowColumnResizing]="true"
+                      [columnHidingEnabled]="false"
+                      [repaintChangesOnly]="true">
+  
+                      <dxo-search-panel [visible]="true"> </dxo-search-panel>
+  
+                      <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+  
+                      <dxo-scrolling  mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+  
+                      <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+  
+                      <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+                      <dxo-export [enabled]="true" [fileName]="title" [allowExportSelectedData]="true"></dxo-export>
+  
+                      <dxo-selection mode="multiple"></dxo-selection>
+  
+                      <dxo-header-filter [visible]="true"></dxo-header-filter>
+  
+                      <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  
+  
+                      <dxo-load-panel
+                      [enabled]="true">
+                     </dxo-load-panel>
+                    </dx-data-grid>
+                 </div>
+  
+          </div>
+          </div>
+        </div>
+  
+      </div>
+
+  
+
+
+  </div>
+  <!-- </dx-scroll-view> -->
+</div>
+</dx-tab-panel>
+<!------Tab End---->
+
+
+<dx-popup class="popup"   [width]="funcpopWidth(30)" [height]="funcpopHeigt(25)" [showTitle]="true" title="Remark" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="approveParamswinpnl">
+    <div *dxTemplate="let data of 'content'">
+        <dx-scroll-view>
+          <form [formGroup]="approvalForm"   (ngSubmit)="approveRequest()" class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form">
+  
+              <div class="col-12">
+                <label class="control-label">Action</label>
+                <dx-select-box formControlName="action" [dataSource]="datasource" valueExpr="name"  displayExpr="name"
+                        [searchEnabled]="true" >
+                        </dx-select-box>
+              </div>
+
+                <div class="col-lg-12">
+                  <hr />
+                <div class="row">
+                   <div class="col-sm-12 col-md-12">
+                    <dx-button
+                    [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+                    text="Approve"
+                    type="default"
+                    icon="fa fa-save"
+                  
+                    (onClick)="approveRequest()">
+                   </dx-button>
+                  </div>
+                </div>
+  
+                </div>
+            </form>
+        </dx-scroll-view>
+    </div>
+  </dx-popup>
+
+
+
+  
+  
+  
+  
+  
+  
+  

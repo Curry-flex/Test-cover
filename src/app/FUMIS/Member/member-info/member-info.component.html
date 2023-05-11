@@ -1,0 +1,394 @@
+<div class="container-fluid px-4 mt-4">
+    <!-- Account page navigation-->
+  
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <!-- <div class="col-xl-4">
+           
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                  
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">  
+                </div>
+            </div>
+        </div> -->
+
+        <div class="container-fluid">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">MEMBER DETAILS</div>
+                <div class="card-body">
+                    <form>
+
+                        <div>
+                            <table class="table table-striped table-inverse table-bordered">
+                                <tbody>
+                                  <tr>
+                                    <td style="text-align: right">Member Number</td>
+                                    <td>{{memberInfo.MemberNumber}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">First Name</td>
+                                    <td>{{memberInfo.FirstName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Middle Name</td>
+                                    <td>{{memberInfo.MiddleName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Surname</td>
+                                    <td>{{memberInfo.SurName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Full Name</td>
+                                    <td>{{memberInfo.FullName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Mother Name</td>
+                                    <td>{{memberInfo.MothersName}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Birth Date</td>
+                                    <td>{{memberInfo.DateofBirth}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Date of Joining Fund</td>
+                                    <td>{{memberInfo.DateofJoiningFund}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Gender</td>
+                                    <td>{{memberInfo.Gender}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Marital Status</td>
+                                    <td>{{memberInfo.MaritalStatus}}</td>
+                                  </tr>
+                           
+                                  <tr >
+                                    <td style="text-align: right">Nationality</td>
+                                    <td>{{memberInfo.Nationality}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Religion</td>
+                                    <td>{{memberInfo.Religion}}</td>
+                                  </tr>
+                                  <tr >
+                                    <td style="text-align: right">Postal Address</td>
+                                    <td>{{memberInfo.PostalAddress}}</td>
+                                  </tr>
+                                  <tr >
+                                    <td style="text-align: right">Physical Address</td>
+                                    <td>{{memberInfo.PhysicalAddress}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Email Address</td>
+                                    <td>{{memberInfo.EmailAddress}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Mobile Number</td>
+                                    <td>{{memberInfo.MobilePhone}}</td>
+                                  </tr>
+                             
+                  
+                                  <tr>
+                                    <td style="text-align: right">National ID</td>
+                                    <td>{{memberInfo.NationalID}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Region</td>
+                                    <td>{{memberInfo.RegionID}}</td>
+                                  </tr>
+
+                                  <tr>
+                                    <td style="text-align: right">District</td>
+                                    <td>{{memberInfo.DistrictID}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Shehia</td>
+                                    <td>{{memberInfo.ShehiaID}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Is Verified</td>
+                                    <td>{{memberInfo.IsVerified}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Verified By</td>
+                                    <td>{{memberInfo.VerifiedBy}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Verified Date</td>
+                                    <td>{{memberInfo.VerifiedDate}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Verification Status</td>
+                                    <td>{{memberInfo.VerificationStatus}}</td>
+                                  </tr>
+
+
+                                  <tr>
+                                    <td style="text-align: right">Rejection Reason</td>
+                                    <td>{{memberInfo.RejectionReason}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Card Print Status</td>
+                                    <td>{{memberInfo.CardPrintStatus}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Fingers Amputated</td>
+                                    <td>{{memberInfo.FingersAmputated}}</td>
+                                  </tr>
+                                  /
+                                  
+                                  <tr>
+                                    <td style="text-align: right">Effective Date</td>
+                                    <td>{{memberInfo.EffectiveDate}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Branch</td>
+                                    <td>{{memberInfo.BranchCode}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Created Date</td>
+                                    <td>{{memberInfo.CreatedDate}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Created By</td>
+                                    <td>{{memberInfo.CreatedBy}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Last Modified</td>
+                                    <td>{{memberInfo.LastModified}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td style="text-align: right">Last Modified By</td>
+                                    <td>{{memberInfo.LastModifiedBy}}</td>
+                                  </tr>
+                       
+                                 
+                                
+                              
+                                </tbody>
+                            </table>
+                          </div>
+                 
+                     
+                        <!-- <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Member Number</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.MemberNumber" name="MemberNumber" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">First Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.FirstName" name="FirstName" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Middle Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.MiddleName" name="MiddleName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Surname</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.SurName" name="SurName" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Full Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.FullName" name="FullName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Mother Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.MothersName" name="MothersName" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Domicile</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.Domicile" name="Domicile" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Date of Birth</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.DateofBirth" name="DateofBirth" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Date of Joining Fund</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.DateofJoiningFund" name="DateofJoiningFund" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Gender</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.Gender" name="Gender" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Marital Status</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.MaritalStatus" name="MaritalStatus" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Nationality</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.Nationality" name="Nationality" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Religion</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.Religion" name="Religion" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Postal Address</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.PostalAddress" name="PostalAddress" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Physical Address</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.PhysicalAddress" name="PhysicalAddress" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Email Address</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.EmailAddress" name="EmailAddress" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Mobile Phone</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.MobilePhone" name="MobilePhone" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Telephone</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.Telephone" name="Telephone" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Active</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.IsActive" name="IsActive" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Effective Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.EffectiveDate" name="EffectiveDate" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Branch Code</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.BranchCode" name="BranchCode" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Created Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.CreatedDate" name="CreatedDate" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Created By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.CreatedBy" name="CreatedBy" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Last Modified</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.LastModified" name="LastModified" readonly>
+                            </div>
+
+                           
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Last Modified By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.LastModifiedBy" name="LastModifiedBy" readonly>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">National ID</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.NationalID" name="NationalID" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Region</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.RegionID" name="RegionID" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">District</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.DistrictID" name="DistrictID" readonly>
+                            </div>
+                           
+                            
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Shehia</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.ShehiaID" name="ShehiaID" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Is Verified</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.IsVerified" name="IsVerified" readonly>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Verified By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.VerifiedBy" name="VerifiedBy" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Verified Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.VerifiedDate" name="VerifiedDate" readonly>
+                            </div>
+
+                         
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Verification Status</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.VerificationStatus" name="VerificationStatus" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Rejection Reason</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.RejectionReason" name="RejectionReason" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Card Print Status</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.CardPrintStatus" name="CardPrintStatus" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Fingers Amputated</label>
+                                <input class="form-control"  type="text" [(ngModel)]="memberInfo.FingersAmputated" name="FingersAmputated" readonly>
+                            </div>
+                        </div> -->
+                    
+                      
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

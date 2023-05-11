@@ -1,0 +1,134 @@
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">API Communication Links Registration</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    (onToolbarPreparing)="paramsToolBarPreparing($event)"
+    [dataSource]="datasource"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [columnAutoWidth]="true"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false"
+    keyExpr="id"
+    height="funcpopHeigt(datagridHeight)">
+
+    <dxo-search-panel [visible]="true"></dxo-search-panel>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName={{title}} [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxi-column
+        caption="Link ID"
+        dataField="linkId">
+    </dxi-column>
+    <dxi-column
+        caption="Api Category"
+        dataField="apiCategory">
+    </dxi-column>
+    <dxi-column
+        caption="Url Path"
+        dataField="urlPath">
+    </dxi-column>
+
+    <dxi-column
+    caption="Status"
+    dataType="string"
+    dataField="status"
+    cellTemplate="cellTemplateActive">
+    <div *dxTemplate="let d of 'cellTemplateActive'">
+
+      <div *ngIf="d.data.status == 1"  class="text-center">
+          <span class="text-white bg-success rounded pl-2 pr-2">Active</span>
+      </div>
+
+      <div *ngIf="d.data.status == 0"  class="text-center">
+        <span class="text-white bg-danger rounded pl-2 pr-2">Not Active</span>
+      </div>
+
+    </div>
+  </dxi-column>
+  <dxi-column
+  caption="Action"
+  dataType="string"
+  [allowSorting]="false"
+  [width]="90"
+  cellTemplate="cellTemplateAttempStatus">
+  <div *dxTemplate="let d of 'cellTemplateAttempStatus'">
+    <div class="d-flex text-center">
+
+      <div class="text-center mr-3 clickable" (click)="onEditListener(d.data)" title="Edit">
+        <i class="fa fa-pencil text-secondary" aria-hidden="true"></i>
+      </div>
+
+      <div *ngIf="d.data.status == 1" class="text-center mr-3 clickable"  (click)="onDeactivateListerner(d.data)" title="Deactivate">
+        <i class="fa fa-lock text-info" aria-hidden="true"></i>
+      </div>
+
+      <div *ngIf="d.data.status == 0" class="text-center mr-3 clickable" (click)="onActivateListener(d.data)" title="Activate">
+        <i class="fa fa-unlock text-success" aria-hidden="true"></i>
+      </div>
+
+      <div class="text-center clickable" (click)="onDeleteListener(d.data)" title="Delete">
+        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+      </div>
+
+    </div>
+</div>
+  </dxi-column>
+  </dx-data-grid>
+      </div>
+</div>
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(30)" [height]="funcpopHeigt(50)" [showTitle]="true" [title]="popUpTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showDialog">
+
+  <div *dxTemplate="let data of 'content'" >
+    <dx-scroll-view>
+      <form [formGroup]="apiLinkForm"  class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form">
+        <div class="col-lg-12">
+          <label class="text-muted">Link ID</label>
+          <dx-text-box formControlName="linkId" [showClearButton]="true">
+          </dx-text-box>
+        </div>
+
+        <div class="col-lg-12">
+          <label class="text-muted">API Category</label>
+          <dx-text-box formControlName="apiCategory" [showClearButton]="true">
+          </dx-text-box>
+        </div>
+
+        <div class="col-lg-12">
+          <label class="text-muted">Url Path</label>
+          <dx-text-box formControlName="urlPath" [showClearButton]="true"
+          placeholder="eg. http://192.168.1.1/xxx">
+          </dx-text-box>
+        </div>
+
+          <div class="col-lg-12">
+            <hr />
+            <div *ngIf="hideSaveActionButton" class="btn">
+              <dx-button
+              text="Update Link"
+              type="default"
+              icon="fa fa-pencil"
+              (onClick)="saveEditedData()">
+              </dx-button>
+            </div>
+
+            <div *ngIf="!hideSaveActionButton" class="btn">
+              <dx-button
+              text="Register Link"
+              type="default"
+              icon="fa fa-save"
+              (onClick)="onSubmitRegistrationData()">
+              </dx-button>
+            </div>
+
+          </div>
+     </form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>

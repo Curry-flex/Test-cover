@@ -1,0 +1,256 @@
+
+<div class="card-header card_header_background">
+    <h4 class="tex-center">Fumis Member Create.</h4>
+</div>
+
+
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          FUMIS MEMBER
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="fumisMemberCreateForm">
+  
+            <div class="row p-3">
+              <div class="col-12 col-md-3">
+              <label for="date">First name</label>
+              <!-- <dx-date-box id="date" formControlName="date" [value]="now" [max]="now" type="date"> </dx-date-box> -->
+              <dx-text-box id="date" formControlName="fname" placeholder="Enter first name">
+              </dx-text-box>
+            </div>
+  
+        
+  
+              <div class="col-12 col-md-3">
+                <label for="employerNo">Middle Name</label>
+                <dx-text-box id="employerNo" formControlName="mName" placeholder="Enter middle name">
+                </dx-text-box>
+              </div>
+              <div class="col-12 col-md-3">
+                <label for="memberNo">Last Name</label>
+                <dx-text-box id="memberNo" formControlName="lname" placeholder="Enter last name">
+                </dx-text-box>
+              </div>
+            </div>
+  
+            <div class="row p-3">
+              <div class="col-12 col-md-3">
+              <label for="systemId">Mother's Name</label>
+              <dx-text-box id="systemId" formControlName="motherName" placeholder="Enter mother's name">
+              </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Date of Birth</label>
+                <dx-date-box
+                        formControlName="DOB"
+                        [value]=""
+                        pickerType="rollers"
+                        placeholder="Select Date"
+                        [max]="today"
+                        type="date">
+                      </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Date of Joining Fund</label>
+                <dx-date-box
+                        formControlName="dateJoinFund"
+                        [value]=""
+                        pickerType="rollers"
+                        placeholder="Select Date"
+                        [max]="today"
+                        type="date">
+                      </dx-date-box>
+              </div>
+             
+  
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Domicile</label>
+                <dx-text-box id="controlNo" formControlName="domicile" placeholder="Enter domicile">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Gender</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="name"
+                displayExpr="name"
+                formControlName="gender"
+                [dataSource]="genderDataSource"
+                placeholder="Choose gender">
+              </dx-select-box>
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Maritial Status</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="name"
+                displayExpr="name"
+                formControlName="marital"
+                [dataSource]="maritalDataSource"
+                placeholder="Choose staus">
+              </dx-select-box>
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Nationality</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="NationalityID"
+                displayExpr="CountryName"
+                formControlName="nationality"
+                [searchEnabled]="true"
+                [dataSource]="nationalityDataSource"
+                placeholder="Choose Nationality">
+              </dx-select-box>
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Religion</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="ReligionID"
+                displayExpr="Description"
+                formControlName="religion"
+                [searchEnabled]="true"
+                [dataSource]="religionList"
+                placeholder="Choose religion">
+              </dx-select-box>
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Physical Address</label>
+                <dx-text-box id="controlNo" formControlName="physicalAddress" placeholder="Enter physical address">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Postal Address</label>
+                <dx-text-box id="controlNo" formControlName="postalAddress" placeholder="Enter postal address">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Email Address</label>
+                <dx-text-box id="controlNo" formControlName="emailAddress" placeholder="Enter email address">
+                </dx-text-box>
+              </div>
+
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Telephone Number</label>
+                <dx-text-box id="controlNo" formControlName="telephone" placeholder="Enter telephone">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Mobile Number</label>
+                <dx-text-box id="controlNo" formControlName="mobile" placeholder="Enter ofice mobile">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">National ID</label>
+                <dx-text-box id="controlNo" formControlName="NIN" placeholder="Enter national ID">
+                </dx-text-box>
+              </div>
+
+
+            
+              <!-- <div class="col-12 col-md-3">
+                <label for="controlNo">Branch Code</label>
+                <dx-text-box id="controlNo" formControlName="branchCode" placeholder="Enter branch code">
+                </dx-text-box>
+              </div> -->
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Branch</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="BranchCode"
+                displayExpr="BranchName"
+                formControlName="branchCode"
+                [searchEnabled]="true"
+                [dataSource]="branchList"
+                placeholder="Choose branch">
+              </dx-select-box>
+              
+              </div>
+
+            
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Region</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="id"
+                displayExpr="name"
+                formControlName="region"
+                [dataSource]="regionList"
+                (onValueChanged)="filterDistricts($event)"
+                [searchEnabled]="true"
+                placeholder="Choose region">
+              </dx-select-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="scope">District</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="id"
+                displayExpr="name"
+                formControlName="district"
+                [dataSource]="districtListNew"
+                (onValueChanged)="filterShehia($event)"
+                [searchEnabled]="true"
+                placeholder="Choose district">
+              </dx-select-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Shehia</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="ShehiaID"
+                displayExpr="ShehiaName"
+                formControlName="shehia"
+                [dataSource]="shehiaListNew"
+                [searchEnabled]="true"
+                placeholder="Choose shehia">
+              </dx-select-box>
+              </div>
+
+                   
+  
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Submit"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="createMember()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

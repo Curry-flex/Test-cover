@@ -1,0 +1,184 @@
+
+<div class="mb-4"></div>
+
+<div class="container">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">VOMIS PUSH</div>
+        <div class="card-body fix-side">
+          <form [formGroup]="pqIdForm" class="col-lg-12  div-nopadding"
+            style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+            (ngSubmit)="onVomisPushHandler()">
+            <div class="dx-field d-flex justify-content-center">
+              <div class="data-field">
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                          <dx-text-box
+                          placeholder="Enter PQ ID"
+                          formControlName="pq_id"
+                          width="400">
+                          </dx-text-box>
+                      </td>
+                      <td>
+                        <dx-button
+                        text="Push"
+                        icon="fa fa-retweet"
+                       type="default"
+                      [useSubmitBehavior]="true">
+                    </dx-button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">VOMIS PUSH RESULTS</div>
+        <div class="card-body fix-side">
+          <form [formGroup] = "paramwinfrm">
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Response ID</label>
+                  <input type="text" class="form-control" formControlName="response_id" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Request ID</label>
+                  <input type="text" class="form-control" formControlName="request_id" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Member Number</label>
+                  <input type="text" class="form-control" formControlName="membership_number" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Member Type</label>
+                  <input type="text" class="form-control" formControlName="membership_type" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Member Name</label>
+                  <input type="text" class="form-control" formControlName="membership_name" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Amount</label>
+                  <input type="text" class="form-control" formControlName="amount" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Currency</label>
+                  <input type="text" class="form-control" formControlName="currency" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Payment Mode</label>
+                  <input type="text" class="form-control" formControlName="payment_mode" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Receipt No</label>
+                  <input type="text" class="form-control" formControlName="receipt_no" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">PSP Ref No</label>
+                  <input type="text" class="form-control" formControlName="psp_ref_no" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Description</label>
+                  <textarea class="form-control" formControlName="description" name="" id="" rows="3" disabled></textarea>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Subsidium 01</label>
+                  <input type="text" class="form-control" formControlName="subsidium_01" disabled>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Subsidium 02</label>
+                  <input type="text" class="form-control" formControlName="subsidium_02" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Subsidium 03</label>
+                  <input type="text" class="form-control" formControlName="subsidium_03" disabled>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Subsidium 04</label>
+                  <input type="text" class="form-control" formControlName="subsidium_04" disabled>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="">Subsidium 05</label>
+                  <input type="text" class="form-control" formControlName="subsidium_05" disabled>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

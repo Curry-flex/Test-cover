@@ -1,0 +1,107 @@
+<div class="content-block">
+  <div class="dx-card responsive-paddings">
+    <!-- Header Part -->
+    <div class="container-fluid">
+      <h4 class="header_title mb-3 p-1">User Feedback Summary</h4>
+      <div class="tr_summ row mb-2 d-flex justify-content-center">
+        <div class="col-12 tr_summary left b1 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-server ico1" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{totalFeedback}}</div>
+          <div class="tr_typ"> Total Users Feedback</div>
+        </div>
+        <div class="col-12 tr_summary left b2 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-clock-o ico2" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{pendingFeedback}}</div>
+          <div class="tr_typ"> Pending Users Feedback</div>
+        </div>
+        <div class="col-12 tr_summary left b4 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-check-circle-o text-success" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{processedFeedback}}</div>
+          <div class="tr_typ"> Processed Users Feedback</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- datagrid -->
+    <dx-data-grid
+    id="gridContainer2"
+    class="div-nopadding data-area"
+    [dataSource]="dataSource"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    (onToolbarPreparing)="toolBarPreparing($event)"
+    [columnAutoWidth]="true"
+    [showRowLines]="false"
+    [hoverStateEnabled]="true"
+    [rowAlternationEnabled]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false"
+    keyExpr="id"
+    [repaintChangesOnly]="true">
+    <dxo-search-panel [visible]="true"> </dxo-search-panel>
+    <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+    <dxo-scrolling mode="standard"></dxo-scrolling>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises">
+    </dxo-pager>
+
+
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName="Users Feedback" [allowExportSelectedData]="true">
+    </dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxi-column dataField="id" caption="ID" dataType="string" >
+    </dxi-column>
+    <dxi-column dataField="feedbackNumber" dataType="string"> </dxi-column>
+    <!-- <dxi-column caption="Customer Number" dataField="customerNumber" dataType="string">
+    </dxi-column> -->
+
+    <dxi-column dataField="dateSubmitted" caption="Date Submitted" dataType="date" format="yyyy-MM-dd h:mm:ss" sortOrder=desc> </dxi-column>
+    <dxi-column dataField="category"> </dxi-column>
+
+    <dxi-column caption="Feedback Source" dataField="feedbackSource" dataType="string" width="150"> </dxi-column>
+
+    <dxi-column dataField="repliedBy"> </dxi-column>
+    <dxi-column dataField="repliedOn" dataType="date" format="yyyy-MM-dd h:mm:ss"> </dxi-column>
+    <dxi-column dataField="waitingDays" dataType="string" width="150"> </dxi-column>
+    <dxi-column
+    caption="Status"
+    dataType="string"
+    dataField="status"
+    cellTemplate="cellTemplateActive">
+    <div *dxTemplate="let d of 'cellTemplateActive'">
+
+      <div *ngIf="d.data.status == 1"  class="text-center">
+          <span class="text-white bg-success rounded pl-2 pr-2">Replied</span>
+      </div>
+
+      <div *ngIf="d.data.status == 0"  class="text-center">
+        <span class="text-white bg-danger rounded pl-2 pr-2">Waiting for Reply</span>
+      </div>
+
+    </div>
+  </dxi-column>
+
+    <dxi-column
+    caption="Action"
+    dataType="string"
+    [allowSorting]="false"
+    [width]="90"
+    cellTemplate="cellTemplateAttempStatus">
+    <div *dxTemplate="let d of 'cellTemplateAttempStatus'">
+      <div class="d-flex text-center" *ngIf="checkUserAccessRight(['DELETE', 'EDIT', 'VIEW'])">
+
+        <div class="text-center mr-3 clickable" (click)="onViewUserFeedback(d.data)" title="View">
+          <i class="fa fa-eye text-secondary" aria-hidden="true"></i>
+        </div>
+
+        <div *ngIf="d.data.status == 0" class="text-center mr-3 clickable" (click)="onReplyUserFeedback(d.data)" title="Reply">
+          <i class="fa fa-reply text-success" aria-hidden="true"></i>
+        </div>
+
+      </div>
+  </div>
+    </dxi-column>
+  </dx-data-grid>
+  </div>
+</div>

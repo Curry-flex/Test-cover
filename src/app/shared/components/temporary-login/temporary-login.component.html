@@ -1,0 +1,40 @@
+<div class="card mat-card card_border">
+  <div class="card-header">
+    <strong style="font-size: 13px;">Change Password Form</strong>
+  </div>
+  <div class="card-body p-5">
+    <form  [formGroup]="tempLoginForm" (submit)="onChangedPasswordConfirmed()" class="example-form">
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <table>
+                <tbody>
+                  <tr>
+                    <td><label class="mb-4 pr-5" for="username:">Temporary Password:</label> </td>
+                  <td><input [ngClass]="{'error': !tempLoginForm.get('temporaryPassword').valid && tempLoginForm.get('temporaryPassword').touched === true }" class="mb-4 pr-5" type="password" name="temporaryPassword" id="temporaryPassword" formControlName="temporaryPassword" required></td>
+                </tr>
+                  <tr>
+                      <td><label class="mb-4 pr-5" for="username:">New Password:</label> </td>
+                    <td><input
+                      [ngClass]="{'error': !tempLoginForm.get('newPassword').valid && tempLoginForm.get('newPassword').touched === true }"
+                      class="mb-4 pr-5"
+                      type="password"
+                      name="newPassword"
+                      id="newPassword"
+                      formControlName="newPassword"
+                      required
+                      pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[0-9]).*$"></td>
+                  </tr>
+                  <tr>
+                    <td><label class="mb-4 pr-5" for="password">Confirm Password:</label> </td>
+                    <td><input [ngClass]="{'error': !tempLoginForm.get('confirmNewPassword').valid && tempLoginForm.get('confirmNewPassword').touched === true }" formControlName="confirmNewPassword" class="mb-4 pr-5" type="password" name="confirmNewPassword" id="confirmNewPassword" required> </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>
+                    <button type="submit" id="btn-login" class="login-btn btn_presets" [disabled]="disableBtn">Change Password</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>

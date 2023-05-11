@@ -1,0 +1,198 @@
+// Variables
+@import "../../../themes/generated/variables.base.scss";
+
+.btn-controller {
+  display: flex;
+  min-width: 300px;
+  height: 50px;
+  margin-right: 16px !important;
+}
+
+.btn-cleared-bills,
+.btn-pending-bills,
+.btn-rejected-bills {
+  display: flex;
+  border: 1px solid #cdcdcd;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-right: 3px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+.icon {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+
+}
+
+.btn-cleared-bills .icon i {
+  color: #058124;
+}
+
+.btn-pending-bills .icon i {
+  color: #e0b414;
+}
+
+.btn-rejected-bills .icon i {
+  color: #8f1414;
+}
+
+.bill-count-detail {
+  padding: 5px;
+}
+
+.bill-count-detail h4,
+.bill-count-detail p {
+  margin: 0 !important;
+}
+
+.bill-topbar {
+  min-height: 60px;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 5px !important;
+}
+
+.bill-bottombar {
+  border-top: 1px solid $card-border-color;
+  background: #fff;
+  min-height: 80px;
+  padding: 20px;
+  border-bottom: 1px solid $card-border-color;
+}
+
+.bill-centerpanel {
+  margin-top: 10px;
+}
+
+.fix-side {
+  display: flex;
+}
+
+#ctr_no_box {
+  width: 600px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.component_header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 1.7rem;
+}
+
+
+form .ng-invalid:before {
+  content: "";
+  display: none;
+}
+
+.data-field {
+  display: flex;
+}
+.dField{
+  display: flex;
+}
+::ng-deep .currency {
+  color: #000;
+}
+.table p{
+  text-align: right;
+}
+.labelColumn{
+  width: 144px;
+  }
+  .table td{
+    border-top: none !important;
+  }
+
+/* Extra small devices (portrait phones, less than 576px) */
+/* No media query since this is the default in Bootstrap */
+@media (max-width: 575px) {
+  #ctr_no_box {
+    width: 170px;
+  }
+}
+
+@media (min-width: 576px) {
+  #ctr_no_box {
+    width: 200px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #ctr_no_box {
+    width: 250px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .mergeBoth {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .mergeRight {
+    padding-right: 0;
+  }
+
+  .mergeLeft {
+    padding-left: 0;
+  }
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}
+
+.tipsUI{
+    margin: 3px;
+}
+
+.validatebtn{
+    margin-top: 23px;
+}
+
+
+#btn-fetch{
+    
+    margin-left: 7px;
+    padding: 0;
+    margin-top: 5px;
+}
+
+#pending{
+    height: 400px;
+}
+
+#tab{
+    margin-top: 8px;
+}

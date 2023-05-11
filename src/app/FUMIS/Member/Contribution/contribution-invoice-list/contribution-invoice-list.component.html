@@ -1,0 +1,62 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          CONTRIBUTION INVOICE LIST
+        </div>
+        <div class="card-body card-nopadding">
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="invoiceList"
+          keyExpr="InvoiceID"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+         
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="Invoice-List" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>

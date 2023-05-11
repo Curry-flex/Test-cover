@@ -1,0 +1,39 @@
+<form [formGroup]="userLoginForm" (ngSubmit)="onLoginClick()" autocomplete="off">
+<dx-validation-group>
+    <div class="login-header">
+      <div class="title"><img style="width: 90px; height: 90px;" src="./assets/img/zssf.png" alt="ZSSF Logo"></div>
+        <div class="title">{{appInfo.title}}</div>
+        <div>Sign In to your account</div>
+    </div>
+    <div class="dx-field">
+      <label for="login" class="text-muted">Username</label>
+        <dx-text-box
+        id="login"
+        formControlName="login"
+        [(value)]="login" placeholder="Enter username" width="100%" autocomplete="off">
+            <dx-validator>
+                <dxi-validation-rule type="required" message="Login is required"></dxi-validation-rule>
+            </dx-validator>
+        </dx-text-box>
+    </div>
+    <div class="dx-field">
+      <label for="password"class="text-muted">Password</label>
+        <dx-text-box
+        id="password"
+        formControlName="password"
+        mode="password" [(value)]="password" placeholder="Enter password" width="100%" autocomplete="off">
+            <dx-validator>
+                <dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+            </dx-validator>
+        </dx-text-box>
+    </div>
+    <!-- <div class="dx-field">
+        <dx-check-box [value]="false" text="Remember me"></dx-check-box>
+    </div> -->
+    <div class="dx-field">
+        <dx-button
+        [disabled]="disableBtn"
+        type="default" text="Login" [useSubmitBehavior]="true" width="100%"></dx-button>
+    </div>
+</dx-validation-group>
+</form>

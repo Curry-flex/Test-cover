@@ -1,0 +1,117 @@
+<!-- <header>
+    <dx-toolbar class="header-toolbar toolbar-back">
+        <dxi-item
+            *ngIf="menuToggleEnabled"
+            location="before"
+            widget="dxButton"
+            cssClass="menu-button"
+            [options]="{
+                icon: 'menu',
+                stylingMode: 'text',
+                onClick: toggleMenu
+            }">
+        </dxi-item>
+
+        <dxi-item
+        location="before">
+        <div class="image-container">
+          <div class="user-image"></div>
+      </div>
+    </dxi-item>
+
+    <dxi-item
+    location="center"
+    text="ZSSF e-Adminstration System">
+    </dxi-item>
+
+        <dxi-item
+            location="after"
+            locateInMenu="auto"
+            menuItemTemplate="menuItem">
+            <div *dxTemplate="let data of 'item'">
+                <dx-button
+                    class="user-button authorization"
+                    width="210px"
+                    height="100%"
+                    stylingMode="text">
+                    <div *dxTemplate="let data of 'content'">
+                        <app-user-panel [menuItems]="userMenuItems" menuMode="context"></app-user-panel>
+                    </div>
+                </dx-button>
+            </div>
+        </dxi-item>
+        <div *dxTemplate="let data of 'menuItem'">
+            <app-user-panel [menuItems]="userMenuItems" menuMode="list"></app-user-panel>
+        </div>
+    </dx-toolbar>
+</header> -->
+
+
+<header>
+  <dx-toolbar class="header-toolbar toolbar-back">
+    <dxi-item *ngIf="menuToggleEnabled" location="before" widget="dxButton" cssClass="menu-button" [options]="{
+                icon: 'menu',
+                stylingMode: 'text',
+                onClick: toggleMenu
+            }">
+    </dxi-item>
+    <dxi-item location="before" cssClass="header-title" *ngIf="title" [text]="appName">
+    </dxi-item>
+
+    <dxi-item location="after" locateInMenu="auto" cssClass="header-title" class="user-button authorization"
+      *ngIf="title" [text]="roleName">
+    </dxi-item>
+    <dxi-item location="after" menuItemTemplate="menuItem">
+      <div *dxTemplate="let data of 'item'">
+        <button type="button" class="btn btn-light mr-3" data-toggle="tooltip" data-placement="bottom"
+          title="Change Password" (click)="funcChangeUserPassword()">
+          <i class="fa fa-key"></i>
+        </button>
+        <button type="button" class="btn btn-light" data-toggle="tooltip" data-placement="bottom" title="Log Out"
+          (click)="funcUserLogOut()">
+          <i class="fa fa-sign-out"></i>
+        </button>
+
+
+      </div>
+    </dxi-item>
+    <div *dxTemplate="let data of 'menuItem'">
+      <app-user-panel [menuItems]="userMenuItems" menuMode="list"></app-user-panel>
+    </div>
+  </dx-toolbar>
+</header>
+
+<dx-popup class="popup" [width]="funcpopWidth(30)" [height]="380" [showTitle]="true" title="Change Password"
+  [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="changePasswordWin">
+
+  <div *dxTemplate="let data of 'content'">
+    <form [formGroup]="changePasswordFrm" class="col-lg-12 row div-nopadding" style="background: #fff;"
+      enctype="multipart/form-data" role="form" autocomplete="off">
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">Old password</label>
+        <dx-text-box formControlName="oldPassword" mode="password" placeholder="Old Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">New password</label>
+        <dx-text-box formControlName="newPassword" mode="password" placeholder="New Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">Confirm password</label>
+        <dx-text-box formControlName="confirmPassword" mode="password" placeholder="Confirm Password" width="100%" autocomplete="off">
+
+        </dx-text-box>
+      </div>
+      <div class="col-lg-12 div-nopadding">
+        <hr />
+        <dx-button text="Change Password" type="success" icon="check" [elementAttr]="{ class: 'custom-btn pull-right' }"
+          (click)="OnPasswordReset()">
+        </dx-button>
+      </div>
+    </form>
+  </div>
+</dx-popup>
+

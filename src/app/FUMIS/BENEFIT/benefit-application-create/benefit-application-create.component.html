@@ -1,0 +1,391 @@
+
+<div class="card-header card_header_background">
+    <h4 class="tex-center">BENEFIT APPLICATION.</h4>
+</div>
+
+<div class="content-block row">
+    <div class="col">
+    
+        
+        <div class="card-body card-nopadding">
+  
+          <form >
+
+            <div *ngIf="showSelectMember" id="Personal-Details" class="card card_border">
+
+              <div class="card-header card_header_background">
+                SELECT MEMBER
+              </div>
+
+              <div class="card-body card-nopadding">
+                <div class="row p-3">
+                  
+                    <div class="col-12 col-md-4">
+                        <label for="date">Termination Date</label>
+                        <dx-date-box
+                            [value]=""
+                            placeholder="Select Date"
+                            [max]="today"
+                            type="date">
+                        </dx-date-box>
+                      </div>
+              
+                  <div class="col-12 col-md-4">
+                    <label for="invoiceNo">Member Number</label>
+                    <dx-text-box id="date" (onValueChanged)="getMemberInfo($event)" >
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-4">
+                    <label for="date">Names</label>
+                   
+                    <dx-text-box id="date" [(ngModel)]="names" name="names"  [disabled]="true" >
+                    </dx-text-box>
+                  </div>
+              
+                  <div class="col-12 col-md-4">
+                    <label for="date">Mother's name</label>
+                   
+                    <dx-text-box id="date" [disabled]="true"   [(ngModel)]="mothersName" name="mothersName" >
+                    </dx-text-box>
+                  </div>
+
+    
+                  <div class="col-12 col-md-4">
+                    <label for="systemId">Application Mode</label>
+                
+                    <dx-select-box
+                        id="scope"
+                        valueExpr="name"
+                        displayExpr="name"
+                        
+                        [dataSource]="applicationTypeList"
+                        placeholder="Choose application type">
+                      </dx-select-box>
+                    </div>
+    
+            
+
+               
+      
+           
+                </div>
+                <div  class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+               
+               
+                  <dx-button
+                  id="action"
+                  text="Next"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="nextApplicationDetailsForm()">
+                  </dx-button>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="showApplicationDetails" id="Maternity-Details" class="card card_border">
+
+              <div class="card-header card_header_background">
+                APPLICATION AND CONTACT DETAILS
+              </div>
+
+              <div class="card-body card-nopadding">
+                <div class="row p-3">
+              
+                      <div class="col-12 col-md-4">
+                        <label for="systemId">Termination Reason</label>
+                    
+                        <dx-select-box
+                            id="scope"
+                            valueExpr="name"
+                            displayExpr="name"
+                            
+                            [dataSource]="terminationReason"
+                            placeholder="Choose application type">
+                          </dx-select-box>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <label for="systemId">Application Type</label>
+                        
+                            <dx-select-box
+                                id="scope"
+                                valueExpr="name"
+                                displayExpr="name"
+                              
+                                [dataSource]="applicationType"
+                                placeholder="Choose application type">
+                              </dx-select-box>
+                            </div>
+
+
+                             <div class="col-12 col-md-4">
+                                <label for="date">Application Date</label>
+                                <dx-date-box
+                                    [value]=""
+                                    placeholder="Select Date"
+                                    [max]="today"
+                                    type="date">
+                                </dx-date-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Last Employer</label>
+                               
+                                <dx-text-box id="date" [disabled]="true" >
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Last Contribution</label>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <dx-text-box id="date" placeholder="month" [disabled]="true">
+                                        </dx-text-box>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <dx-text-box id="date" placeholder="Year">
+                                        </dx-text-box>
+                                    </div>
+                                   
+                                </div>
+                               
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Additional Monthes</label>
+                               
+                                <dx-text-box id="date" [disabled]="true" >
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Number Of Monthes Allowed</label>
+                               
+                                <dx-text-box id="date" [disabled]="true">
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Reference Application</label>
+                               
+                                <dx-text-box id="date" [disabled]="true">
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Physical Address</label>
+                               
+                                <dx-text-box id="date" >
+                                </dx-text-box>
+                              </div>
+
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Telephone Number</label>
+                               
+                                <dx-text-box id="date" >
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Email Address</label>
+                               
+                                <dx-text-box id="date" >
+                                </dx-text-box>
+                              </div>
+
+                              <div class="col-12 col-md-4">
+                                <label for="date">Postal Address</label>
+                               
+                                <dx-text-box id="date" >
+                                </dx-text-box>
+                              </div>
+    
+
+           
+                </div>
+                <div  class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+               
+               
+                  <dx-button
+                  style="margin: 5px;"
+                  id="action"
+                  text="Next"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="nextpaymentForm()">
+                  </dx-button>
+
+                  <dx-button
+                  style="margin: 5px;"
+                  id="action"
+                  text="Previous"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="prevSelectMemberForm()">
+                  </dx-button>
+                </div>
+
+            
+              </div>
+            </div>
+
+
+            <div *ngIf="showPaymentsDetails" id="Maternity-Details" class="card card_border">
+
+                <div class="card-header card_header_background">
+                  PAYMENTS DETAILS
+                </div>
+  
+                <div class="card-body card-nopadding">
+                  <div class="row p-3">
+                
+                        <div class="col-12 col-md-4">
+                          <label for="systemId">Payment Mode</label>
+                      
+                          <dx-select-box
+                              id="scope"
+                              valueExpr="PaymentModeID"
+                              displayExpr="PaymentMode"
+                              
+                              [dataSource]="paymentsModes"
+                              placeholder="Choose application type">
+                            </dx-select-box>
+                          </div>
+  
+                     
+  
+  
+                                <div class="col-12 col-md-4">
+                                  <label for="date">Account Number</label>
+                                 
+                                  <dx-text-box id="date"  >
+                                  </dx-text-box>
+                                </div>
+  
+                           
+  
+                                <div class="col-12 col-md-4">
+                                  <label for="date">Account Name</label>
+                                 
+                                  <dx-text-box id="date">
+                                  </dx-text-box>
+                                </div>
+  
+                             
+  
+                                <div class="col-12 col-md-4">
+                                  <label for="date">Bank</label>
+                                  <dx-select-box
+                                  id="scope"
+                                  valueExpr="BankID"
+                                  displayExpr="BankAcronym"
+                                 
+                                  [searchEnabled]="true"
+                                  [dataSource]="bankList"
+                                  placeholder="Choose">
+                                </dx-select-box>
+                                </div>
+      
+  
+             
+                  </div>
+                  <div  class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+                 
+                 
+                    <dx-button
+                    style="margin: 5px;"
+                    id="action"
+                    text="Next"
+                    type="default"
+                    (click)="photoAndSignatureForm()"
+                    [useSubmitBehavior]="false"
+                    >
+                    </dx-button>
+  
+                    <dx-button
+                    style="margin: 5px;"
+                    id="action"
+                    text="Previous"
+                    type="default"
+                    [useSubmitBehavior]="false"
+                    (click)="prevApplicationDetailsForm()">
+                    </dx-button>
+                  </div>
+  
+              
+                </div>
+              </div>
+
+  
+          
+              <div *ngIf="showPhotoAndSignature" id="Maternity-Details" class="card card_border">
+
+                <div class="card-header card_header_background">
+                  PHOTOGRAPHY AND SIGNATURE
+                </div>
+  
+                <div class="card-body card-nopadding">
+                  <div class="row p-3">
+                
+                        <div class="col-12 col-md-4">
+                          <label for="systemId">Photograpgh</label>
+                          
+                          <img src="https://i.pinimg.com/originals/6b/7e/d6/6b7ed698713c09ad9e6afc7dcb996a09.jpg" alt="" style="width:100px; height:100px; margin-left:10px">
+                          
+                          </div>
+
+
+                          <div class="col-12 col-md-4">
+                            <label for="systemId">Signature</label>
+                           
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/XXXTentacion_signature.svg/1206px-XXXTentacion_signature.svg.png" alt="" style="width:100px; height:100px; margin-left:10px">
+                             
+                          </div>
+
+                  </div>
+                  <div  class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+                 
+                 
+                    <dx-button
+                    style="margin: 5px;"
+                    id="action"
+                    text="Submit"
+                    type="default"
+                    [useSubmitBehavior]="false"
+                    >
+                    </dx-button>
+  
+                    <dx-button
+                    style="margin: 5px;"
+                    id="action"
+                    text="Previous"
+                    type="default"
+                    [useSubmitBehavior]="false"
+                    (click)="prevPaymentsForm()">
+                    </dx-button>
+                  </div>
+  
+              
+                </div>
+              
+           
+            </div>
+
+      
+<!-------Life has so many things here and around-->
+            
+            
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+     
+    </div>
+  </div>

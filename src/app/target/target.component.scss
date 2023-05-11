@@ -1,0 +1,19 @@
+.data-area{
+  height: 400px;
+}
+
+.table tbody tr td, .table th {
+  border-top: 0;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.text_amt{
+  direction: rtl;
+}
+

@@ -1,0 +1,667 @@
+<!-- <h2 class="content-block">Home</h2> -->
+<div class="content-block" *ngIf="!hideSensitiveData">
+
+
+  <div class="container-fluid mb-5 mt-3">
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-stats mb-4 mb-xl-0">
+          <div class="card-header bg-secondary text-white d-flex align-items-center">
+            <h3 class="">Payment Service Provider yearly Collection summary ({{current}})</h3>
+            <div class="ml-3">
+              <form [formGroup]="paymentSummaryForm">
+                <div class="row p-3">
+                  <div class="">
+                    <!-- <label for="Year">Contribution Year</label> -->
+                    <dx-select-box
+                    id="contributionYear"
+                    formControlName="year"
+                    [dataSource]="years"
+                    placeholder="Choose Year"
+                    (onValueChanged)="onContributionYearChanged($event)">
+                  </dx-select-box>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="header bg-gradient-primary pb-8 pt-1 pt-md-8 mb-5">
+              <div class="container-fluid">
+                <div class="header-body">
+                  <div class="row">
+                    <div class="col-12 col-md-4 col-lg-4" *ngFor="let item of this.banksYealyCollectionDatasource">
+                      <div class="card card-stats mb-4 mb-xl-0">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <h5 class="card-title text-uppercase text-muted mb-0">
+                                <img *ngIf="item.psp == 'CRDB'" src="./assets/images/crdb.png" alt="crdb logo" style="width: 100px;" />
+                                <img *ngIf="item.psp == 'NMB'" src="./assets/images/nmb.jpg" alt="nmb logo" style="width: 100px;" />
+                                <img *ngIf="item.psp == 'PBZ'"  src="./assets/images/pbz.png" alt="pbz logo" style="width: 100px;" />
+                                <span *ngIf="item.psp != 'PBZ' && item.psp != 'CRDB' && item.psp != 'NMB'">ZAN MALIPO</span>
+                                <span class="ml-2">{{item.psp}} Collections</span> </h5>
+                              <h4 class="text-muted font-weight-bold mb-0">Amount: {{item.amount | currency: 'USD':''}} TZS</h4>
+                              <h4 class="text-muted font-weight-bold mb-0">Collection Percentage: {{((item.amount/totalAmountCollectedYearly)*100) | number: '1.0-0' }}%</h4>
+                            </div>
+                          </div>
+                          <p class="mt-1 mb-0 text-muted text-sm">
+                            <span class="text-muted mr-2" style="font-weight: bold;">{{item.billsCount}}</span>
+                            <span class="text-muted"> Bills paid via <span style="font-weight: bold;">{{item.psp}}</span> out of <span style="font-weight: bold;">{{totalBillCountPerYear}}</span>  total bills paid.</span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- <div class="dx-card responsive-paddings">
+    <div class="container-fluid">
+      <h4 class="header_title mb-3">Collection Summary</h4>
+      <div class="tr_summ row mb-2 d-flex justify-content-center">
+        <div class="col-12 tr_summary left b1 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-university ico1" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{totalCollectionsByBanks | currency:'USD':''}}</div>
+          <div class="tr_typ"> Total Collections - BANKS (Tzs)</div>
+        </div>
+        <div class="col-12 tr_summary left b2 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-signal ico2" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{totalCollectionsByMno | currency:'USD': ''}}</div>
+          <div class="tr_typ"> Total Collections - MNO (Tzs)</div>
+        </div>
+        <div class="col-12 tr_summary left b4 col-md-3 mb-sm-2">
+          <div class="img"><i class="fa fa-fax ico4" aria-hidden="true"></i></div>
+          <div class="tr_typo">{{totalCollectionsByPos | currency:'USD': ''}}</div>
+          <div class="tr_typ"> Total Collections - POS (Tzs)</div>
+        </div>
+      </div>
+    <h4 class="header_title mb-3">Dashboard Quick Links</h4>
+
+      <div class="row">
+        <div class="col col-md-3">
+          <ul class="subNav">
+            <li>
+              Bill Management
+            </li>
+            <li>
+              <a [routerLink]="['/bill-create']" ><i class="fa fa-calculator" aria-hidden="true"></i> Create Bill</a>
+            </li>
+            <li>
+              <a (click)="goToAnchor('bills')" ><i class="fa fa-check-square" aria-hidden="true"></i> Paid Bills</a>
+            </li>
+            <li>
+              <a  (click)="goToAnchor('bills')"><i class="fa fa-clock-o" aria-hidden="true"></i> Pending Bills</a>
+            </li>
+            <li>
+              <a  (click)="goToAnchor('bills')"><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> All Bills</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-trash" aria-hidden="true"></i> Defect Bill</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col col-md-3">
+          <ul class="subNav">
+            <li>
+              System Administration
+            </li>
+            <li>
+              <a [routerLink]="['/system-users']" ><i class="fa fa-users" aria-hidden="true"></i> User Management</a>
+            </li>
+            <li>
+              <a [routerLink]="['/system-settings']"><i class="fa fa-cogs" aria-hidden="true"></i> Settings Management</a>
+            </li>
+            <li>
+              <a [routerLink]="['/security-manager']"><i class="fa fa-shield" aria-hidden="true"></i> Security Management</a>
+            </li>
+            <li>
+              <a [routerLink]="['/system-roles']"><i class="fa fa-universal-access" aria-hidden="true"></i> Roles Management</a>
+            </li>
+            <li>
+              <a [routerLink]="['/system-privileges']"><i class="fa fa-random" aria-hidden="true"></i> Privileges Management</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col col-md-3">
+          <ul class="subNav">
+            <li>
+              Payments
+            </li>
+            <li>
+              <a (click)="goToAnchor('payments')"><i class="fa fa-search" aria-hidden="true"></i> Search Payments</a>
+            </li>
+            <li>
+              <a (click)="goToAnchor('payments')"><i class="fa fa-university" aria-hidden="true"></i> Payments Via Banks </a>
+            </li>
+            <li>
+              <a (click)="goToAnchor('payments')"><i class="fa fa-signal" aria-hidden="true"></i> Payments Via MNO's</a>
+            </li>
+            <li>
+              <a (click)="goToAnchor('payments')"><i class="fa fa-fax" aria-hidden="true"></i> Payments Via POS</a>
+            </li>
+            <li>
+              <a (click)="goToAnchor('payments')"><i class="fa fa-sellsy" aria-hidden="true"></i> Internet Banking</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col col-md-3">
+          <ul class="subNav">
+            <li>
+              Reports
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-area-chart" aria-hidden="true"></i> Collection Report</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Collection VS Target</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-server" aria-hidden="true"></i> Collection Centers Report</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-binoculars" aria-hidden="true"></i> Data Visualization</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-sticky-note" aria-hidden="true"></i> Other Reports</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+  </div> -->
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Payment Collections By Banks ({{current}})" [dataSource]="collectionData"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="amount" name="Amount"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true" [format]="{
+                type: 'fixedPoint',
+                precision: '2'
+            }">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+  
+
+ 
+
+  <!-- <div class="container-fluid" id="payments">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="dx-card responsive-paddings mt-3">
+          <div class="container-fluid">
+            <dx-pie-chart class="pie" type="doughnut" title="Payment Collection By PSP (Banks)" palette="Soft Pastel"
+              [dataSource]="paymentDatasourceByBanks">
+              <dxi-series argumentField="psp">
+                <dxo-label [visible]="true" [format]="{
+                  type: 'fixedPoint',
+                  precision: '2'
+                  }">
+                  <dxo-connector [visible]="true"></dxo-connector>
+                </dxo-label>
+              </dxi-series>
+              <dxo-export [enabled]="true"></dxo-export>
+              <dxo-legend [margin]="0" horizontalAlignment="right" verticalAlignment="top"></dxo-legend>
+              <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip2">
+              </dxo-tooltip>
+            </dx-pie-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="dx-card responsive-paddings mt-3">
+          <div class="container-fluid">
+            <dx-pie-chart class="pie" type="doughnut" title="Payment Collection By PSP (MNOs)" palette="Soft Pastel"
+              [dataSource]="paymentCollectionMNO">
+              <dxi-series argumentField="psp">
+                <dxo-label [visible]="true" format="fixedPoint">
+                  <dxo-connector [visible]="true"></dxo-connector>
+                </dxo-label>
+              </dxi-series>
+              <dxo-export [enabled]="true"></dxo-export>
+              <dxo-legend [margin]="0" horizontalAlignment="right" verticalAlignment="top"></dxo-legend>
+              <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip2">
+              </dxo-tooltip>
+            </dx-pie-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Payment Collections Via PBZ ({{current}})" [dataSource]="pbzMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="amount" name="Amount"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true" [format]="{
+                type: 'fixedPoint',
+                precision: '2'
+            }">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Total Control Numbers Paid Via PBZ ({{current}})" [dataSource]="pbzMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="billsCount" name="Total"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Payment Collections Via CRDB ({{current}})" [dataSource]="crdbMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="amount" name="Amount"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true" [format]="{
+                type: 'fixedPoint',
+                precision: '2'
+            }">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Total Control Numbers Paid Via CRDB ({{current}})" [dataSource]="crdbMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="billsCount" name="Total"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Payment Collections Via NMB ({{current}})" [dataSource]="nmbMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="amount" name="Amount"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true" [format]="{
+                type: 'fixedPoint',
+                precision: '2'
+            }">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+  <div class="dx-card responsive-paddings mt-3">
+    <div class="container-fluid">
+      <dx-chart id="chart" title="Total Control Numbers Paid Via NMB ({{current}})" [dataSource]="nmbMonthlyCollectionDatasource"
+        (onPointClick)="onPointClick($event)">
+        <dxi-series valueField="billsCount" name="Total"></dxi-series>
+        <dxo-common-series-settings argumentField="monName" type="bar" hoverMode="allArgumentPoints"
+          selectionMode="allArgumentPoints">
+          <dxo-label [visible]="true">
+          </dxo-label>
+        </dxo-common-series-settings>
+        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+        </dxo-legend>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-chart>
+    </div>
+  </div>
+
+  <div class="dx-card responsive-paddings mt-3" id="bills">
+    <div class="container-fluid">
+          <!-- Paid Invoices DataGrid -->
+          <p>Paid Invoices </p>
+          <div class="col-lg-12 div-nopadding ">
+            <dx-data-grid
+              class="div-nopadding gridHeight"
+              (onToolbarPreparing)="onBillsToolBarPreparing($event)"
+              [dataSource]="paymentsDataSource"
+              [showBorders]="false"
+              [focusedRowEnabled]="true"
+              [columnAutoWidth]="true"
+              [showRowLines]="false"
+              [hoverStateEnabled]="true"
+              [rowAlternationEnabled]="true"
+              [allowColumnResizing]="true"
+              [columnHidingEnabled]="false"
+              keyExpr="id"
+              [repaintChangesOnly]="true">
+              <dxo-search-panel [visible]="true"> </dxo-search-panel>
+              <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+              <dxo-scrolling mode="standard"></dxo-scrolling>
+              <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises">
+              </dxo-pager>
+
+              <dxo-filter-row [visible]="false"></dxo-filter-row>
+              <dxo-export [enabled]="true" fileName="Paid Invoices" [allowExportSelectedData]="true">
+              </dxo-export>
+              <dxo-selection mode="single"></dxo-selection>
+
+              <dxi-column dataField="creationDate" caption="Invoice Issued At" dataType="date" format="yyyy-MM-dd hh:mm:ss a" sortOrder="desc">
+              </dxi-column>
+
+              <dxi-column dataField="clearanceDate" caption="Payment Received At" dataType="date" format="yyyy-MM-dd hh:mm:ss a">
+              </dxi-column>
+
+              <dxi-column dataField="controlNo"> </dxi-column>
+              <dxi-column caption="Nav Receipt" dataField="navReceipt">
+              </dxi-column>
+
+              <dxi-column dataField="currency"> </dxi-column>
+              <dxi-column caption="Amount" dataField="amount" dataType="number">
+                <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+              </dxi-column>
+              <dxi-column
+              caption="Status"
+              dataType="string"
+              dataField="cleared"
+              cellTemplate="cellTemplateActive">
+              <div *dxTemplate="let d of 'cellTemplateActive'">
+
+                <div *ngIf="d.data.cleared == 1"  class="text-center">
+                    <span class="text-white bg-success rounded pl-2 pr-2">Invoice Paid</span>
+                </div>
+
+                <div *ngIf="d.data.cleared == 0"  class="text-center">
+                  <span class="text-white bg-danger rounded pl-2 pr-2">Waiting for payment</span>
+                </div>
+
+              </div>
+            </dxi-column>
+              <dxi-column caption="Paid Via" dataField="psp"> </dxi-column>
+              <dxi-column dataField="customerNo"> </dxi-column>
+              <dxi-column dataField="payerName"> </dxi-column>
+              <dxi-column dataField="billDesc"> </dxi-column>
+
+              <dxo-summary>
+                <dxi-total-item
+                    column="creationDate"
+                    summaryType="count">
+                </dxi-total-item>
+                <dxi-total-item
+                    column="amount"
+                    summaryType="sum"
+                    valueFormat="fixedPoint"
+                    precision="2">
+                </dxi-total-item>
+            </dxo-summary>
+
+            </dx-data-grid>
+          </div>
+    </div>
+  </div>
+
+
+  <div class="dx-card responsive-paddings mt-3" id="bills">
+    <div class="container-fluid">
+          <!-- Pending Payments DataGrid -->
+          <p>Pending Payments</p>
+          <div class="col-lg-12 div-nopadding">
+            <dx-data-grid
+              class="div-nopadding gridHeight"
+              (onToolbarPreparing)="onBillsToolBarPreparing($event)"
+              [dataSource]="pendingPayments"
+              [showBorders]="false"
+              [focusedRowEnabled]="true"
+              [columnAutoWidth]="true"
+              [showRowLines]="false"
+              [hoverStateEnabled]="true"
+              [rowAlternationEnabled]="true"
+              [allowColumnResizing]="true"
+              [columnHidingEnabled]="false"
+              keyExpr="id"
+              [repaintChangesOnly]="true">
+              <dxo-search-panel [visible]="true"> </dxo-search-panel>
+              <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+              <dxo-scrolling mode="standard"></dxo-scrolling>
+              <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises">
+              </dxo-pager>
+
+              <dxo-filter-row [visible]="false"></dxo-filter-row>
+              <dxo-export [enabled]="true" fileName="Pending payments" [allowExportSelectedData]="true">
+              </dxo-export>
+              <dxo-selection mode="single"></dxo-selection>
+
+              <dxi-column dataField="creationDate" caption="Invoice Issued At" dataType="date" format="yyyy-MM-dd hh:mm:ss a" sortOrder="desc">
+              </dxi-column>
+
+              <dxi-column dataField="controlNo"> </dxi-column>
+
+              <dxi-column dataField="currency"> </dxi-column>
+              <dxi-column caption="Amount" dataField="amount" dataType="number">
+                <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+              </dxi-column>
+              <dxi-column
+              caption="Status"
+              dataType="string"
+              dataField="cleared"
+              cellTemplate="cellTemplateActive">
+              <div *dxTemplate="let d of 'cellTemplateActive'">
+
+                <div *ngIf="d.data.cleared == 1"  class="text-center">
+                    <span class="text-white bg-success rounded pl-2 pr-2">Invoice Paid</span>
+                </div>
+
+                <div *ngIf="d.data.cleared == 0"  class="text-center">
+                  <span class="text-white bg-danger rounded pl-2 pr-2">Waiting for payment</span>
+                </div>
+
+              </div>
+            </dxi-column>
+              <dxi-column dataField="customerNo"> </dxi-column>
+              <dxi-column dataField="payerName"> </dxi-column>
+              <dxi-column dataField="billDesc"> </dxi-column>
+
+              <dxo-summary>
+                <dxi-total-item
+                    column="creationDate"
+                    summaryType="count">
+                </dxi-total-item>
+                <dxi-total-item
+                    column="amount"
+                    summaryType="sum"
+                    valueFormat="fixedPoint"
+                    precision="2">
+                </dxi-total-item>
+            </dxo-summary>
+
+
+            </dx-data-grid>
+          </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="content-block" *ngIf="hideSensitiveData">
+  <h4 class="header_title mb-3 p-2">{{title}}</h4>
+  <div class="dx-card responsive-paddings">
+
+    <dx-button
+    class="mb-3 mt-3"
+    icon="fa fa-recycle"
+    text="Referesh"
+    type="default"
+    (onClick)="fetchReports()">
+
+    </dx-button>
+
+
+    <dx-tab-panel #tabPanel [dataSource]="tab_paneldata" [selectedIndex]="tabIndex"
+    [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+    <div *dxTemplate="let tab_paneldata of 'title'">
+      <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+      <span>{{ tab_paneldata.name }}</span>
+    </div>
+    <div *dxTemplate="let tab_paneldata of 'item'">
+      <dx-scroll-view>
+      <div class="tabpanel-item  row col-lg-12 div-nopadding">
+        <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 1">
+        <!-- DAILY -->
+        <h4 class="header_title mb-3 p-2">Employers Registration Report (Daily)</h4>
+        <dx-data-grid
+        class="mb-3 mt-3"
+        [dataSource]="dailyReport"
+        [showBorders]="true"
+        [focusedRowEnabled]="false"
+        [showRowLines] = "true"
+        [allowColumnResizing]="true"
+        [columnAutoWidth]="true"
+        [columnHidingEnabled]="false"
+        height="funcpopHeigt(datagridHeight)">
+        <dxo-export [enabled]="true" fileName="Employers Registration Report (Daily)" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-paging [pageSize]="100"></dxo-paging>
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="allowedPageSises"
+    ></dxo-pager>
+        <dxo-search-panel [visible]="false"></dxo-search-panel>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+    </dx-data-grid>
+
+        </div>
+
+        <div class="col-lg-12 div-nopadding" *ngIf="tab_paneldata.ID == 2">
+
+    <!-- WEEKLY -->
+    <h4 class="header_title mb-3 p-2">Employers Registration Report (weekly)</h4>
+    <dx-data-grid
+    class="mb-3 mt-3"
+    [dataSource]="weeklyReport"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Employers Registration Report (weekly)" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+    ></dxo-pager>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+    </dx-data-grid>
+        </div>
+
+        <div class=" col-lg-12  div-nopadding" *ngIf="tab_paneldata.ID == 3">
+    <!-- MONTLY -->
+    <h4 class="header_title mb-3 p-2">Employers Registration Report (Montly)</h4>
+    <dx-data-grid
+    class="mb-3 mt-3"
+    [dataSource]="monthlyReport"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Employers Registration Report (Montly)" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+    ></dxo-pager>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+    </dx-data-grid>
+        </div>
+
+        <div class=" col-lg-12  div-nopadding" *ngIf="tab_paneldata.ID == 4">
+    <!-- YEARLY -->
+    <h4 class="header_title mb-3 p-2">Employers Registration Report (Yearly)</h4>
+    <dx-data-grid
+    class="mb-3 mt-3"
+    [dataSource]="yearlyReport"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [columnHidingEnabled]="false"
+    height="funcpopHeigt(datagridHeight)">
+    <dxo-export [enabled]="true" fileName="Employers Registration Report (Yearly)" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-paging [pageSize]="100"></dxo-paging>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="allowedPageSises"
+    ></dxo-pager>
+    <dxo-search-panel [visible]="false"></dxo-search-panel>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+    </dx-data-grid>
+        </div>
+
+      </div>
+      </dx-scroll-view>
+    </div>
+    </dx-tab-panel>
+
+      </div>
+</div>
+

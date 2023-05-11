@@ -1,0 +1,201 @@
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+      <div class="card-body pl-5 pr-5 pb-3 pt-3">
+        <div class="d-flex flex-nowrap">
+          <div class="order-1 pr-3">
+            <dx-button
+            stylingMode="contained"
+            icon="fa fa-thumb-tack"
+            [disabled]="disableNextButton"
+            text="Generate Control Number"
+            type="default"
+            (onClick)="submitInvoices()">
+            </dx-button>
+          </div>
+          <div class="order-2 pr-3">
+            <!-- <dx-button
+          stylingMode="contained"
+          icon="clear"
+          text="Discard"
+          type="danger"
+          (onClick)="discardChanges()">
+          </dx-button> -->
+        <!-- <span class="d-block">Cancel List</span> -->
+          </div>
+        </div>
+        <hr />
+          <div class="dx-fieldset-header">Countribution Invoice</div>
+          <dx-data-grid
+          id="gridContainer"
+          keyExpr="invoiceNo"
+          [dataSource]="contributionInvoicesDataSource"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          [columnAutoWidth]="true"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false">
+          <dxo-search-panel [visible]="true"> </dxo-search-panel>
+          <dxo-paging [enabled]="false"></dxo-paging>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+          <dxo-export [enabled]="true" fileName="Employer Invoices" [allowExportSelectedData]="true">
+          </dxo-export>
+          <dxo-header-filter [visible]="false"></dxo-header-filter>
+          <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+          <dxo-selection
+            mode="single">
+          </dxo-selection>
+
+          <dxi-column
+          dataField="invoiceNo"
+          dataType="string">
+          </dxi-column>
+
+          <dxi-column
+          dataField="invoiceAmount"
+          dataType="number"
+          caption="Amount Receivable">
+                  <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                  </dxo-format>
+          </dxi-column>
+
+          <dxi-column
+          dataField="currencyCode"
+          caption="Currency"
+          width="100">
+        </dxi-column>
+
+          <dxi-column
+          dataField="invoiceGroupID"
+          caption="Invoice Type"
+          dataType="string"
+          cellTemplate="cellTemplateInvoiceGroupID">
+          <div *dxTemplate="let d of 'cellTemplateInvoiceGroupID'">
+
+            <div *ngIf="d.data.invoiceGroupID == 2" class="text-center">
+              <span class="text-white bg-danger rounded pl-2 pr-2">Penalty Invoice</span>
+            </div>
+
+            <div *ngIf="d.data.invoiceGroupID == 1" class="text-center">
+              <span class="text-white bg-success rounded pl-2 pr-2">Contribution Invoice</span>
+            </div>
+
+          </div>
+          </dxi-column>
+
+          <dxi-column
+          dataField="invoiceDescription"
+          dataType="string"
+          caption="Description">
+          </dxi-column>
+
+          </dx-data-grid>
+          <hr />
+          <div *ngIf="true">
+            <div class="dx-fieldset-header">Penalties Imposed</div>
+            <dx-data-grid
+            id="gridContainer"
+            keyExpr="invoiceID"
+            [dataSource]="penaltyInvoicesDataSource"
+            [(selectedRowKeys)]="selectedRows"
+            [showBorders]="true"
+            [focusedRowEnabled]="false"
+            [columnAutoWidth]="true"
+            [showRowLines]="true"
+            [allowColumnResizing]="true"
+            [columnHidingEnabled]="false">
+            <dxo-search-panel [visible]="true"> </dxo-search-panel>
+            <dxo-paging [enabled]="false"></dxo-paging>
+            <dxo-filter-row [visible]="false"></dxo-filter-row>
+            <dxo-export [enabled]="true" fileName="Employer Invoices" [allowExportSelectedData]="true">
+            </dxo-export>
+            <dxo-header-filter [visible]="false"></dxo-header-filter>
+            <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+            <!-- <dxo-selection
+              [selectAllMode]="allMode"
+              [showCheckBoxesMode]="checkBoxesMode"
+              mode="multiple">
+            </dxo-selection> -->
+
+            <dxi-column
+            dataField="penaltNumber"
+            dataType="string">
+            </dxi-column>
+
+            <dxi-column
+            dataField="percentAmount"
+            dataType="string">
+            </dxi-column>
+
+            <dxi-column
+            dataField="penaltAmount"
+            dataType="number"
+            caption="Penalty Amount">
+                    <dxo-format
+                      type="fixedPoint"
+                      [precision]="2">
+                    </dxo-format>
+            </dxi-column>
+
+            <dxi-column
+            dataField="amountRequiredToPay"
+            dataType="number"
+            caption="Amount Receivable">
+                    <dxo-format
+                      type="fixedPoint"
+                      [precision]="2">
+                    </dxo-format>
+            </dxi-column>
+
+            <dxi-column
+            dataField="currencyCode"
+            caption="Currency"
+            width="100">
+          </dxi-column>
+
+          <dxi-column
+          [calculateCellValue]="contributionInWords"
+          dataField="penaltyContributionMonth"
+          caption="Month">
+        </dxi-column>
+
+        <dxi-column
+        dataField="penaltyContributionYear"
+        caption="Year">
+      </dxi-column>
+
+      <dxi-column
+            caption="Invoice Type"
+            dataType="string"
+            cellTemplate="cellTemplateInvoiceGroupID">
+            <div *dxTemplate="let d of 'cellTemplateInvoiceGroupID'">
+
+              <div class="text-center">
+                <span class="text-white bg-danger rounded pl-2 pr-2">Penalty Invoice</span>
+              </div>
+
+            </div>
+            </dxi-column>
+
+            <dxi-column
+            dataField="penaltyNarration"
+            dataType="string"
+            caption="Description">
+            </dxi-column>
+
+            </dx-data-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

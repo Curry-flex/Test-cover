@@ -1,0 +1,163 @@
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+      <div class="card-body pl-5 pr-5 pb-3 pt-3">
+        <div class="d-flex flex-nowrap">
+          <div class="order-1 pr-3">
+            <dx-button
+            stylingMode="contained"
+            icon="movetofolder"
+            text="Update Details"
+            type="default"
+            (onClick)="updateInvoiceContribution()">
+            </dx-button>
+          </div>
+          <div class="order-2 pr-3">
+            <dx-button
+          stylingMode="contained"
+          icon="clear"
+          text="Discard Changes"
+          type="danger"
+          (onClick)="discardChanges()">
+          </dx-button>
+        <!-- <span class="d-block">Cancel List</span> -->
+          </div>
+        </div>
+        <hr />
+    <!-- grid info header -->
+    <div class="dx-fieldset-header">Contribution Details</div>
+    <dx-data-grid
+    [dataSource]="contributionDetails"
+    [showBorders]="true"
+    [focusedRowEnabled]="false"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false">
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxo-scrolling mode="virtual"></dxo-scrolling>
+
+    <dxi-column [allowEditing]="false" dataField="contributionYear" caption="Contribution Year">
+    </dxi-column>
+
+    <dxi-column
+    [calculateCellValue]="contributionInWords"
+    [allowEditing]="false"
+    dataField="contributionMonth"
+    caption="Contribution Month">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false" dataField="amountReceivable" dataType="number">
+      <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false" dataField="currency" dataType="string" [visible]="false">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false" dataField="dateCreated" caption="Submission Date" dataType="date" >
+    </dxi-column>
+
+
+  </dx-data-grid>
+    <!-- end of grid info header -->
+    <div class="dx-fieldset-header">Contributions Data</div>
+    <dx-data-grid
+      id="gridContainer"
+      keyExpr="memberID"
+      [dataSource]="contributionDataset"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      [columnAutoWidth]="true"
+      height="funcpopHeigt(datagridHeight)"
+      [showRowLines]="true"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="false"
+      (onSelectionChanged)="selectedChanged($event)"
+      (onRowInserted)="onRowInserted($event)"
+      (onRowUpdated)="onRowUpdated($event)"
+      (onEditingStart)="onEditingStart($event)"
+      (onRowInserting)="onRowInserting($event)">
+      <dxo-search-panel [visible]="true"> </dxo-search-panel>
+      <dxo-paging [pageSize]="100"></dxo-paging>
+      <dxo-pager [showPageSizeSelector]="false" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+      <dxo-export [enabled]="true" fileName="Members Contributions" [allowExportSelectedData]="true">
+      </dxo-export>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-editing
+      mode="row"
+      [allowAdding]="true"
+      [allowUpdating]="true"
+      [allowDeleting]="true">
+      </dxo-editing>
+
+      <dxi-column dataField="memberNumber" dataType="string" caption="Member Number">
+      </dxi-column>
+      <dxi-column dataField="memberNames" dataType="string" caption="Member Names" sortOrder="asc">
+      </dxi-column>
+
+      <dxi-column caption="Member Salary" dataField="baseAmount" dataType="number"
+        [calculateCellValue]="memberSalaryFilter">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column [allowEditing]="false" dataField="employerNumber" dataType="string" caption="Employer Number">
+      </dxi-column>
+      <dxi-column [allowEditing]="false" dataField="memberContribution" caption="Member Contribution"
+        [calculateCellValue]="calculateMemberContribution" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column [allowEditing]="false" dataField="employerContribution"
+        [calculateCellValue]="calculateEmployerContribution" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+      <dxi-column [allowEditing]="false" dataField="amountContributed" caption="Total Amount Contributed"
+        [calculateCellValue]="calculateAmountContributed" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+      </dxi-column>
+
+      <dxo-summary [recalculateWhileEditing]="true">
+        <dxi-total-item
+        column="memberNumber"
+        summaryType="count"
+        [customizeText]="customizeText"
+        valueFormat="fixedPoint">
+    </dxi-total-item>
+
+    <dxi-total-item
+    column="baseAmount"
+    summaryType="sum"
+    valueFormat="fixedPoint"
+    precision="2">
+  </dxi-total-item>
+
+  <dxi-total-item
+  column="memberContribution"
+  summaryType="sum"
+  valueFormat="fixedPoint"
+  precision="2">
+</dxi-total-item>
+
+<dxi-total-item
+column="employerContribution"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+<dxi-total-item
+column="amountContributed"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+</dxo-summary>
+</dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>

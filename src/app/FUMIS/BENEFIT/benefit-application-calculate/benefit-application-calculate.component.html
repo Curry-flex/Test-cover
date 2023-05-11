@@ -1,0 +1,224 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          BENEFITS CALCULATION
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="calculateForm">
+  
+          
+  
+            <div class="row p-3">
+
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Application Number</label>
+                    <dx-text-box id="controlNo" formControlName="appNo" placeholder="Enter application number">
+                    </dx-text-box>
+                  </div>
+
+                 
+
+                  
+ 
+                   
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Calculate"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="calculate()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+ <div class="headerWrapper">
+  
+  </div>
+
+
+  <div *ngIf="showCalculationResult">
+    <div class="headerWrapper content-block">
+      <div class="container space">
+        <div class="row d-flex justify-content-center">
+          <div class="btn" >
+            <dx-button text="Print" icon="print" stylingMode="contained" type="default"
+              (onClick)="printTopdf()">
+            </dx-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <dx-scroll-view>
+        <div id="print-container2" class="">
+          <div class="">
+            <div class="logo__block">
+              <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+              <p>Zanzibar Social Security Fund</p>
+              <p>(Based on Average Salary and Number of Months Contributed)</p>
+            </div>
+            <div class="invoice__head row">
+              <div class="invoice__head__child col-12 col-md-6">
+                <table class="table table-responsive">
+                  <tbody>
+                      <tr>
+                          <td>Member Name: </td>
+                          <td colspan="2"><strong>{{calculationDataSource.FullName}}</strong> </td>
+                        </tr>
+                        <tr>
+                          <td>Member Number: </td>
+                          <td><strong>{{calculationDataSource.MemberNumber}}</strong></td>
+                        </tr>
+                        <tr>
+                          <td>Last Employer:</td>
+                          <td colspan="8"><strong>{{calculationDataSource.EmployerName}}</strong></td>
+                          <td>Sector:</td>
+                          <td><strong>{{calculationDataSource.Sector}}</strong></td>
+                        </tr>
+                        <tr >
+                          <td>Sex: </td>
+                          <td><strong>{{calculationDataSource.Gender}}</strong></td>
+                        </tr>
+            
+                        <tr>
+                          <td>Date Of Birth: </td>
+                          <td><strong>{{calculationDataSource.DateofBirth}}</strong></td>
+                        </tr>
+            
+                        <tr>
+                          <td>Date Employed: </td>
+                          <td><strong></strong></td>
+                        </tr>
+  
+                        <tr>
+                          <td>No. of Month Contributed: </td>
+                          <td><strong>{{calculationDataSource.NumberOfContributions}}</strong></td>
+                        </tr>
+                        <tr>
+                          <td>Last Month & Year Contribution Received: </td>
+                          <td><strong>{{calculationDataSource.LastContributionMonth}}/{{calculationDataSource.LastContributionYear}}</strong></td> 
+                        </tr>
+                  </tbody>
+                </table>
+              </div>
+            
+            </div>
+            <p
+              style="text-align: center; border-bottom: 1px dotted #4d88bb; border-top: 1px dotted #4d88bb; padding: .5rem;">
+             <b>BENEFIT PAID</b></p>
+              <div class="">
+                <div class="invoice__body">
+                  <table class="full_table table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Calculation</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>Total Contribution</td>
+                          <td>{{calculationDataSource.TotalContributions}}</td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>Last Month Salary</td>
+                          <td>2099686687/98</td>
+                          <td>1000000</td>
+                               
+                        </tr>
+                        <tr>
+                          <td>Full Pension</td>
+                          <td>2099686687/98</td>
+                          <td>1000000</td>
+                        </tr>
+                        <tr>
+                          <td>Full Gratuity</td>
+                          <td>2099686687/98</td>
+                          <td>1000000</td>
+                        </tr>
+                        <tr>
+                          <td>Monthly Pension</td>
+                          <td>2099686687/98</td>
+                          <td>1000000</td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+  
+                <div class="row" >
+                  <p style="padding-left: 5px;">Certified that the proposed payments are in accordance with Z.S.S.F act and are collectly calculated based on the facts recorded in this form</p>
+                </div>
+    
+                <div class=" invoice__how_to_pay row">
+                  
+                  <div class="col-12 col-md-6">
+                    <hr>
+                    <table class="table table-responsive">
+                      <tbody>
+                        <tr>
+                          <td colspan="2">Date:................................................................................................</td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">Name:................................................................................................</td>
+                          
+                        </tr>
+                        <tr>
+                          <td colspan="2">Controller and Auditor General</td>
+                        </tr>
+  
+                        <tr>
+                          <td colspan="2">Signature:...........................................................................................</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <hr>
+                    <table class="table table-responsive">
+                      <tbody>
+                          <tr>
+                              <td colspan="2">Date:................................................................................................</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">Name:................................................................................................</td>
+                              
+                            </tr>
+                            <tr>
+                              <td colspan="2">Managing Director ZSSF</td>
+                            </tr>
+      
+                            <tr>
+                              <td colspan="2">Signature:...........................................................................................</td>
+                            </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            <hr>
+           
+          </div>
+        </div>
+      </dx-scroll-view>
+    </div>
+
+  </div>
+
+  

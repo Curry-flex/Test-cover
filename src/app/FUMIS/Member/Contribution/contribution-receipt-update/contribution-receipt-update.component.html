@@ -1,0 +1,219 @@
+<!-- <div class="content-block">
+
+  
+
+    
+    <br>
+    <br>
+  
+  
+    <div class="dx-card responsive-paddings card card_border">
+      <div class="card-header card_header_background"><b>CONTRIBUTION RECIPIENT CREATE</b></div>
+      <br>
+      <form [formGroup]="receiptCreateForm">
+  
+        <div class="card">
+          <div class="card-header metal">
+          
+          </div>
+          <div class="card-body card-nopadding">
+            <div class="container-fluid metal">
+              <div class="row d-flex justify-content-betwen">
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      
+                      <tr>
+                        <td>
+                          Receipt Number:
+                        </td>
+                        <td>
+                          <dx-text-box placeholder="Receipt number" formControlName="recNum"></dx-text-box>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Receipt Date:
+                        </td>
+                        <td>
+                            <dx-date-box
+                        formControlName="recDate"
+                        [value]=""
+                        placeholder="Select Date"
+                        [max]="today"
+                        type="date">
+                      </dx-date-box>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          Employer:
+                        </td>
+                        <td>
+
+
+                            <dx-text-box placeholder="Employer number" (onValueChanged)="fetchEmployerID($event)" formControlName="empID" ></dx-text-box>
+                          
+                          
+                        </td>
+                      </tr>
+  
+                      <tr>
+                        <td>Member:</td>
+                        <td>
+                        
+
+                        <dx-text-box placeholder="Member number" (onValueChanged)="fetchMemberID($event)" formControlName="memberID" ></dx-text-box>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="card mt-2">
+          <div class="card-header metal">
+            
+          </div>
+          <div class="card-body card-nopadding">
+            <div class="container-fluid metal">
+              <div class="row d-flex justify-content-betwen">
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Receipt Details:</td>
+                        <td>
+                            <dx-text-area [height]="70" formControlName="recDetails" [maxLength]="maxLength"
+                            placeholder="Receipt Details">
+                          </dx-text-area>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          Payment mode:
+                        </td>
+                        <td>
+                          <dx-select-box [dataSource]="paymentModeList" formControlName="paymentMode" valueExpr="PaymentModeID"
+                            displayExpr="PaymentMode" [searchEnabled]="true" placeholder="--Select--">
+                          </dx-select-box>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Reference Number:</td>
+                        <td>
+                          <dx-text-box [readOnly]="false" formControlName="refNo"></dx-text-box>
+                        </td>
+                      </tr>
+  
+                      <tr>
+                        <td>
+                          Amount Received:
+                        </td>
+                        <td>
+                          <dx-number-box [(value)]="amount" formControlName="amount"></dx-number-box>
+                        </td>
+                        
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+  
+        <div class="card mt-2">
+          <div class="card-header metal">
+           
+          </div>
+          <div class="card-body card-nopadding">
+            <div class="container-fluid metal">
+              <div class="row d-flex justify-content-betwen">
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Currency:</td>
+                        <td>
+                          <dx-select-box [dataSource]="currencyDts" formControlName="currency" valueExpr="id" #CurrencyselectBox
+                            displayExpr="text" [searchEnabled]="true" placeholder="--Select--">
+                          </dx-select-box>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td>
+                          Amount Received In Local:
+                        </td>
+                        <td>
+                          <dx-number-box [(value)]="amount" formControlName="amountLocal"></dx-number-box>
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+  
+                <div class="col-12 col-md-6">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          Branch:
+                        </td>
+                        <td>
+                            <dx-select-box
+                            id="scope"
+                            valueExpr="BranchCode"
+                            displayExpr="BranchName"
+                            formControlName="branchCode"
+                            [dataSource]="branchList"
+                            placeholder="Choose branch">
+                          </dx-select-box>
+                        </td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="card mt-2">
+          <div class="card-body card-nopadding">
+            <div class="container-fluid metal">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-end p-2">
+                 
+  
+                  <dx-button text="Update " type="default" icon="fa fa-pencil" (onClick)="updateReceipt()">
+                  </dx-button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+   -->

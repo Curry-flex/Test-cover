@@ -1,0 +1,262 @@
+<div class="container-fluid mt-3">
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card card_border">
+          <div class="card-header card_header_background">
+            <h5>CONTRIBUTION RECEIPT LIST</h5>
+          </div>
+          <div class="card-body fix-side">
+          
+
+            <form [formGroup]="fetchForm"
+            class="col-lg-12 div-nopadding"
+            style="background: rgba(255, 255, 255, 0.7)">
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">By Date</label>
+              
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mr-1">
+                      <label for="">Start Date:</label>
+                      <dx-date-box
+                          formControlName="startDate"
+                          [value]=""
+                          [max]="today"
+                          type="date">
+                      </dx-date-box>
+                  </div>
+                  </div>
+  
+                  <div class="col-6">
+                    <div class="mr-1">
+                      <label for="">End Date:</label>
+                      <dx-date-box
+                          formControlName="endDate"
+                          [value]=""
+                          [max]="today"
+                          type="date">
+                      </dx-date-box>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">By Employer number</label>
+              
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mr-1">
+                 
+                     
+                        <dx-text-box id="" formControlName="empNum" style="width:150px" placeholder="Employer number">
+                        </dx-text-box>
+                        
+                     
+                  </div>
+                  </div>
+
+                 
+  
+                
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">By Member number</label>
+              
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mr-1">
+                      
+                     
+                        <dx-text-box id="" style="width:150px" formControlName="mNumber" placeholder="Member number">
+                        </dx-text-box>
+                        
+                     
+                  </div>
+                  </div>
+
+                 
+  
+                
+                </div>
+
+              </div>
+
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">By Branch</label>
+              
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mr-1">
+                     
+                     
+                      <dx-select-box
+                      style="width:150px"
+                      id="scope"
+                      valueExpr="BranchCode"
+                      displayExpr="BranchName"
+                      formControlName="branchCode"
+                      [dataSource]="branchList"
+                      placeholder="Choose branch">
+                    </dx-select-box>
+                        
+                     
+                  </div>
+                  </div>
+
+                 
+  
+                
+                </div>
+
+              </div>
+
+            
+
+              <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label"></label>
+              
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mr-1">
+                      <dx-button
+                      id="action"
+                      text="Fetch Records"
+                      type="default"
+                      [useSubmitBehavior]="false"
+                      (click)="getData()">
+                      </dx-button>
+                  </div>
+                  </div>
+  
+                
+                </div>
+
+              </div>
+
+
+             
+            </form>
+<!--               
+              <div class="d-flex justify-content-center">
+
+           
+
+               
+                <div class="mr-1">
+                  <label for="">Start Date:</label>
+                  <dx-date-box
+                      formControlName="startDate"
+                      [value]="today"
+                      [max]="today"
+                      type="date">
+                  </dx-date-box>
+              </div>
+              <div class="mr-1">
+                <label for="">End Date:</label>
+                <dx-date-box
+                    formControlName="endDate"
+                    [value]="today"
+                    [max]="today"
+                    type="date">
+                </dx-date-box>
+            </div>
+               
+            
+
+                <div class="col-12 col-md-3 mt-2" style="padding-top: 20px;">
+               
+               
+                    <dx-button
+                    id="action"
+                    text="Fetch Records"
+                    type="default"
+                    [useSubmitBehavior]="false"
+                    (click)="getData()">
+                    </dx-button>
+                  </div>
+              </div> -->
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-body card-nopadding">
+        <!-- <dx-data-grid
+        class="div-nopadding gridContainer"
+        [dataSource]="registrationPerformanceDataSource"
+        [showBorders]="true"
+        keyExpr="Male"
+        [focusedRowEnabled]="false"
+        [columnAutoWidth]="true"
+        height="funcpopHeigt(datagridHeight)"
+        [showRowLines]="false"
+        [rowAlternationEnabled]="true"
+        [allowColumnResizing]="true"
+        [columnHidingEnabled]="false"
+        [repaintChangesOnly]="true">
+  
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+  
+        <dxo-paging [pageSize]="pageSize" [enabled]="false"></dxo-paging>
+  
+        <dxo-scrolling  mode="virtual" rowRenderingMode="virtual"></dxo-scrolling>
+  
+        <dxo-pager [showPageSizeSelector]="true" [showInfo]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+  
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+        <dxo-export [enabled]="true" [fileName]="" [allowExportSelectedData]="true"></dxo-export>
+  
+        <dxo-selection mode="single"></dxo-selection>
+  
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+  
+        <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+  
+        <dxo-load-panel
+        [enabled]="true">
+       </dxo-load-panel>
+      </dx-data-grid> -->
+
+      <dx-data-grid
+      [dataSource]="receptDatasource"
+      keyExpr="ReceiptID"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      (onRowClick)="previewDetailsu($event)"
+      [showRowLines] = "true"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="false"
+      [columnAutoWidth]="true"
+     
+      height="funcpopHeigt(datagridHeight)">
+      <dxo-load-panel
+      [enabled]="false">
+      </dxo-load-panel>
+      <dxo-export [enabled]="true" fileName="contribution-receipt" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-paging [pageSize]="pageSize"></dxo-paging>
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="allowedPageSises"
+  ></dxo-pager>
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+      
+
+
+  </dx-data-grid>
+      </div>
+    </div>
+  </div>

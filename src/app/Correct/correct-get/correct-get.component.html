@@ -1,0 +1,120 @@
+<!--<p>bill-validation-tigo works!</p>-->
+<div class="headerWrapper">
+    <div class=" div-pagetitle ">
+  
+    </div>
+  
+  </div>
+  
+  <div class="container-fluid mt-3">
+    <!-- start of container -->
+  
+    <!-- Bill Validation -->
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card card_border">
+          <h6 class="card-header card_header_background">Search</h6>
+          <div class="card-body fix-side">
+            <form [formGroup]="queryForm" class="col-lg-12  div-nopadding"
+              style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+              (ngSubmit)="query()">
+              <div class="dx-field d-flex justify-content-center">
+                <div class="data-field">
+                   
+
+                     <div class="tipsUI">
+                      <label for="">ID</label>
+                      <dx-text-box placeholder="Enter ID" formControlName="ID" width="280" style="padding-right: 10px;">
+                    </dx-text-box>
+                    </div>
+                  
+                
+                  
+                    
+                    <div class="validatebtn">
+                        <dx-button [elementAttr]="{ class: 'btn ml-3' }" name="search" text="submit" type="default"  id="btn-fetch"
+                        [useSubmitBehavior]="true">
+                      </dx-button>
+                    </div>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!---------LOOKUP RESULT-->
+   <div class="row mb-3">
+    <div class="col" *ngIf="correctDetails">
+    
+  
+  
+      <div class="col-12">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 mergeRight">
+            <div class="card card_border">
+              <!-- <div class="card-header card_header_background ">Reciever Details</div> -->
+              <form class="col-lg-12  div-nopadding"
+              style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+              >
+              <div class="card-body">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Control Number:</td>
+                      <td style="padding-left: 1rem;"> <strong>{{controlNo}}</strong></td>
+                    </tr>
+                    <tr>
+                      <td>New Amount:</td>
+                      <td style="padding-left: 1rem;"><strong>{{newAmount}}</strong></td>
+                    </tr>
+                    <tr>
+                      <td>Bill Amount:</td>
+                      <td style="padding-left: 1rem;"> <strong>{{billAmount}}</strong></td>
+                    </tr>
+                     <tr>
+                        <td>invAmount:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{invAmount}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>invDtAmount:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{invDtAmount}}</strong></td>
+                      </tr>
+
+                      <tr>
+                        <td>iciAmount:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{iciAmount}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Status:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{status}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>ID:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{id}}</strong></td>
+                      </tr>
+                      <tr>
+                        <td>Create At:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{createdAt}}</strong></td>
+                      </tr>
+
+                      <tr>
+                        <td>Create By:</td>
+                        <td style="padding-left: 1rem;"> <strong>{{createdBy}}</strong></td>
+                      </tr>
+
+               
+                  </tbody>
+                </table>
+  
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+  </div>

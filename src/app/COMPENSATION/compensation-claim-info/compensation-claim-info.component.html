@@ -1,0 +1,879 @@
+<!-- <div class="container-fluid px-4 mt-4">
+ 
+  
+    <hr class="mt-0 mb-4">
+    <div class="row">
+      
+
+        <div class="container-fluid">
+           
+            <div class="card mb-4">
+                <div class="card-header">COMPENSATION CLAIM DETAILS</div>
+                <div class="card-body">
+                    <form>
+                 
+                     
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Employer Number</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.empNo" name="empNo" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Employer Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.empName" name="empName" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Member Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.memberName" name="memberName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Incident Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.incDate" name="incDate" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Incident Time</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.incTime" name="incTime" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Region</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.region" name="region" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">District</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.district" name="district" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Injured On Work</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuredOnWork" name="injuredOnWork" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Employment Type</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.employmentType" name="employmentType" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Assigned Department</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.assignedDepartment" name="assignedDepartment" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Occupation When Injured</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.occupationWhenInjured" name="occupationWhenInjured" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Is Returned To Work</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.isReturnedToWork" name="isReturnedToWork" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Date Returned To Work</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateReturnedToWork" name="dateReturnedToWork" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Anticipated Return Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.anticipatedReturnDate" name="anticipatedReturnDate" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Date Last Worked</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateLastWorked" name="dateLastWorked" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Incident Outcome</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.incOutcome" name="incOutcome" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Date Of Birth</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateOfDeath" name="dateOfDeath" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Accident Cause</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.accidentCause" name="accidentCause" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Injured Body Parts</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuredBodyParts" name="injuredBodyParts" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Injury Nature</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuryNature" name="injuryNature" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Treatment Type</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.treatmentType" name="treatmentType" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">More Details</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.moreDetails" name="moreDetails" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Facility Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityName" name="facilityName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Facility Address</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityAddress" name="facilityAddress" readonly>
+                            </div>
+
+                            
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Facility Phone</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityPhone" name="facilityPhone" readonly>
+                            </div>
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Physician Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.physicianName" name="physicianName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Physician Position</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.physicianPosition" name="physicianPosition" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Payment Mode</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.paymentMode" name="paymentMode" readonly>
+                            </div>
+                           
+                          
+                        </div>
+
+                        
+                        <div class="row gx-3 mb-3">
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Account Number</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.accNo" name="accNo" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Account Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.accName" name="accName" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Bank Name</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.bankName" name="bankName" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Claim Status</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.claimStatus" name="claimStatus" readonly>
+                            </div>
+                           
+                           
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Deleted</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.deleted" name="deleted" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Created At</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.createdAt" name="createdAt" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Created By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.createdBy" name="createdBy" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Modified At</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.modifiedAt" name="modifiedAt" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Modified By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="claimInfo.modifiedBy" name="modifiedBy" readonly>
+                            </div>
+                           
+                           
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                        
+                            <div class="" *ngFor="let item of claimInfo.witnesses">
+                                <div class="col-md-3" >
+                                    <label class="small mb-1" for="inputLastName">Full Name</label>
+                                    <input class="form-control" [value]="item.fullName"  type="text"  readonly>
+                                </div> 
+
+                                <div class="col-md-3">
+                                    <label class="small mb-1" for="inputLastName">Phone</label>
+                                    <input class="form-control" [value]="item.phone"  type="text"  readonly>
+                                </div> 
+                                
+                                <div class="col-md-3">
+                                    <label class="small mb-1" for="inputLastName">Address</label>
+                                    <input class="form-control" [value]="item.address"  type="text"  readonly>
+                                </div> 
+
+                                <div class="col-md-3">
+                                    <label class="small mb-1" for="inputLastName">Position</label>
+                                    <input class="form-control" [value]="item.position"  type="text"  readonly>
+                                </div> 
+
+                                
+
+                            </div>
+                            
+                           
+                        </div>
+                    
+                      
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<dx-tab-panel #tabPanel  [dataSource]="tab_paneldata"
+[selectedIndex]="tabIndex" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+<div *dxTemplate="let tab_paneldata of 'title'">
+  <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+  <span>{{ tab_paneldata.name }}</span>
+</div>
+<div *dxTemplate="let tab_paneldata of 'item'">
+  <!-- <dx-scroll-view> -->
+  <div class="tabpanel-item  row col-lg-12 div-nopadding">
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 1">
+      <div class="headerWrapper">
+        <div class="table-full-width div-pagetitle">
+            <div class="container-fluid px-4 mt-4">
+ 
+  
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                  
+            
+                    <div class="container-fluid">
+                       
+                        <div class="card mb-4">
+                            <div class="card-header">COMPENSATION CLAIM DETAILS</div>
+                            <div class="card-body">
+                                <form>
+                             
+                                 
+                                    <div class="row gx-3 mb-3">
+                                        
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Employer Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.empNo" name="empNo" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Employer Name</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.empName" name="empName" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Employment Type</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.employmentType" name="employmentType" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Assigned Department</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.assignedDepartment" name="assignedDepartment" readonly>
+                                        </div>
+            
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Is Returned To Work</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.isReturnedToWork" name="isReturnedToWork" readonly>
+                                        </div>
+
+                                  
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Date Returned To Work</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateReturnedToWork" name="dateReturnedToWork" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Anticipated Return Date</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.anticipatedReturnDate" name="anticipatedReturnDate" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Date Last Worked</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateLastWorked" name="dateLastWorked" readonly>
+                                        </div>
+            
+                                     
+                                    </div>
+            
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    
+    </div>
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 2">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">INCIDENT DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Incident Date</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.incDate" name="incDate" readonly>
+                                        </div>
+                                         
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Incident Time</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.incTime" name="incTime" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Region</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.region" name="region" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">District</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.district" name="district" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Injured On Work</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuredOnWork" name="injuredOnWork" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Accident Cause</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.accidentCause" name="accidentCause" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Injured Body Parts</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuredBodyParts" name="injuredBodyParts" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Occupation When Injured</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.occupationWhenInjured" name="occupationWhenInjured" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">More Details</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.moreDetails" name="moreDetails" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Incident Outcome</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.incOutcome" name="incOutcome" readonly>
+                                        </div>
+              
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+
+                              
+                          </div>
+
+                          <div class="card mb-4">
+                            <div class="card-header">WITNESSES</div>
+                            <div class="card-body">
+                              
+
+                                  <div class="card-body card-nopadding">
+                                    <dx-data-grid
+                                    [dataSource]="claimInfo.witnesses"
+                                    keyExpr="id"
+                                    [showBorders]="true"
+                                    [focusedRowEnabled]="true"
+                                    [showRowLines] = "true"
+                                    [allowColumnResizing]="true"
+                                    [columnHidingEnabled]="false"
+                                    [columnAutoWidth]="true"
+                                   
+                                    height="funcpopHeigt(datagridHeight)">
+                                    <dxo-load-panel
+                                    [enabled]="false">
+                                   </dxo-load-panel>
+                                    
+                                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                                    <dxo-pager
+                                    [showPageSizeSelector]="true"
+                                    [allowedPageSizes]="allowedPageSises"
+                                    ></dxo-pager>
+                                    
+                                    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+                                    <dxi-column dataField="fullName" caption="Full name" dataType="string" ></dxi-column>
+                                    <dxi-column dataField="phone" caption="Phone" ></dxi-column>
+                                    <dxi-column dataField="address" caption="Address" ></dxi-column>
+                                    <dxi-column dataField="position" caption="Position" ></dxi-column>
+                                    <dxi-column dataField="createdAt" caption="Created At" ></dxi-column>
+                                
+                            
+                                    
+                            
+                              
+                                </dx-data-grid>
+                            
+                                  </div>
+                            </div>
+
+                            
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+    
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 3">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">MEDICAL DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Facility Name</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityName" name="facilityName" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Facility Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityAddress" name="facilityAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Facility Phone</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.facilityPhone" name="facilityPhone" readonly>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Physician Name</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.physicianName" name="physicianName" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Physician Position</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.physicianPosition" name="physicianPosition" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Treatment Type</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.treatmentType" name="treatmentType" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Injury Nature</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.injuryNature" name="injuryNature" readonly>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="small mb-1" for="inputFirstName">Date Of Birth</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.dateOfDeath" name="dateOfDeath" readonly>
+                                        </div>
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+       
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 4">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">Payments DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Bank Name</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.bankName" name="bankName" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Account Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.accNo" name="accNo" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Account Name</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.accName" name="accName" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Payment Mode</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.paymentMode" name="paymentMode" readonly>
+                                        </div>
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+    
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 5">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">CLAIM DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Claim Status</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.claimStatus" name="claimStatus" readonly>
+                                        </div>
+                                          
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Created At</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.createdAt" name="createdAt" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Created By</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.createdBy" name="createdBy" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Modified At</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.modifiedAt" name="modifiedAt" readonly>
+                                        </div>
+            
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Modified By</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.modifiedBy" name="modifiedBy" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Deleted</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="claimInfo.deleted" name="deleted" readonly>
+                                        </div>
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+     
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 6">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">UPLOADS DETAILS</div>
+       
+                          </div>
+
+                          <div class="card mb-4">
+                            <div class="card-header">UPLOADS</div>
+                            <div class="card-body">
+                              
+
+                                  <div class="card-body card-nopadding">
+                                    <dx-data-grid
+                                    [dataSource]="claimInfo.uploads"
+                                    keyExpr="id"
+                                    [showBorders]="true"
+                                    [focusedRowEnabled]="true"
+                                    [showRowLines] = "true"
+                                    [allowColumnResizing]="true"
+                                    [columnHidingEnabled]="false"
+                                    [columnAutoWidth]="true"
+                                   
+                                    height="funcpopHeigt(datagridHeight)">
+                                    <dxo-load-panel
+                                    [enabled]="false">
+                                   </dxo-load-panel>
+                                    
+                                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                                    <dxo-pager
+                                    [showPageSizeSelector]="true"
+                                    [allowedPageSizes]="allowedPageSises"
+                                    ></dxo-pager>
+                                    
+                                    <dxo-filter-row [visible]="false"></dxo-filter-row>
+
+                                    <dxi-column dataField="upDesc" caption="Description" dataType="string" ></dxi-column>
+                                    <dxi-column dataField="remarks" caption="Remark" ></dxi-column>
+                                    <dxi-column dataField="createdAt" caption="Created At" ></dxi-column>
+                              
+                                
+                            
+                                    
+                            
+                              
+                                </dx-data-grid>
+                            
+                                  </div>
+                            </div>
+
+                            
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 7">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">Actions</div>
+       
+                          </div>
+
+                          <div class="card mb-4">
+                            
+                            <div class="card-body">
+                              
+
+                                  <div class="card-body card-nopadding">
+                                    
+                                    
+                                    <dx-button
+                                    style="margin: 5px;"
+                                    id="action"
+                                    text="Calculate"
+                                    type="default"
+                                    [useSubmitBehavior]="false"
+                                    (click)="calculate(claimInfo.id)">
+                                    </dx-button>
+                                
+                                     
+                                    <dx-button
+                                    style="margin: 5px;"
+                                    id="action"
+                                    text="Foward"
+                                    type="default"
+                                    [useSubmitBehavior]="false"
+                                    (click)="foward(claimInfo.id)">
+                                    </dx-button>
+
+                                    <dx-button
+                                    id="action"
+                                    style="margin: 5px;"
+                                    text="Reject"
+                                    type="default"
+                                    [useSubmitBehavior]="false"
+                                    (click)="reject(claimInfo.id)">
+                                    </dx-button>
+
+                                    <dx-button
+                                    style="margin: 5px;"
+                                    id="action"
+                                    text="Close"
+                                    type="default"
+                                    [useSubmitBehavior]="false"
+                                    (click)="close(claimInfo.id)">
+                                    </dx-button>
+
+                                    
+
+                                    <div *ngIf="showCalculate">
+                                    <div class="card-header">CALCULATE SUMMARY</div>
+                                    <dx-data-grid
+                                    [dataSource]="calculateDatasource"
+                                    keyExpr="id"
+                                    [showBorders]="true"
+                                    [focusedRowEnabled]="true"
+                                    
+                                    [showRowLines] = "true"
+                                    [allowColumnResizing]="true"
+                                    [columnHidingEnabled]="false"
+                                    [columnAutoWidth]="true"
+                                   
+                                    height="funcpopHeigt(datagridHeight)">
+                                    <dxo-load-panel
+                                    [enabled]="false">
+                                   </dxo-load-panel>
+                                    <dxo-export [enabled]="true" fileName="Members-List" [allowExportSelectedData]="true"></dxo-export>
+                                    <dxo-paging [pageSize]="pageSize"></dxo-paging>
+                                    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+                                    <dxo-pager
+                                    [showPageSizeSelector]="true"
+                                    [allowedPageSizes]="allowedPageSises"
+                                ></dxo-pager>
+                                    <dxo-search-panel [visible]="true"></dxo-search-panel>
+                                    <dxo-filter-row [visible]="false"></dxo-filter-row>
+                            
+                                    
+                            
+                              
+                                </dx-data-grid>
+                                    </div>
+                                
+                            
+                                  </div>
+                            </div>
+
+                            
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+      
+      </div>
+
+
+  </div>
+  <!-- </dx-scroll-view> -->
+</div>
+</dx-tab-panel>

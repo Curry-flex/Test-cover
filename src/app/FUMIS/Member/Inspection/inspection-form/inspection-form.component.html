@@ -1,0 +1,307 @@
+
+<div class="card-header card_header_background">
+    <h4 class="tex-center">INSPECTION FORM.</h4>
+</div>
+
+
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          PRELIMINARY DETAILS
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="inspectionCreateForm">
+  
+            <div class="row p-3">
+              
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Arrive Time</label>
+                <input type="time" id="appt" name="appt" class="form-control" formControlName="arrivalTime" placeholder="">
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Depature Time</label>
+                <input type="time" id="appt" name="appt" class="form-control" formControlName="deptTime" placeholder="">
+              
+              </div>
+
+              <div class="col-12 col-md-3">
+              <label for="date">Employer Number</label>
+              <!-- <dx-date-box id="date" formControlName="date" [value]="now" [max]="now" type="date"> </dx-date-box> -->
+              <dx-text-box id="date" formControlName="empNo" (onValueChanged)="fetchEmployerID($event)" placeholder="Enter employer number">
+              </dx-text-box>
+            </div>
+
+            <!-- <div class="col-12 col-md-3">
+              <label for="date">Employer Name</label>
+             
+              <dx-text-box id="date" formControlName="empName" placeholder="Enter employer name">
+              </dx-text-box>
+            </div> -->
+  
+       
+            </div>
+  
+            <div class="row p-3">
+
+               
+  
+              <div class="col-12 col-md-3">
+                <label for="employerNo">Inspection Type</label>
+                  <dx-select-box
+                  id="scope"
+                  valueExpr="InspectionTypeID"
+                  displayExpr="InspectionName"
+                  formControlName="inspectionType"
+                  [dataSource]="inspectionTypeList"
+                  placeholder="Choose inspection type">
+                </dx-select-box>
+                
+              </div>
+              <div class="col-12 col-md-3">
+                <label for="memberNo">Inspection Date</label>
+                <dx-date-box
+                        formControlName="inspectionDate"
+                        [value]=""
+                        placeholder="Select Date"
+                        [max]="today"
+                        type="date">
+                      </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+              <label for="systemId">Group Leader</label>
+          
+              <dx-select-box
+                  id="scope"
+                  valueExpr="UserID"
+                  displayExpr="UserName"
+                  [searchEnabled]="true"
+                  formControlName="inspectionLeader"
+                  [dataSource]="groupLeadersList"
+                  placeholder="Choose group leader">
+                </dx-select-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Contact Person</label>
+                <dx-text-box id="systemId" formControlName="contactPerson" placeholder="Enter contact person">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Rank</label>
+                <dx-text-box id="systemId" formControlName="rank" placeholder="Enter rank">
+                </dx-text-box>
+              </div>
+             
+  
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Contact Person Phone</label>
+                <dx-text-box id="controlNo" formControlName="contactPersonPhone" placeholder="Enter contact person">
+                </dx-text-box>
+              </div>
+
+
+           
+
+           
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Other routine </label>
+                <dx-text-box id="controlNo" formControlName="routine" placeholder="Other routine">
+                </dx-text-box>
+              </div>
+
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Other routine specify</label>
+                <dx-text-box id="controlNo" formControlName="routineOtherS" placeholder="Other routine specify">
+                </dx-text-box>
+              </div>
+
+             
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">New Employer Number</label>
+                <dx-text-box id="controlNo" formControlName="newemployerNum" placeholder="New Employer Number">
+                </dx-text-box>
+              </div>
+
+
+            
+              <!-- <div class="col-12 col-md-3">
+                <label for="controlNo">Branch Code</label>
+                <dx-text-box id="controlNo" formControlName="branchCode" placeholder="Enter branch code">
+                </dx-text-box>
+              </div> -->
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Employer Members Contribution</label>
+                <dx-text-box id="controlNo" formControlName="empMemberContr" placeholder="Employer Members Contribution">
+                </dx-text-box>
+              
+              </div>
+
+            
+  
+              <!-- <div class="col-12 col-md-3">
+                <label for="invoiceNo">Nature of business</label>
+                <dx-text-box id="invoiceNo" formControlName="natureBusines" placeholder="Enter nature of business">
+                </dx-text-box>
+              </div> -->
+
+            
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Court Action</label>
+                <dx-text-box id="controlNo" formControlName="courtAction" placeholder="Court Action">
+                </dx-text-box>
+              </div>
+
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Reference Number</label>
+                <dx-text-box id="controlNo" formControlName="refNo" placeholder="Reference Number">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Next Appointment</label>
+                <dx-date-box
+                formControlName="nextAppointment"
+                [value]=""
+                placeholder="Select Date"
+                type="date">
+              </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Remark</label>
+                <dx-text-box id="controlNo" formControlName="remark" placeholder="Remark">
+                </dx-text-box>
+              </div>
+
+           
+            </div>
+
+            <div class="card card_border">
+            <div class="card-header card_header_background">
+              WORK DONE/ACTION
+            </div>
+
+            <div class="row p-3 ml-2">
+                
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" [value]="" (change)="onCheckChangeUP($event)" formControlName="ucheck" value="" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                  Underpayment Check
+                </label>
+              </div>
+
+             
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" value="" (change)="onCheckChangeDN($event)" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Demand Notice
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" (change)="onCheckChangeVI($event)" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Verbal Instructions
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" (change)="onCheckChangeDC($event)" value="" id="flexCheckChecked" >
+                <label class="form-check-label" for="flexCheckChecked">
+                  Dishourned Check
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" value="" (change)="onCheckChangePY($event)" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Payroll Check
+                </label>
+              </div>
+
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" value="" (change)="onCheckChangeSC($event)" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Suspence Clearence
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" (change)="onCheckChangeNEA($event)" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  New Employer Added
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" (change)="onCheckChangeNEF($event)" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  New Employer Found
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" (change)="onCheckChangeNP($event)" value="" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  Notice Provided
+                </label>
+              </div>
+
+              <div class="form-check col-6 col-md-3">
+               
+                <input class="form-check-input" id="controlNo" type="checkbox" value="" (change)="onCheckChangeNMA($event)" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                  New Member Added
+                </label>
+              </div>
+
+              
+            
+              </div>
+            </div>
+
+            <div class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+               
+               
+              <dx-button
+              id="action"
+              text="Submit"
+              type="default"
+              [useSubmitBehavior]="false"
+              (click)="createForm()">
+              </dx-button>
+            </div>
+            
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

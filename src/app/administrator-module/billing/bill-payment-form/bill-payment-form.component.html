@@ -1,0 +1,244 @@
+<div class="headerWrapper content-block">
+  <div class="container space">
+    <div class="row d-flex justify-content-center">
+      <!-- <div class="btn" *ngIf="!hidePrintBtn"> -->
+        <div class="btn" >
+        <dx-button text="Print Invoice" icon="print" stylingMode="contained" type="default"
+          (onClick)="printBillForm()">
+        </dx-button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="container">
+  <dx-scroll-view>
+    <div id="print-container2" class="invoice_wrapper">
+      <div class="invoice">
+        <div class="logo__block">
+          <img src="./assets/img/zssf.png" alt="zssf logo" style="width: 70px; height: 70px;" />
+          <p>Zanzibar Social Security Fund</p>
+          <p>Bill Payment Form</p>
+        </div>
+        <div class="invoice__head row">
+          <div class="invoice__head__child col-12 col-md-6">
+            <table class="table table-responsive">
+              <tbody>
+                <tr>
+                  <td>Control Number: </td>
+                  <td><strong>{{controlNumber}}</strong> </td>
+                </tr>
+                <tr>
+                  <td>Total Amount: </td>
+                  <td><strong>{{totalAmountContributed | currency:'USD':'' }} {{invoiceCurrency}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Issue At:</td>
+                  <td><strong>{{billCreationDate | date: "yyyy - MM -d h:mm:ss a"}}</strong></td>
+                </tr>
+                <tr>
+                  <td>Payer Name: </td>
+                  <td><strong>{{payerName}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="invoice__head__child_contacts col-12 col-md-6 text-right">
+            <div *ngIf="!hideQrCode">
+             
+              <qrcode [level]="1" [qrvalue]="qrCodeString"></qrcode>
+            </div>
+          </div>
+        </div>
+        <p
+          style="text-align: center; border-bottom: 1px dotted #4d88bb; border-top: 1px dotted #4d88bb; padding: .5rem;">
+          Bill Details</p>
+          <div class="divide">
+            <div class="invoice__body">
+              <table class="full_table table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Description</th>
+                    <th>Currency</th>
+                    <th style="text-align: end;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let item of invoiceBillItems">
+                    <td>{{item.ID}}</td>
+                    <td>{{item.DESCRIPTION}}</td>
+                    <td>{{invoiceCurrency}}</td>
+                    <td>
+                      <p style="text-align: end; color: #000;">
+                        {{item.AMOUNT | currency:'USD':''}}
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+           
+            <div class="invoice__how_to_pay row">
+              <div class="col-12 col-md-6">
+                <hr>
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td colspan="2">Jinsi ya Kulipa</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">1. Kupitia Benki: Fika tawi lolote
+                        au wakala wa benki ya {{payableBanks}}. Namba ya kumbukumbu: <strong>{{controlNumber}}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="col-12 col-md-6">
+                <hr>
+                <table class="table table-responsive">
+                  <tbody>
+                    <tr>
+                      <td colspan="2">How to Pay</td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">Via Bank: Visit any branch or bank agent of {{payableBanks}}.
+                        Reference Number: <strong>{{controlNumber}}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        <hr>
+        <p class="footer">Zanzibar Social Security Find &copy; {{currentYear}} All Rights Reserved (ZSSF)</p>
+      </div>
+    </div>
+  </dx-scroll-view>
+</div> -->
+
+<div class="container">
+  <dx-scroll-view>
+    <div id="print-container2" class="invoice_wrapper">
+      <div class="main" id="print-container3" class="invoice_wrapper" >
+
+        
+    
+        
+          <div class="main">
+            <div class="text-center"> <img style="height: 150px;" src="./assets/images/zssf.png"> </div>
+            <div class="text-center" style="font-weight: bold;"> Zanzibar Social Security Fund </div>
+            <div class="text-center" style="font-size: 1.3em;"> Bill Order Form</div>
+            <div class="text-center"  style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;">  </div>
+        
+            <table class="tbtxt">
+              <tr> <td>Control Number : </td> <td>{{zmControlNo}} </td></tr> 
+              <tr> <td>ZSSF Ctrl No. : </td> <td>{{controlNo}} </td></tr> 
+              <tr> <td>Invoice No : </td> <td>{{invoiceNo}} </td></tr> 
+              <tr> <td>SP Code : </td> <td>SP200013 </td></tr> 
+              <tr> <td>Payer Name : </td> <td>{{payerName}} </td></tr> 
+              <tr> <td>Payer Phone : </td> <td>{{payerMobile}} </td></tr> 
+              <tr> <td>Bill Description : </td> <td>{{billDesc}} </td></tr> 
+              <tr> <td>Bill Amount : </td> <td>{{billAmount | number:'.2'}}</td></tr> 
+              <tr> <td>Amount in Words : </td> <td>{{amountWords}}</td></tr> 
+              <tr> <td>Expires on : </td> <td>{{billExDate}}</td></tr> 
+            </table>
+           
+            <div class="text-center" style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;">  </div>
+            <!-- <div class="heading">Bill Items</div>
+            <div class="text-center" style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;"></div>
+        
+            <table class="tbdtails " *ngFor="let item of invoiceBillItems">
+              <tr> <td>200010</td> <td>Item Details 01</td><td>20,000.00</td></tr> 
+              <tr> <td>200011</td> <td>Item Details 02</td><td>5,000.00</td></tr>
+              <tr> <td></td> <td>Total</td><td >25,000.00</td></tr> 
+            </table>
+            <div class="text-center" style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;">  </div> -->
+            <div class="heading">Bill Items</div>
+            <div class="text-center" style=""> <hr> </div>
+        
+            <table class="tbdtails ">
+              <tr *ngFor="let billItems of billItems"> <td>{{billItems.itemId}}</td> <td>{{billItems.itemDesc}}</td><td>{{billItems.amount | number:'.2'}}</td></tr> 
+              
+              <tr> <td></td> <td>Total</td><td >{{billAmount | number:'.2'}}</td></tr> 
+            </table>
+            <div class="text-center" style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;">  </div>
+        
+            <table class="tbtxt"> 
+              <tr> <td>Issued By : </td> <td>{{createdBy}}</td></tr> 
+              <tr> <td>Issued on : </td> <td>{{todayDate | date: 'dd-mm-yyyy'}}</td></tr> 
+              <tr> <td>Printed By : </td> <td>{{fname}} {{lname}}</td></tr> 
+              <tr> <td>Printed on : </td> <td>{{todayDate | date: 'dd-mm-yyyy'}}</td></tr> 
+              <tr> <td>Signature : </td> <td>...................</td></tr> 
+            </table>
+        
+            <div class="pagebreak"> </div>
+        
+            <div class="heading">How to Pay</div>
+            <div class="text-center" style="  border-top: 1px dotted black; margin-top: 20px; margin-bottom: 20px;">  </div>
+            <p> <span style="font-weight:500">Via BANKS </span>: Visit any branch or bank agent of PBZ, CRDB, NBC or EQUITY</p>
+            <p> <span style="font-weight:500">Via MNO's </span></p>
+        
+            <table class="tbmnos"> 
+              <tr> 
+                <td><p style="font-weight:500">TIGOPESA </p>
+                  1. Piga *150*01#<br/>
+                  2. Chagua namba (4) “Lipa Bili”<br/>
+                  3. Chagua (5) “Malipo ya Serikali”<br/>
+                  4. Ingiza namba ya kumbukumbu ya malipo (Control number)<br/>
+                  5. Ingiza kiasi cha pesa unachotaka kulipa<br/>
+                  6. Ingiza namba ya siri kuhakiki<br/>
+                </td> 
+                <td><p style="font-weight:500">M-PESA </p>
+                  1. Piga *150*00#<br/>
+                  2. Chagua namba (4) “Lipa kwa M-Pesa”<br/>
+                  3. Chagua (5) “Malipo ya Serikali”<br/>
+                  4. Chagua namba 1 Namba ya Malipo<br/>
+                  6. Ingiza namba ya kumbukumbu ya malipo (Control Number)<br/>
+                  7. Ingiza kiasi cha pesa unachotaka kulipa<br/>
+                  8. Ingiza namba ya siri<br/>
+                  9. Thibitisha kwa kuchagua (1)<br/>
+                </td>
+                <td><p style="font-weight:500">AIRTEL MONEY </p>
+                  1. Piga *150*60#<br/>
+                  2. Chagua namba (5) “Lipia Bili”<br/>
+                  3. Chagua (5) “Malipo ya Serikali”<br/>
+                  4. Chagua namba 1 “Weka namba ya kumbukumbu”<br/>
+                  5. Ingiza namba ya kumbukumbu ya malipo (control number)<br/>
+                  6. Ingiza kiasi cha pesa<br/>
+                  7. Weka namba ya siri<br/>
+        
+                </td>
+              </tr> 
+              <tr> 
+                <td><p style="font-weight:500">T-PESA </p>
+                  Namna ya kulipia kwa T-Pesa<br/>
+                  1. Piga *150*71#<br/>
+                  2. Chagua namba (5) “Lipia Bili”<br/>
+                  3. Chagua (3) “Malipo ya Serikali”<br/>
+                  4. Ingiza kumbukumbu namba (control number)<br/>
+                  5. Ingiza kiasi<br/>
+                  6. Ingiza namba ya siri<br/>
+                </td>
+                <td><p style="font-weight:500">HALOPESA </p>
+                  Namna ya kulipia kwa HaloPesa<br/>
+                  1. Piga *150*88#<br/>
+                  2. Chagua namba (5) lipia bili<br/>
+                  3. Chagua (5) malipo ya serikali<br/>
+                  4. Weka namba ya kumbukumbu ya malipo (control number)<br/>
+                  5. Ingiza kiasi cha pesa<br/>
+                  6. Weka namba ya siri<br/>
+                </td>
+              </tr> 
+            </table>
+          </div>
+          
+       </div>
+    </div>
+  </dx-scroll-view>
+</div>
+
+

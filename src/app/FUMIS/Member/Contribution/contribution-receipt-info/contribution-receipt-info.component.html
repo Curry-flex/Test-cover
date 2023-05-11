@@ -1,0 +1,131 @@
+<div class="container-fluid px-4 mt-4">
+    <!-- Account page navigation-->
+  
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <!-- <div class="col-xl-4">
+           
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                  
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">  
+                </div>
+            </div>
+        </div> -->
+
+        <div class="container-fluid">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">RECEPIENT DETAILS</div>
+                <div class="card-body">
+                    <form>
+                 
+                     
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Receipt Number</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.ReceiptNo" name="ReceiptNo" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Receipt Date</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.ReceiptDate" name="ReceiptDate" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Employer ID</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.EmployerID" name="EmployerID" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Member ID</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.MemberID" name="MemberID" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Receipt Details</label>
+                               
+                                <textarea class="form-control" id="w3review" name="w3review" rows="4" cols="40" [(ngModel)]="recepientInfo.ReceiptDetails" name="ReceiptDetails" readonly>
+                            
+                                    </textarea>
+
+                                  
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Payment Mode</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.PaymentMode" name="PaymentMode" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Reference Number</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.ReferenceNo" name="ReferenceNo" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Amount Received</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.AmountReceived" name="AmountReceived" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Currency</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.CurrencyCode" name="CurrencyCode" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Amount Received Local</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.AmountReceivedInLocal" name="AmountReceivedInLocal" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Branch</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.BranchCode" name="BranchCode" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Created By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.CreatedBy" name="CreatedBy" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row gx-3 mb-3">
+                            
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Date Created</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.DateCreated" name="DateCreated" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Is Posted</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.IsPosted" name="IsPosted" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputFirstName">Posted By</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.PostedBy" name="PostedBy" readonly>
+                            </div>
+                           
+                            <div class="col-md-3">
+                                <label class="small mb-1" for="inputLastName">Date Posted</label>
+                                <input class="form-control"  type="text" [(ngModel)]="recepientInfo.DatePosted" name="DatePosted" readonly>
+                            </div>
+                        </div>
+
+                
+                    
+                      
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

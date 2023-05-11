@@ -1,0 +1,176 @@
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">{{title}}</h4>
+    <div class="card responsive-paddings">
+          <dx-data-grid
+            id="gridContainer2"
+            keyExpr="id"
+            [dataSource]="penaltyExemptionDatasource"
+            [showBorders]="true"
+            [focusedRowEnabled]="true"
+            [columnAutoWidth]="true"
+            [showRowLines]="true"
+            [allowColumnResizing]="true"
+            [columnHidingEnabled]="false"
+            (onToolbarPreparing)="onParamsToolBarPreparing($event)">
+            <dxo-search-panel [visible]="true"> </dxo-search-panel>
+            <dxo-paging [pageSize]="20"></dxo-paging>
+            <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-export
+              [enabled]="true"
+              fileName="Penalty Exemption Reason List"
+              [allowExportSelectedData]="true">
+            </dxo-export>
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-header-filter [visible]="false"></dxo-header-filter>
+            <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+            <!-- <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling> -->
+
+            <!-- <dxi-column dataField="id" caption="Reason Id"></dxi-column> -->
+            <dxi-column
+              dataField="reason"
+              caption="Exemption Reason"
+            ></dxi-column>
+            <!-- <dxi-column dataField="active" caption="Active Flag"></dxi-column> -->
+            <!-- <dxi-column dataField="deleted" caption="Deletion Flag"></dxi-column> -->
+            <dxi-column
+              dataField="createdAt"
+              caption="Creation Timestamp"
+              dataType="date"
+              format="yyyy-MM-dd HH:mm:ss a"
+            ></dxi-column>
+
+            <dxi-column
+              dataField="createdBy"
+              caption="Created User ID"
+            ></dxi-column>
+
+            <dxi-column
+              dataField="modifiedAt"
+              caption="Record Modification Timestamp"
+              dataType="date"
+              format="yyyy-MM-dd HH:mm:ss a"
+            ></dxi-column>
+
+            <dxi-column
+              dataField="modifiedBy"
+              caption="Modified User ID"
+            ></dxi-column>
+
+            <dxi-column
+              dataField="checkedAt"
+              caption="Approval Timestamp"
+              dataType="date"
+              format="yyyy-MM-dd HH:mm:ss a"
+            ></dxi-column>
+
+            <dxi-column
+              dataField="checkedBy"
+              caption="Approval User"
+            ></dxi-column>
+
+            <dxi-column
+              caption="Status"
+              dataType="string"
+              cellTemplate="myTemplate"
+            >
+              <div *dxTemplate="let d of 'myTemplate'">
+                <div
+                  *ngIf="d.data.active == 1 && d.data.deleted == 0"
+                  class="text-center"
+                >
+                  <span class="bg-success text-white rounded p-3">Enabled</span>
+                </div>
+
+                <div
+                  *ngIf="d.data.active == 0 && d.data.deleted == 0"
+                  class="text-center"
+                >
+                  <span class="bg-danger text-white rounded p-3">Disabled</span>
+                </div>
+
+                <div *ngIf="d.data.deleted == 1" class="text-center">
+                  <span class="bg-danger text-white rounded p-3">Deleted </span>
+                </div>
+              </div>
+            </dxi-column>
+
+            <dxi-column
+              caption="Action"
+              dataType="string"
+              cellTemplate="myActionTemplate"
+            >
+              <div *dxTemplate="let d of 'myActionTemplate'">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="rowClickedOnUpdate(d.data)"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i> Update
+                </button>
+
+                <button
+                  *ngIf="d.data.deleted == 0 && d.data.active == 1"
+                  (click)="enableDisableDelete(0, d.data.id)"
+                  type="button"
+                  class="btn btn-warning"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i> Disable
+                </button>
+
+                <button
+                  *ngIf="d.data.deleted == 0 && d.data.active != 1"
+                  (click)="enableDisableDelete(1, d.data.id)"
+                  type="button"
+                  class="btn btn-success"
+                >
+                  <i class="fa fa-pencil" aria-hidden="true"></i> Enable
+                </button>
+
+                <button
+                  *ngIf="d.data.deleted == 0"
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="enableDisableDelete(d.data.id)"
+                >
+                  <i class="fa fa-trash" aria-hidden="true"></i> Delete
+                </button>
+              </div>
+            </dxi-column>
+          </dx-data-grid>
+    </div>
+</div>
+
+<dx-popup
+[(visible)]="showPopUpDialog"
+[closeOnOutsideClick]="false"
+[dragEnabled]="false"
+[height]="funcpopHeigt(90)"
+[showTitle]="true"
+[width]="funcpopWidth(80)"
+class="popup"
+title="Penalty Exemption">
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <form [formGroup]="CreatePenaltyExemptionReasonForm">
+        <div>
+          <label for="reason">
+            Penalty Exemption Reason
+          </label>
+        </div>
+
+        <textarea class="mt-3" formControlName="reason" id="reason" cols="30" rows="10" placeholder="Write Reason...">
+        </textarea>
+
+        <button type="button" class="btn btn-success ml-3" (click)="createReason()" *ngIf="hideUpdateButton">
+          Create
+        </button>
+        <button type="button" class="btn btn-primary ml-3" (click)="updateReason()" *ngIf="!hideUpdateButton">
+          Update
+        </button>
+      </form>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+

@@ -1,0 +1,312 @@
+
+
+<div class="content-block">
+  <h4 class="header_title mb-3 p-2">UserGroups Navigation Mapping</h4>
+  <div class="dx-card responsive-paddings">
+    <dx-data-grid
+    id="gridContainer2"
+    (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+    [dataSource]="paramDataSet"
+    (onRowDblClick)="previewDetails($event)"
+    [showBorders]="true"
+    [focusedRowEnabled]="true"
+    [columnAutoWidth]="true"
+    [showRowLines] = "true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="true"
+    keyExpr="id"
+    height="funcpopHeigt(datagridHeight)">
+
+    <dxo-search-panel [visible]="true">
+      </dxo-search-panel>
+      <dxo-paging [pageSize]="100"></dxo-paging>
+      <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName={{title}} [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+
+    <dxi-column
+    caption="Group Id"
+        dataField="id"
+        [width]="100">
+    </dxi-column>
+    <dxi-column
+        caption="Group Code"
+        dataField="code">
+    </dxi-column>
+    <dxi-column
+    caption="Group Description"
+    dataField="desc">
+</dxi-column>
+
+
+    <dxi-column
+    caption="Action"
+    dataType="string"
+    cellTemplate="cellTemplateEnabled">
+    <div *dxTemplate="let d of 'cellTemplateEnabled'">
+
+      <div class="text-left nav-button" *ngIf="checkUserAccessRight(['DELETE', 'EDIT', 'VIEW'])">
+          <!-- <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View Group Navs" (click)="onGetUserGroupPrivileges(d.data, 1)"><i class="fa fa-eye" aria-hidden="true"></i></button> -->
+          <dx-button
+          icon="fa fa-eye"
+          stylingMode="contained"
+          text="View Navigations"
+          type="success"
+          (onClick)="onGetUserGroupPrivileges(d.data, 1)"
+        >
+        </dx-button>
+          <!-- <button type="button" class="btn btn-success ml-2" data-toggle="tooltip" data-placement="top" title="Add Group Nav" (click)="filterUserGroups(d.data)"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-danger ml-2" data-toggle="tooltip" data-placement="top" title="Remove Group Nav" (click)="onGetUserGroupPrivileges(d.data, 2)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button> -->
+      </div>
+
+    </div>
+  </dxi-column>
+  </dx-data-grid>
+  </div>
+</div>
+
+
+<!-- View Navigations -->
+<dx-popup class="popup"  [width]="funcpopWidth(80)" [height]="funcpopHeigt(70)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showViewGrpPrivs">
+
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <dx-data-grid
+      [dataSource]="userGroupNavigations"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      [columnAutoWidth]="true"
+      (onRowClick)="assignUserGroup($event)"
+      (onRowRemoving)="logEvent($event)"
+      [showRowLines] = "true"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="true"
+      keyExpr="id"
+      height="funcpopHeigt(datagridHeight)">
+
+      <dxo-search-panel [visible]="true">
+        </dxo-search-panel>
+        <dxo-paging [pageSize]="100"></dxo-paging>
+        <dxo-pager [allowedPageSizes]="[20, 50, 100]" [showPageSizeSelector]="true"></dxo-pager>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+      <dxo-export [enabled]="false" fileName='User Group Navigations' [allowExportSelectedData]="true"></dxo-export>
+      <dxo-selection mode="single"></dxo-selection>
+
+      <dxo-editing
+      mode="row"
+      [allowAdding]="false"
+      [allowUpdating]="false"
+      [allowDeleting]="true">
+      </dxo-editing>
+
+      <dxi-column
+      caption="Id"
+          dataField="id"
+          [width]="100">
+      </dxi-column>
+      <dxi-column
+          caption="Navigation Name"
+          dataField="text">
+      </dxi-column>
+      <!-- <dxi-column
+          caption="Navigation Path"
+          dataField="path">
+      </dxi-column>
+      <dxi-column
+          caption="Navigation level"
+          dataField="level">
+      </dxi-column> -->
+      <dxi-column
+      caption="Access Name"
+      dataField="accessName">
+  </dxi-column>
+
+
+    </dx-data-grid>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+
+
+<!-- Assign Access right to navigation -->
+<dx-popup class="popup"  [width]="funcpopWidth(50)" [height]="funcpopHeigt(55)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showAddGrpPrivs">
+  <div *dxTemplate="let data of 'content'">
+    <form [formGroup]="paramwinfrm">
+
+       <!-- unavailableNavigationsList -->
+      <div>
+        <label for="">Select Navigation</label>
+        <dx-select-box
+        formControlName="navigation"
+        [dataSource]="selectedNavigation"
+        [searchEnabled]="true"
+        [value]="selectedNavigation[0].id"
+        applyValueMode="useButtons"
+        displayExpr="text"
+        valueExpr="id"
+        placeholder="Choose Navigation...">
+      </dx-select-box>
+      </div>
+
+
+      <div>
+        <label for="">Select Access Type</label>
+        <dx-select-box
+        formControlName="accessType"
+        [dataSource]="accessAllData"
+        [searchEnabled]="true"
+        applyValueMode="useButtons"
+        displayExpr="accessName"
+        valueExpr="accessId"
+        placeholder="Choose Access Type...">
+      </dx-select-box>
+      </div>
+
+
+      <div class="border p-3 mt-2" *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+        <div class="d-flex flex-nowrap flex-row-reverse">
+          <div class="order-1 pr-2">
+            <dx-button
+              text="Assign Navigation"
+              icon="fa fa-plus-circle"
+              type="success"
+              (click)="addNavigation()">
+           </dx-button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</dx-popup>
+
+
+<!-- Remove access rights to navigation -->
+<dx-popup class="popup"  [width]="funcpopWidth(80)" [height]="funcpopHeigt(70)" [showTitle]="true" [title]="previewHeadersTitle" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showRemGrpPrivs">
+  <div *dxTemplate="let data of 'content'">
+    <dx-scroll-view>
+      <dx-data-grid
+      id="gridContainer"
+      keyExpr="id"
+      [dataSource]="userGroupNavigations"
+      [showBorders]="false"
+      [focusedRowEnabled]="false"
+      [columnAutoWidth]="true"
+      [showRowLines]="true"
+      (onRowRemoving)="logEvent($event)"
+      [allowColumnResizing]="true"
+      [columnHidingEnabled]="false">
+      <dxo-search-panel [visible]="true"> </dxo-search-panel>
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-filter-row [visible]="false"></dxo-filter-row>
+      <dxo-export [enabled]="false" fileName="Usergoup navigations" [allowExportSelectedData]="true">
+      </dxo-export>
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-header-filter [visible]="false"></dxo-header-filter>
+      <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+      <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-editing
+      mode="row"
+      [allowAdding]="false"
+      [allowUpdating]="false"
+      [allowDeleting]="true">
+      </dxo-editing>
+
+      <dxi-column
+      caption="Id"
+          dataField="id"
+          [width]="100">
+      </dxi-column>
+      <dxi-column
+          caption="Navigation Name"
+          dataField="text">
+      </dxi-column>
+      <dxi-column
+          caption="Navigation Path"
+          dataField="path">
+      </dxi-column>
+      <dxi-column
+          caption="Navigation level"
+          dataField="level">
+      </dxi-column>
+      <dxi-column
+      caption="Access Name"
+      dataField="accessName">
+  </dxi-column>
+
+    </dx-data-grid>
+    </dx-scroll-view>
+  </div>
+</dx-popup>
+
+
+<!-----USERGROUP FUNCTIONALITY-->
+<dx-popup class="popup"   [width]="funcpopWidth(45)" [height]="funcpopHeigt(68)" [showTitle]="true" title="{{hideSaveButton == true ? 'Usergroup Add' : 'Usergroup Update'}}" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="paramswinpnl">
+  <div *dxTemplate="let data of 'content'">
+      <dx-scroll-view>
+        <form [formGroup]="paramwinfrm1"   (ngSubmit)="addUserGroup()" class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form">
+
+        
+
+            <div class="col-12">
+              <label class="control-label">Usergroup Name</label>
+              <dx-text-box formControlName="code" placeholder="usergroup name" [showClearButton]="true">
+              </dx-text-box>
+            </div>
+
+            
+          
+            <div class="col-12">
+              <label class="control-label">Description</label>
+              <dx-text-box formControlName="desc" placeholder="description" [showClearButton]="true">
+              </dx-text-box>
+            </div>
+
+            
+            <div class="col-12">
+              
+              <input type='hidden' formControlName="id"/>
+            </div>
+
+              <div class="col-lg-12">
+                <hr />
+              <div class="row">
+                <div class="col-sm-12 col-md-12">
+                  <dx-button
+                  [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+                  [visible]="hideSaveButton"
+                  text="Add User group"
+                  type="normal"
+                  icon="fa fa-save"
+                
+                  (onClick)="addUserGroup()">
+              </dx-button>
+                </div>
+                 <div class="col-sm-12 col-md-12" >
+                  <dx-button
+                  [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+                  [visible]="hideButton"
+                  text="Update"
+                  type="normal"
+                  icon="fa fa-pencil-square-o"
+                  (onClick)="updateUsergroup()">
+                </dx-button>
+
+                <dx-button
+                [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+                [visible]="hideButton"
+                text="Delete"
+                type="normal"
+                icon="fa fa-times-circle-o"
+                (onClick)="deleteUsergroup()">
+               </dx-button>
+
+                </div>
+             
+              </div>
+
+              </div>
+          </form>
+      </dx-scroll-view>
+  </div>
+</dx-popup>

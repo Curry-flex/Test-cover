@@ -1,0 +1,47 @@
+
+<div class="content-block" *ngIf="hideViewDetailsTable">
+    <h4 class="header_title mb-3 p-2">Users Portal Registration Report </h4>
+    <div class="dx-card responsive-paddings">
+      <dx-data-grid
+      id="gridContainer2"
+      [dataSource]="responseData"
+      keyExpr="mobileNo"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      [showRowLines] = "true"
+      [allowColumnResizing]="true"
+      [columnAutoWidth]="true"
+      [columnHidingEnabled]="false"
+      (onToolbarPreparing)="onParamsToolBarPreparing($event)"
+      height="funcpopHeigt(datagridHeight)">
+      <dxo-export [enabled]="true" fileName="User Registration" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-paging [pageSize]="100"></dxo-paging>
+      <dxo-load-panel [enabled]="true"></dxo-load-panel>
+      <dxo-pager
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="allowedPageSises"
+  ></dxo-pager>
+      <dxo-search-panel [visible]="true"></dxo-search-panel>
+      <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+
+      <dxi-column caption="Full Name" dataField="fullName"></dxi-column>
+      <dxi-column caption="Username" dataField="username" ></dxi-column>
+      <dxi-column caption="Designation" dataField="designation"></dxi-column>
+      <dxi-column caption="Link ID" dataField="linkId"></dxi-column>
+      <dxi-column caption="Account Name" dataField="accName"></dxi-column>
+      <dxi-column caption="Email" dataField="email"></dxi-column>
+      <dxi-column caption="Mobile" dataField="mobileNo"></dxi-column>
+      <dxi-column caption="Telephone" dataField="telephone"></dxi-column>
+      <dxi-column caption="Created At" dataField="createdAt"></dxi-column>
+      <dxi-column caption="Status" dataField="status"></dxi-column>
+      <dxi-column caption="User Group" dataField="usergroup"></dxi-column>
+  
+  </dx-data-grid>
+        </div>
+  </div>
+  
+  
+  
+
+  

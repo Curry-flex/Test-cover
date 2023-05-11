@@ -1,0 +1,473 @@
+
+
+
+
+<dx-tab-panel #tabPanel  [dataSource]="tab_paneldata"
+[selectedIndex]="tabIndex" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+<div *dxTemplate="let tab_paneldata of 'title'">
+  <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+  <span>{{ tab_paneldata.name }}</span>
+</div>
+<div *dxTemplate="let tab_paneldata of 'item'">
+ 
+  <div class="tabpanel-item  row col-lg-12 div-nopadding">
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 1">
+      <div class="headerWrapper">
+        <div class="table-full-width div-pagetitle">
+            <div class="container-fluid px-4 mt-4">
+ 
+  
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                  
+            
+                    <div class="container-fluid">
+                       
+                        <div class="card mb-4">
+                            <div class="card-header">APPLICATION DETAILS</div>
+                            <div class="card-body">
+                                <form>
+                             
+                                 
+                                    <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Member Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.MemberNumber" name="MemberNumber" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Physical Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.PhysicalAddress" name="PhysicalAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Postal Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.PostalAddress" name="PostalAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Telephone Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.TelephoneMobile" name="TelephoneMobile" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Email Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.EmailAddress" name="EmailAddress" readonly>
+                                        </div>
+
+                                        <!-- <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Date Of Birth</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.DateofBirth" name="DateofBirth" readonly>
+                                        </div> -->
+
+                                       
+                                        
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Application Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ApplicationNo" name="ApplicationNo" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Date</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ApplicationDate" name="ApplicationDate" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Application Type</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ApplicationTypeID" name="ApplicationTypeID" readonly>
+                                        </div>
+                                       
+                                        <!-- <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Category</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ApplicationCategory" name="ApplicationCategory" readonly>
+                                        </div> -->
+                                        
+            
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Mode</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ApplicationMode" name="ApplicationMode" readonly>
+                                        </div>
+
+                                        <!-- <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Reference Application</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ReferenceApplication" name="ReferenceApplication" readonly>
+                                        </div> -->
+
+                                     
+                                    </div>
+            
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    
+    </div>
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 2">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">CONTRIBUTION DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Last Contribution Month</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.LastContributionMonth" name="LastContributionMonth" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Last Contribution Year</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.LastContributionYear" name="LastContributionYear" readonly>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Number Of Contribution</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.NumberOfContributions" name="NumberOfContributions" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Total Contribution</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.TotalContributions" name="TotalContributions" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Other Contribution</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.OtherContributions" name="OtherContributions" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Average Salary</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.AverageSalary" name="AverageSalary" readonly>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Total For Salary</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.TotalForAverageSalary" name="TotalForAverageSalary" readonly>
+                                        </div>
+                                         
+                                     
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+      
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 3">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">FORMULAS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">GTFormula</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.GTFormula" name="GTFormula" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">GTFormulawnumber</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.GTFormulawnumber" name="GTFormulawnumber" readonly>
+                                        </div>
+                                         
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">MPFormula</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.MPFormula" name="MPFormula" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">MPFormula</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.MPFormula" name="MPFormula" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">MPFormulawnumber</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.MPFormulawnumber" name="MPFormulawnumber" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">RFFormula</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.RFFormula" name="RFFormula" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">RFFormulawnumber</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.RFFormulawnumber" name="RFFormulawnumber" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Refund</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.Refund" name="Refund" readonly>
+                                        </div>
+                                         
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+     
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 4">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PAYMENTS DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Bank</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.bankID" name="bankID" readonly>
+                                        </div>
+                                          
+                                           <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Account Number</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.AccountNo" name="AccountNo" readonly>
+                                           </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Account Name</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.AccountName" name="AccountName" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Mode Of Payment</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ModeOfPayment" name="ModeOfPayment" readonly>
+                                        </div>
+                                          
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Payment Date</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.PaymentDate" name="PaymentDate" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Payment Details</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.PaymentDetails" name="PaymentDetails" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Reference Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ReferenceNo" name="ReferenceNo" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Authority</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.AuthorityID" name="AuthorityID" readonly>
+                                          </div>
+
+                                    
+
+                                        
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+     
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 5">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PENSION DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Monthly Pension</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.MonthlyPension" name="MonthlyPension" readonly>
+                                        </div>
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Calculated Monthly Pension</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.CalculatedMonthlyPension" name="CalculatedMonthlyPension" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">LumpsumPayable</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.LumpsumPayable" name="LumpsumPayable" readonly>
+                                        </div>
+                                           
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+   
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 6">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PROCESSING STAGE</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Processing Stage</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.ProcessingStageID" name="ProcessingStageID" readonly>
+                                        </div>
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Status</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.Status" name="Status" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Rejection Reason</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.RejectionReasonID" name="RejectionReasonID" readonly>
+                                          </div>
+                                          
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Created By</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.CreatedBy" name="CreatedBy" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Date Created</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="benefitData.DateCreated" name="DateCreated" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Last Modified</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.LastModified" name="LastModified" readonly>
+                                        </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">LastModified By</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.LastModifiedBy" name="LastModifiedBy" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Remark</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="benefitData.Remarks" name="Remarks" readonly>
+                                        </div>
+
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+       
+      </div>
+
+      
+
+
+
+
+  </div>
+  <!-- </dx-scroll-view> -->
+</div>
+</dx-tab-panel>

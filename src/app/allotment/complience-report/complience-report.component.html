@@ -1,0 +1,192 @@
+<div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+
+      <div class="card-body card-nopadding">
+      <div class="row pl-3">
+        <form [formGroup]="searchForm">
+          <P class="pl-3">Searching criterias</P>
+          <table class="table table-responsive">
+            <tbody>
+              <tr>
+                <td>
+
+                  <dx-select-box
+                  valueExpr="id"
+                  displayExpr="text"
+                  formControlName="searchParam"
+                  [dataSource]="searchParamDatasource"
+                  placeholder="Choose Search scope">
+                </dx-select-box>
+
+                </td>
+
+                <td>
+                  <dx-select-box
+                  formControlName="contributionYear"
+                  [dataSource]="years"
+                  placeholder="Choose Year">
+                </dx-select-box>
+                </td>
+
+                <td>
+                  <dx-select-box
+                  formControlName="contributionMonth"
+                  [dataSource]="months"
+                  displayExpr="text"
+                  valueExpr="id"
+                  placeholder="Choose Month">
+                </dx-select-box>
+                </td>
+
+                <td colspan="2">
+                  <dx-button
+                  text="Search Records"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="searchRecords()">
+                  </dx-button>
+                </td>
+
+                <td>
+                  <h1>OR</h1>
+                </td>
+
+                <td colspan="2">
+                  <dx-text-box formControlName="customerNumber" placeholder="Enter employer number">
+                    <dx-validator>
+                      <dxi-validation-rule type="required" message="Employer number is required">
+                      </dxi-validation-rule>
+                    </dx-validator>
+                  </dx-text-box>
+                </td>
+
+                <td colspan="2">
+                  <dx-button
+                  text="Search Employer"
+                  type="default"
+                  [useSubmitBehavior]="false"
+                  (click)="searchEmployerRecords()">
+                  </dx-button>
+                </td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </form>
+      </div>
+      </div>
+
+      <div class="card-body card-nopadding" *ngIf="hideEmployerContributionRecords">
+        <dx-data-grid
+        id="gridContainer2"
+        [dataSource]="contributionDatasource"
+        [allowColumnReordering]="true"
+        [focusedRowEnabled]="false"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        height="funcpopHeigt(datagridHeight)"
+        [showRowLines]="true"
+        [allowColumnResizing]="true"
+        [columnHidingEnabled]="false">
+
+        <dxi-column dataField="employerNumber" ></dxi-column>
+        <dxi-column dataField="receiptDate" dataType="date" format="yyyy-MM-dd"></dxi-column>
+        <dxi-column dataField="receiptNo"></dxi-column>
+
+
+        <dxi-column dataField="localAmount" caption="Amount" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+        <dxi-column dataField="employerName"></dxi-column>
+        <!-- <dxi-column dataField="DEPARTMENT_NAME" caption="Department"></dxi-column> -->
+
+        <dxi-column
+          dataField="isActive"
+          caption="Status"
+          dataType="string"
+          cellTemplate="cellTemplateIsActive">
+          <div *dxTemplate="let d of 'cellTemplateIsActive'">
+            <div *ngIf="d.data.isActive != 1" class="text-center">
+              <span class="text-white bg-danger rounded pl-2 pr-2">Not Active</span>
+            </div>
+            <div *ngIf="d.data.isActive == 1" class="text-center">
+              <span class="text-white bg-success rounded pl-2 pr-2">Active</span>
+            </div>
+          </div>
+        </dxi-column>
+
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Report" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="single"></dxo-selection>
+      </dx-data-grid>
+      </div>
+
+
+
+      <div class="card-body card-nopadding" *ngIf="!hideEmployerContributionRecords">
+
+        <table class="table table-striped table-inverse mb-2 w-100">
+          <thead class="thead-inverse">
+            <tr>
+              <th>Employer Number</th>
+              <th>Employer Name</th>
+              <th>Effective Date</th>
+              <th>Scope</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{employerNo}}</td>
+                <td>{{employerName}}</td>
+                <td>{{effectiveDate}}</td>
+                <td>{{scope}}</td>
+                <td>
+                  <span class="text-white bg-success pl-2 pr-2 rounded" *ngIf="status == 1">Active</span>
+                  <span class="text-white bg-danger pl-2 pr-2 rounded" *ngIf="status != 1">Not Active</span>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+
+        <dx-data-grid
+        id="gridContainer2"
+        [dataSource]="employerContributionRecords"
+        [allowColumnReordering]="true"
+        [focusedRowEnabled]="false"
+        [showBorders]="true"
+        [columnAutoWidth]="true"
+        height="funcpopHeigt(datagridHeight)"
+        [showRowLines]="true"
+        [allowColumnResizing]="true"
+        [columnHidingEnabled]="false">
+
+        <dxi-column dataField="contributingPeriod"></dxi-column>
+        <dxi-column dataField="receiptDate" dataType="date" format="yyyy-MM-dd"></dxi-column>
+        <dxi-column dataField="receiptNo"></dxi-column>
+
+
+        <dxi-column dataField="localAmount" caption="Amount" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Report (All Contribution Records)" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="single"></dxo-selection>
+      </dx-data-grid>
+      </div>
+
+    </div>
+  </div>
+</div>

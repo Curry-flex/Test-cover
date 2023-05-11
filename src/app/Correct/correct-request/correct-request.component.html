@@ -1,0 +1,67 @@
+<!--<p>bill-validation-tigo works!</p>-->
+<div class="headerWrapper">
+    <div class=" div-pagetitle ">
+  
+    </div>
+  
+  </div>
+  
+  <div class="container-fluid mt-3">
+    <!-- start of container -->
+  
+    <!-- Bill Validation -->
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card card_border">
+          <div class="card-header card_header_background">Correct Request</div>
+          <div class="card-body fix-side">
+            <form [formGroup]="requestForm" class="col-lg-12  div-nopadding"
+              style="background: rgba(255, 255, 255, 0.7);" enctype="multipart/form-data" role="form"
+              (ngSubmit)="correctRequest()">
+              <div class="dx-field d-flex justify-content-center">
+                <div class="data-field">
+                   
+
+                     <div class="tipsUI">
+                      <label for="">Control Number</label>
+                      <dx-text-box placeholder="Enter control number" formControlName="controlNo" width="280" style="padding-right: 10px;">
+                    </dx-text-box>
+                    </div>
+                  
+                    <div class="tipsUI">
+                        <label for="">Amount</label>
+                        <dx-text-box placeholder="Enter amount" formControlName="amount" width="280" style="padding-right: 10px;">
+                     </dx-text-box>
+                    </div>
+                  
+                    
+                    <div class="validatebtn">
+                        <dx-button [elementAttr]="{ class: 'btn ml-3' }" name="search" text="submit" type="default"  id="btn-fetch"
+                        [useSubmitBehavior]="true">
+                      </dx-button>
+                    </div>
+                  
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+      </div>
+
+      <!----END LOOKUP RESULT-->
+
+
+      <!------TRANSFER RESULTS-->
+
+
+  
+  
+  
+  
+  
+  
+  

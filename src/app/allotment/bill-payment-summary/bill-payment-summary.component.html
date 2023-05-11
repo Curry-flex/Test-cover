@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+       <h4 class="header_title mb-3 p-2">{{title}}</h4>
+      </div>
+
+      <div class="card-body card-nopadding">
+        <dx-data-grid
+          id="gridContainer2"
+          keyExpr="billId"
+          [dataSource]="billPaymentDatasource"
+          (onToolbarPreparing)="toolBarPreparing($event, this.getBillPaymentSummary)"
+          [allowColumnReordering]="true"
+          [focusedRowEnabled]="false"
+          [showBorders]="true"
+          [columnAutoWidth]="true"
+          height="funcpopHeigt(datagridHeight)"
+          [showRowLines]="true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false">
+
+        <!-- <dxi-column dataField="billId"></dxi-column> -->
+        <dxi-column dataField="customerNo"></dxi-column>
+
+        <dxi-column dataField="controlNo" caption="Control Number"></dxi-column>
+
+        <dxi-column dataField="amount" caption="Amount Paid" dataType="number">
+          <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+        </dxi-column>
+
+        <dxi-column dataField="invoiceNo"></dxi-column>
+
+        <dxi-column dataField="creationDate" dataType="date" format="yyyy-MM-dd hh:mm:ss"></dxi-column>
+        <dxi-column dataField="clearanceDate" dataType="date" format="yyyy-MM-dd hh:mm:ss" sortOrder="desc"></dxi-column>
+        <dxi-column dataField="pspCode"></dxi-column>
+        <dxi-column dataField="category"></dxi-column>
+        <dxi-column dataField="navReceipt"></dxi-column>
+        <dxi-column dataField="fumisRcpts"></dxi-column>
+        <dxi-column dataField="fumisRcptsItems"></dxi-column>
+        <dxi-column dataField="contributions"></dxi-column>
+        <dxi-column dataField="indContrInvoices"></dxi-column>
+        <dxi-column dataField="orphanedContributions"></dxi-column>
+        <dxi-column dataField="indContributions"></dxi-column>
+
+      <!-- <dxi-column
+      caption="Auto Allotment"
+      dataField="allot"
+      dataType="string"
+      cellTemplate="cellTemplateAllot">
+      <div *dxTemplate="let d of 'cellTemplateAllot'">
+        <div *ngIf="d.data.allot == 0" class="text-start">
+          <strong class="text-white bg-success pl-2 pr-2">Allotted</strong>
+        </div>
+        <div *ngIf="d.data.allot == 1" class="text-start">
+          <strong class="text-white bg-danger pl-2 pr-2">Not Alloted</strong>
+        </div>
+      </div>
+    </dxi-column> -->
+
+        <dxi-column
+          dataField="allot"
+          caption="Action"
+          dataType="string"
+          cellTemplate="cellTemplateAutoAllotUpdate">
+          <div *dxTemplate="let d of 'cellTemplateAutoAllotUpdate'">
+            <div *ngIf="d.data.allot == 0" class="text-start">
+              <span class="text-white bg-secondary pl-2 pr-2">Allotment can't be done</span>
+            </div>
+
+            <div *ngIf="d.data.allot == 1" class="text-center">
+              <button *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" type="button" class="btn btn-success btn-sm mr-2" (click)="employerAllotment(d.data)">Allot Contributions</button>
+            </div>
+          </div>
+        </dxi-column>
+
+
+  <dxo-summary [recalculateWhileEditing]="true">
+    <dxi-total-item
+        column="controlNo"
+        summaryType="count"
+        valueFormat="fixedPoint">
+    </dxi-total-item>
+</dxo-summary>
+
+
+        <dxo-search-panel [visible]="true"> </dxo-search-panel>
+        <dxo-paging [pageSize]="pageSize"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="allowedPageSises"></dxo-pager>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Bill Payment summary" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-load-panel [enabled]="true"> </dxo-load-panel>
+      </dx-data-grid>
+      </div>
+
+    </div>
+  </div>
+</div>
+

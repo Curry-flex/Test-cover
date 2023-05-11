@@ -1,0 +1,453 @@
+
+
+
+
+<dx-tab-panel #tabPanel  [dataSource]="tab_paneldata"
+[selectedIndex]="tabIndex" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+<div *dxTemplate="let tab_paneldata of 'title'">
+  <i class="{{ tab_paneldata.icon }}"></i>&nbsp;&nbsp;
+  <span>{{ tab_paneldata.name }}</span>
+</div>
+<div *dxTemplate="let tab_paneldata of 'item'">
+ 
+  <div class="tabpanel-item  row col-lg-12 div-nopadding">
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 1">
+      <div class="headerWrapper">
+        <div class="table-full-width div-pagetitle">
+            <div class="container-fluid px-4 mt-4">
+ 
+  
+                <hr class="mt-0 mb-4">
+                <div class="row">
+                  
+            
+                    <div class="container-fluid">
+                       
+                        <div class="card mb-4">
+                            <div class="card-header">APPLICATION DETAILS</div>
+                            <div class="card-body">
+                                <form>
+                             
+                                 
+                                    <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Member Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.MemberNumber" name="MemberNumber" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Physical Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.PhysicalAddress" name="PhysicalAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Postal Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.PostalAddress" name="PostalAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Telephone Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.TelephoneMobile" name="TelephoneMobile" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Email Address</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.EmailAddress" name="EmailAddress" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Date Of Birth</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.DateofBirth" name="DateofBirth" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Average Salary</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.AverageSalary" name="AverageSalary" readonly>
+                                        </div>
+                                        
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Application Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ApplicationNo" name="ApplicationNo" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Date</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ApplicationDate" name="ApplicationDate" readonly>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Application Type</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ApplicationTypeID" name="ApplicationTypeID" readonly>
+                                        </div>
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Category</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ApplicationCategory" name="ApplicationCategory" readonly>
+                                        </div>
+                                        
+            
+                                       
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Application Mode</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ApplicationMode" name="ApplicationMode" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Reference Application</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ReferenceApplication" name="ReferenceApplication" readonly>
+                                        </div>
+
+                                     
+                                    </div>
+            
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    
+    </div>
+
+    <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 2">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">CONTRIBUTION DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Last Contribution Month</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.LastContributionMonth" name="LastContributionMonth" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Last Contribution Year</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.LastContributionYear" name="LastContributionYear" readonly>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Number Of Contribution</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.NumberOfContributions" name="NumberOfContributions" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Contribution Before Retirement</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ContBeforeRetirement" name="ContBeforeRetirement" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Last Six Month Contribution</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.LastSixMonthContribution" name="LastSixMonthContribution" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Contribution Period</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ContributingPeriod" name="ContributingPeriod" readonly>
+                                        </div>
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+      
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 3">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">MATERNITY DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Maternity Benefit Amount</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.MaternityBenefitAmount" name="MaternityBenefitAmount" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Total Maternity Benefit</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.TotalMaternityBenefit" name="TotalMaternityBenefit" readonly>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Twin Increment</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.TwinIncriment" name="TwinIncriment" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Pregant Age</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.PregAge" name="PregAge" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Baby Status</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.BabyStatus" name="BabyStatus" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Delivery Category</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.DeliveryCategory" name="DeliveryCategory" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Delivery Date</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.DeliveryDate" name="DeliveryDate" readonly>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Delivery Category</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.DeliveryCategory" name="DeliveryCategory" readonly>
+                                        </div>
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+     
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 4">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PAYMENTS DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <!-- <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Bank</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.bankID" name="bankID" readonly>
+                                        </div> -->
+                                          
+                                           <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Account Number</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.AccountNo" name="AccountNo" readonly>
+                                           </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Account Name</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.AccountName" name="AccountName" readonly>
+                                          </div>
+                                          
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Payment Date</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.PaymentDate" name="PaymentDate" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Payment Details</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.PaymentDetails" name="PaymentDetails" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Reference Number</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ReferenceNo" name="ReferenceNo" readonly>
+                                        </div>
+
+                                       
+
+                                        
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+     
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 5">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PENSION DETAILS</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Monthly Pension</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.MonthlyPension" name="MonthlyPension" readonly>
+                                        </div>
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">First Pension Month</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.FirstPensionMonth" name="FirstPensionMonth" readonly>
+                                          </div>
+                                           
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+   
+      </div>
+
+      <div class=" col-lg-12 div-nopadding " *ngIf="tab_paneldata.ID == 6">
+        <div class="headerWrapper">
+          <div class="table-full-width div-pagetitle">
+              <div class="container-fluid px-4 mt-4">
+   
+    
+                  <hr class="mt-0 mb-4">
+                  <div class="row">
+                    
+              
+                      <div class="container-fluid">
+                         
+                          <div class="card mb-4">
+                              <div class="card-header">PROCESSING STAGE</div>
+                              <div class="card-body">
+                                  <form>
+                               
+                                   
+                                      <div class="row gx-3 mb-3">
+
+                                        <div class="col-md-4">
+                                            <label class="small mb-1" for="inputFirstName">Processing Stage</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.ProcessingStageID" name="ProcessingStageID" readonly>
+                                        </div>
+                                          
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputFirstName">Status</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.Status" name="Status" readonly>
+                                          </div>
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Rejection Reason</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.RejectionReasonID" name="RejectionReasonID" readonly>
+                                          </div>
+                                          
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Created By</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.CreatedBy" name="CreatedBy" readonly>
+                                          </div>
+              
+                                         
+                                          <div class="col-md-4">
+                                              <label class="small mb-1" for="inputLastName">Date Created</label>
+                                              <input class="form-control"  type="text" [(ngModel)]="maternityInfo.DateCreated" name="DateCreated" readonly>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">Last Modified</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.LastModified" name="LastModified" readonly>
+                                        </div>
+
+                                          <div class="col-md-4">
+                                            <label class="small mb-1" for="inputLastName">LastModified By</label>
+                                            <input class="form-control"  type="text" [(ngModel)]="maternityInfo.LastModifiedBy" name="LastModifiedBy" readonly>
+                                        </div>
+
+                                    
+  
+                                       
+                                      </div>
+              
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+  
+       
+      </div>
+
+      
+
+
+
+
+  </div>
+  <!-- </dx-scroll-view> -->
+</div>
+</dx-tab-panel>

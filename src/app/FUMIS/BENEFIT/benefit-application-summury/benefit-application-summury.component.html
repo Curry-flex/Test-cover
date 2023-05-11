@@ -1,0 +1,481 @@
+<!-- <div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          BENEFIT SUMMARY
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="summaryForm">
+       
+            <div class="row p-3">
+
+              
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Start Date</label>
+                   <dx-date-box
+                    formControlName="startDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                    </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">End Date</label>
+                   <dx-date-box
+                    formControlName="endDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                    </dx-date-box>
+              </div>
+
+            </div>  
+
+            <hr style="font-size: 16px; font-weight: 700;">
+            
+            <div class="row p-3">
+
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Month</label>
+                    <dx-select-box
+                    id="scope"
+                    valueExpr="val"
+                    displayExpr="name"
+                    formControlName="month"
+                    [searchEnabled]="true"
+                    [dataSource]="month"
+                    placeholder="Choose sector">
+                  </dx-select-box>
+                  </div>
+    
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Year</label>
+                    <dx-select-box
+                    id="scope"
+                    formControlName="year"
+                    [searchEnabled]="true"
+                    [dataSource]="years"
+                    placeholder="Choose sector">
+                  </dx-select-box>
+                  </div>
+
+            </div>
+
+
+            <div class="row p-3">
+
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Min</label>
+                    <dx-text-box id="controlNo" formControlName="max" placeholder="">
+                    </dx-text-box>
+                  </div>
+    
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Max</label>
+                    <dx-text-box id="controlNo" formControlName="min" placeholder="">
+                    </dx-text-box>
+                  </div>
+
+            </div> 
+            
+            <div class="row p-3">
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Sector</label>
+                    <dx-text-box id="controlNo" formControlName="sector" placeholder="">
+                    </dx-text-box>
+                  </div>
+    
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Employer Number</label>
+                    <dx-text-box id="controlNo" formControlName="employerNumber" placeholder="">
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">District</label>
+                    <dx-text-box id="controlNo" formControlName="district" placeholder="">
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Application Type</label>
+                    <dx-select-box
+                    id="scope"
+                    formControlName="applicationType"
+                    [searchEnabled]="true"
+                    [dataSource]=""
+                    placeholder="Choose">
+                  </dx-select-box>
+                  </div>
+
+            </div> 
+
+            <div class="row p-3">
+                <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                    <dx-button
+                    id="action"
+                    text="Search"
+                    type="default"
+                    [useSubmitBehavior]="false"
+                    (click)="getSummary()">
+                    </dx-button>
+                  </div>
+            </div>
+             
+
+          
+            
+  
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="summaryDataSource"
+          keyExpr="ApplicationTypeID"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          (onRowClick)="previewDetailsu($event)"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="Benefit-summury" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+ -->
+
+
+
+ <!--------POP UP FORM -->
+ <!-- <dx-popup class="popup"  [width]="funcpopWidth(80)" [height]="funcpopHeigt(90)" [showTitle]="true" title="Bill Details By Control number"  [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showCalculationDetails">
+
+    <div *dxTemplate="let data of 'content'">
+      <dx-scroll-view>
+        <div>
+          <table class="table table-striped table-inverse table-bordered">
+              <tbody>
+               
+                <tr>
+                  <td style="text-align: right">Full Name</td>
+                  <td>{{calculateDatasource.FullName}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Gender</td>
+                    <td>{{calculateDatasource.Gender}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Date Of Birth</td>
+                    <td>{{calculateDatasource.DateofBirth}}</td>
+                  </tr>
+                  
+                  <tr>
+                    <td style="text-align: right">Date Of Joining Fund</td>
+                    <td>{{calculateDatasource.DateOfJoiningFund}}</td>
+                  </tr>
+                  
+                  <tr>
+                    <td style="text-align: right">Application Date</td>
+                    <td>{{calculateDatasource.ApplicationDate}}</td>
+                  </tr> 
+
+                  <tr>
+                    <td style="text-align: right">Application Type</td>
+                    <td>{{calculateDatasource.ApplicationTypeID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Application Mode</td>
+                    <td>{{calculateDatasource.ApplicationMode}}</td>
+                  </tr>  
+
+                <tr>
+                  <td style="text-align: right">Member Number</td>
+                  <td>{{calculateDatasource.MemberNumber}}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right">Application Number</td>
+                  <td>{{calculateDatasource.ApplicationNo}}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right">Postal Address</td>
+                  <td>{{calculateDatasource.PostalAddress}}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right">Physical Address</td>
+                  <td>{{calculateDatasource.PhysicalAddress}}</td>
+                </tr>
+                <tr>
+                  <td style="text-align: right">Email Address</td>
+                  <td>{{calculateDatasource.EmailAddress}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Employer Number</td>
+                    <td>{{calculateDatasource.EmployerNumber}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Employer Name</td>
+                    <td>{{calculateDatasource.EmployerName}}</td>
+                  </tr>
+                  
+                  <tr>
+                    <td style="text-align: right">Last Employer</td>
+                    <td>{{calculateDatasource.LastEmployerID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Sector</td>
+                    <td>{{calculateDatasource.Sector}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Date Of First Appointment</td>
+                    <td>{{calculateDatasource.DateofFirstAppointment}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Termination Date</td>
+                    <td>{{calculateDatasource.TerminationDate}}</td>
+                  </tr>  
+                  <tr>
+                    <td style="text-align: right">Number Of Contributions</td>
+                    <td>{{calculateDatasource.NumberOfContributions}}</td>
+                  </tr>
+
+                  <tr>
+                    <td style="text-align: right">Contributions Before Retirement</td>
+                    <td>{{calculateDatasource.ContBeforeRetirement}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Total Contributions</td>
+                    <td>{{calculateDatasource.TotalContributions}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Last Contribution Month</td>
+                    <td>{{calculateDatasource.LastContributionMonth}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Last Contribution Year</td>
+                    <td>{{calculateDatasource.LastContributionYear}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Other Contributions</td>
+                    <td>{{calculateDatasource.OtherContributions}}</td>
+                  </tr>
+
+                  <tr>
+                    <td style="text-align: right">Average Salary</td>
+                    <td>{{calculateDatasource.AverageSalary}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Total For Average Salary</td>
+                    <td>{{calculateDatasource.TotalForAverageSalary}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">FullPension</td>
+                    <td>{{calculateDatasource.FullPension}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">LumpsumPayable</td>
+                    <td>{{calculateDatasource.LumpsumPayable}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Monthly Pension</td>
+                    <td>{{calculateDatasource.MonthlyPension}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Account Number</td>
+                    <td>{{calculateDatasource.AccountNo}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Account Name</td>
+                    <td>{{calculateDatasource.AccountName}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Mode Of Payment</td>
+                    <td>{{calculateDatasource.ModeOfPayment}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Payment Date</td>
+                    <td>{{calculateDatasource.PaymentDate}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Payment Details</td>
+                    <td>{{calculateDatasource.PaymentDetails}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Authority</td>
+                    <td>{{calculateDatasource.AuthorityID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Bank</td>
+                    <td>{{calculateDatasource.BankID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Reference Number</td>
+                    <td>{{calculateDatasource.ReferenceNo}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">OfBankID</td>
+                    <td>{{calculateDatasource.OfBankID}}</td>
+                  </tr>
+
+                  <tr>
+                    <td style="text-align: right">Processing Stage</td>
+                    <td>{{calculateDatasource.ProcessingStageID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Status</td>
+                    <td>{{calculateDatasource.Status}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Rejection Reason</td>
+                    <td>{{calculateDatasource.RejectionReasonID}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Remarks</td>
+                    <td>{{calculateDatasource.Remarks}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">MWP</td>
+                    <td>{{calculateDatasource.MWP}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">GFT</td>
+                    <td>{{calculateDatasource.GFT}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">MFT</td>
+                    <td>{{calculateDatasource.MFT}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">GFB</td>
+                    <td>{{calculateDatasource.GFB}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">MFB</td>
+                    <td>{{calculateDatasource.MFB}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">MAS</td>
+                    <td>{{calculateDatasource.MAS}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">LAR</td>
+                    <td>{{calculateDatasource.LAR}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Extension Allowed</td>
+                    <td>{{calculateDatasource.ExtensionAllowed}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Monthes Allowed</td>
+                    <td>{{calculateDatasource.MonthesAllowed}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Reference App</td>
+                    <td>{{calculateDatasource.ReferenceApp}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Approver Name</td>
+                    <td>{{calculateDatasource.ApproverName}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Approver User</td>
+                    <td>{{calculateDatasource.ApproverUser}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">SignatureLoc</td>
+                    <td>{{calculateDatasource.SignatureLoc}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">SignaturePic</td>
+                    <td>{{calculateDatasource.SignaturePic}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Approved</td>
+                    <td>{{calculateDatasource.Approved}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Remark</td>
+                    <td>{{calculateDatasource.Remark}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">CreatedDate</td>
+                    <td>{{calculateDatasource.CreatedDate}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">SignatureLock</td>
+                    <td>{{calculateDatasource.SignatureLock}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: right">Allocation Events</td>
+                    <td>{{calculateDatasource.SignatureLock}}</td>
+                  </tr>
+ 
+              </tbody>
+          </table>
+        </div>
+        
+      </dx-scroll-view>
+    </div>
+  </dx-popup> -->
+
+
+  <!-- <table>
+    <tbody>
+      <tr>
+        <label for="">Minimum</label>
+        <td><input type="text" placeholder="Minimum"></td>
+        <label for="">Maximum with different scenarion for cases and scenario</label> 
+        <td><input type="text" placeholder="Maximum"></td>
+      </tr>
+    </tbody>
+  </table> -->

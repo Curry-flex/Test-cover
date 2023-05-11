@@ -1,0 +1,127 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+            AGGREGATE EMPLOYER STATEMENT
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="statementForm">
+  
+          
+  
+            <div class="row p-3">
+
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Employer Number</label>
+                    <dx-text-box id="controlNo" formControlName="empNo" placeholder="Enter employer number">
+                    </dx-text-box>
+                  </div>
+       
+
+
+             
+                   
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Search"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="filterStetement()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+
+  <div *ngIf="showSummury" class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          <table class="table table-bordered">
+           
+            <tbody>
+              <tr>
+                <th scope="row">Employer Name</th>
+                <td>{{empName}}</td>
+              </tr>
+
+              <tr>
+                <th scope="row">Employer Number</th>
+                <td>{{empNumber}}</td>
+              </tr>
+             
+            </tbody>
+          </table>
+        
+        </div>
+        <div class="card-body card-nopadding">
+  
+      
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="statementDatasource"
+          keyExpr="EmployerNumber"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="Aggregate-statement" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>

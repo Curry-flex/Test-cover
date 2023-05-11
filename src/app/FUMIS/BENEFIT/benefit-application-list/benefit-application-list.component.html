@@ -1,0 +1,249 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          BENEFIT APPLICATION LIST
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="fetchForm">
+       
+            <div class="row p-3">
+
+              
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Start Date</label>
+                   <dx-date-box
+                    formControlName="startDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                    </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">End Date</label>
+                   <dx-date-box
+                    formControlName="endDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                    </dx-date-box>
+              </div>
+
+            </div>   
+
+            <hr style="font-size: 16px; font-weight: 700;">
+  
+            <div class="row p-3">
+
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Employer Number</label>
+                    <dx-text-box id="controlNo" formControlName="employerNumber" placeholder="Enter employer number">
+                    </dx-text-box>
+                  </div>
+             
+
+
+              <div class="col-12 col-md-3">
+                <label for="scope">Sector</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="SectorID"
+                displayExpr="Description"
+                formControlName="sector"
+                [searchEnabled]="true"
+                [dataSource]="sectorList"
+                placeholder="Choose sector">
+              </dx-select-box>
+              </div>
+  
+        
+              <div class="col-12 col-md-3">
+                <label for="scope">District</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="DistrictNameID"
+                displayExpr="DistrictName"
+                formControlName="district"
+                [searchEnabled]="true"
+                [dataSource]="districtList"
+                placeholder="Choose district">
+              </dx-select-box>
+              </div>
+             
+          
+
+
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Rejection Reason</label>
+                <dx-text-box id="controlNo" formControlName="rejectionReason" placeholder="Rejection reason">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Stage</label>
+                <dx-text-box id="controlNo" formControlName="stage" placeholder="Stage">
+                </dx-text-box>
+              </div>
+
+             
+                   
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Search"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="filterList()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block" *ngIf="showList">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="BenefitList"
+          keyExpr="ApplicationNo"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          (onRowClick)="previewDetailsu($event)"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="Benefit-List" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row content-block" *ngIf="showHistory">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="historyDatasource"
+          keyExpr="ApplicationNo"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="benefit-history" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <dx-popup class="popup"   [width]="funcpopWidth(30)" [height]="funcpopHeigt(20)" [showTitle]="true" title="Action" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="actionWindow">
+    <div *dxTemplate="let data of 'content'">
+        <dx-scroll-view>
+          <form  class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form">
+  
+        
+  
+             
+  
+                <div class="col-lg-12">
+                  <hr />
+                <div class="row">
+                
+               
+                  <div class="col-sm-6 col-md-6">
+                    <dx-button
+                    [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+        
+                    text="View Details"
+                    type="default"
+                    icon="fa fa-eye"
+                    (onClick)="viewDetails()">
+                   </dx-button>
+                  </div>
+  
+                  <div class="col-sm-6 col-md-6">
+                    <dx-button
+                    [elementAttr]="{class: 'custom-btn custom-btn-width'}"
+                   
+                    text="View History"
+                    type="default"
+                    icon="fa fa-history"
+                    (onClick)="viewHistory()">
+                   </dx-button>
+                  </div>
+  
+                </div>
+  
+                </div>
+            </form>
+        </dx-scroll-view>
+    </div>
+  </dx-popup>

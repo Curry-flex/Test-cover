@@ -1,0 +1,652 @@
+
+<!-- New Contribution upload layout -->
+<div class="row content-block">
+  <div class="col">
+    <div class="card card_border">
+      <div *ngIf="hideContributionMonthGap" class="card-header card_header_background">
+        {{ title }}
+      </div>
+
+      <div *ngIf="!hideContributionMonthGap" class="alert alert-danger" role="alert">
+        <strong> {{contributionMonthGapMessage}}</strong>
+      </div>
+
+
+      <div class="card-body card-nopadding">
+<!-- tab start -->
+
+<div class="row pl-3">
+  <form [formGroup]="customerForm">
+    <table class="table table-responsive">
+      <tbody>
+        <tr>
+          <td>Customer Type</td>
+          <td>
+            <dx-radio-group
+            formControlName="customerType"
+            [dataSource]="customerType"
+            layout="horizontal"
+            displayExpr="text"
+            valueExpr="value"
+            (onValueChanged)="onCustomerTypeValueChange($event)">
+            </dx-radio-group>
+          </td>
+
+          <td colspan="2">
+            <dx-text-box formControlName="customerNumber" placeholder="Enter customer number">
+              <dx-validator>
+                <dxi-validation-rule type="required" message="Customer number is required">
+                </dxi-validation-rule>
+              </dx-validator>
+            </dx-text-box>
+          </td>
+
+          <td colspan="2">
+            <dx-button
+            text="Save Number"
+            type="default"
+            [useSubmitBehavior]="false"
+            (click)="updateCustomerNumber()">
+            </dx-button>
+          </td>
+          <td>
+
+            <p class="text-danger" *ngIf="!customerNumberSaved">No saved Customer Number</p>
+            <p class="text-muted"*ngIf="customerNumberSaved">Saved Customer Number: {{currrentEmployerNumber}}</p>
+            <p class="text-muted"*ngIf="customerNumberSaved">Saved Customer Number: {{currentCustomerName}}</p>
+            
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </form>
+</div>
+
+  <!-- invoice line -->
+
+    <form [formGroup]="invoiceForm">
+
+      <div class="row p-3">
+
+        <div class="col-12 col-md-3">
+          <label for="contributionYear">Contribution Year</label>
+          <dx-select-box
+          id="contributionYear"
+          formControlName="contributionYear"
+          [dataSource]="years"
+          placeholder="Choose Year"
+          (onValueChanged)="onContributionYearChanged($event)">
+        </dx-select-box>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="contributionMonth">Contribution Month(s)</label>
+          <dx-tag-box
+          id="contributionMonth"
+          formControlName="contributionMonth"
+          [dataSource]="months"
+          [showSelectionControls]="true"
+          applyValueMode="useButtons"
+          displayExpr="text"
+          valueExpr="id"
+          placeholder="Choose Months..."
+          (onSelectionChanged)="onMonthSelectionChanged($event)">
+        </dx-tag-box>
+        </div>
+
+        <div class="col-12 col-md-3">
+          <label for="contributionType">Contribution Type</label>
+          <dx-select-box
+          id="contributionType"
+          formControlName="contributionType"
+          [dataSource]="contributionType"
+          placeholder="Contribution Type"
+          valueExpr="id"
+          displayExpr="text"
+          (onValueChanged)="onContributionTypeChanged($event)">
+        </dx-select-box>
+        </div>
+        <div class="col-12 col-md-3">
+          <label for="installmentType">Please Select Payment Installment Type</label>
+          <!-- <dx-text-area id="description" [readOnly]="true" formControlName="description" [height]="90" ></dx-text-area> -->
+          <dx-select-box
+          id="installmentType"
+          formControlName="installmentType"
+          [dataSource]="installmentType"
+          placeholder="Installment Type"
+          valueExpr="value"
+          displayExpr="text">
+        </dx-select-box>
+        </div>
+      </div>
+    </form>
+
+  <div class="row border p-3" *ngIf="!hideDataUploadControls">
+
+    <div *ngIf="checkUserAccessRight(['DELETE', 'EDIT', 'VIEW'])" class="col-12 col-md-6 mb-3">
+    <dx-button
+      icon="repeat"
+      text="Load Last Contribution Data"
+      type="default"
+      (click)="onLoadExistingEmployeesList()">
+    </dx-button>
+
+    </div>
+    <div class="col-12 col-md-6">
+      <dx-button
+      icon="exportxlsx"
+      text="Upload Excel File"
+      type="default"
+      (click)="openPopUp()">
+      </dx-button>
+    </div>
+
+    <!-- <div class="col-12 col-md-3">
+      <dx-button
+      icon="user"
+      text="Load Members Only"
+      type="default"
+      (click)="onLoadPreviousContributionData()">
+      </dx-button>
+    </div> -->
+  </div>
+  <!-- contribution data grid -->
+  <!-- Individual Contribututor -->
+  <div *ngIf="hideDataUploadControls">
+    <dx-data-grid
+    id="gridContainer"
+    keyExpr="id"
+    [dataSource]="employeeUploadListDataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false"
+    (onSelectionChanged)="selectedChanged($event)"
+    (onRowInserted)="onRowInserted($event)"
+    (onRowUpdated)="onRowUpdatedINDIVIDUAL($event)"
+    (onEditingStart)="onEditingStart($event)"
+    (onRowInserting)="onRowInserting($event)">
+    <dxo-search-panel [visible]="true"> </dxo-search-panel>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName="Members List" [allowExportSelectedData]="true">
+    </dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-header-filter [visible]="false"></dxo-header-filter>
+    <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+    <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+    <dxo-editing
+    mode="row"
+    [allowAdding]="false"
+    [allowUpdating]="true"
+    [allowDeleting]="false">
+    </dxo-editing>
+
+    <!-- <dxi-column dataField="id" dataType="string" caption="S/N">
+    </dxi-column> -->
+  <dxi-column dataField="memberNumber" dataType="string" caption="Member Number">
+  </dxi-column>
+  <dxi-column dataField="memberNames" dataType="string" caption="Member Name">
+  </dxi-column>
+
+  <dxi-column caption="Member Salary" dataField="memberSalary" dataType="number" [calculateCellValue]="memberSalaryFilter">
+
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+  <dxi-column
+  [allowEditing]="false"
+  dataField="employerNumber"
+  dataType="string"
+  caption="Employer Number" [visible]="false"></dxi-column>
+
+  <dxi-column
+  [allowEditing]="false"
+  dataField="memberContribution"
+  caption="Member Contribution"
+  [calculateCellValue]="calculateMemberContribution"  [visible]="false">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+
+  <dxi-column
+  [allowEditing]="false"
+  dataField="employerContribution"
+  [calculateCellValue]="calculateEmployerContribution" [visible]="false">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+
+  <dxi-column
+  [allowEditing]="false"
+  dataField="amountContributed"
+  caption="Total Amount Contributed"
+  [calculateCellValue]="calculateAmountContributed">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+
+
+  <dxo-summary [recalculateWhileEditing]="true">
+    <dxi-total-item
+        column="memberNumber"
+        summaryType="count"
+        valueFormat="fixedPoint">
+    </dxi-total-item>
+
+    <dxi-total-item
+    column="memberSalary"
+    summaryType="sum"
+    valueFormat="fixedPoint"
+    precision="2">
+</dxi-total-item>
+
+
+<dxi-total-item
+column="memberContribution"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+<dxi-total-item
+column="employerContribution"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+    <dxi-total-item
+        column="amountContributed"
+        summaryType="sum"
+        valueFormat="fixedPoint"
+        precision="2">
+    </dxi-total-item>
+</dxo-summary>
+
+
+  </dx-data-grid>
+  </div>
+
+  <!-- Employer Contribution -->
+  <div *ngIf="!hideDataUploadControls">
+    <dx-data-grid
+    id="gridContainer"
+    keyExpr="id"
+    [dataSource]="employeeUploadListDataSource"
+    [showBorders]="false"
+    [focusedRowEnabled]="false"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false"
+    (onSelectionChanged)="selectedChanged($event)"
+    (onRowInserted)="onRowInserted($event)"
+    (onRowUpdated)="onRowUpdated($event)"
+    (onEditingStart)="onEditingStart($event)"
+    (onRowInserting)="onRowInserting($event)">
+    <dxo-search-panel [visible]="true"> </dxo-search-panel>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName="Members List" [allowExportSelectedData]="true">
+    </dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-header-filter [visible]="false"></dxo-header-filter>
+    <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+    <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+    <dxo-editing
+    mode="row"
+    [allowAdding]="true"
+    [allowUpdating]="true"
+    [allowDeleting]="true">
+    </dxo-editing>
+
+    <!-- <dxi-column [allowEditing]="false" dataField="id" dataType="string" caption="S/N">
+    </dxi-column> -->
+  <!-- <dxi-column dataField="memberNumber" dataType="string" caption="Member Number"  cssClass="cell-highlighted-member-number">
+  </dxi-column> -->
+
+<!-- Prototype -->
+
+<!-- <dxi-column *ngIf="isMemberNamesMatch" dataField="memberNames" dataType="string" caption="Member Name" sortOrder="asc"></dxi-column>
+<dxi-column *ngIf="!isMemberNamesMatch" dataField="memberNames" dataType="string" caption="Member Name" sortOrder="asc" cssClass="cell-highlighted-member-name"></dxi-column>
+
+<dxi-column *ngIf="isMemberNumberValid" dataField="memberNumber" dataType="string" caption="Member Number" sortOrder="asc"></dxi-column>
+<dxi-column *ngIf="!isMemberNumberValid" dataField="memberNumber" dataType="string" caption="Member Number" sortOrder="asc" cssClass="cell-highlighted-member-name"></dxi-column> -->
+
+<!-- Prototype -->
+
+
+<!-- <dxi-column  dataField="memberNames" dataType="string" caption="Member Name" sortOrder="asc" cssClass="cell-highlighted-member-name"></dxi-column>
+<dxi-column  dataField="memberNumber" dataType="string" caption="Member Number" sortOrder="asc" cssClass="cell-highlighted-member-number"></dxi-column> -->
+
+<dxi-column  caption="Member Number" cellTemplate="cellTemplateMemberNumbers" dataField="memberNumber" dataType="string">
+  <div *dxTemplate="let d of 'cellTemplateMemberNumbers'">
+    <div *ngIf="!d.data.isMemberNumberValid" class="bg-danger text-white tooltip2">
+       <span [innerHTML] = "d.data.memberNumber"></span>
+    </div>
+    <div *ngIf="d.data.isMemberNumberValid">
+      <span [innerHTML] = "d.data.memberNumber"></span>
+  </div>
+  </div>
+</dxi-column>
+
+<dxi-column  caption="Member Names" cellTemplate="cellTemplateMemberNames" dataField="memberNames" dataType="string" sortOrder="asc">
+  <div *dxTemplate="let d of 'cellTemplateMemberNames'">
+    <div *ngIf="!d.data.isMemberNamesValid" class="bg-warning tooltip2">
+      <span [innerHTML] = "d.data.memberNames" data-toggle="tooltip" data-placement="right" [title]="d.data.correctName"></span>
+    </div>
+    <div *ngIf="d.data.isMemberNamesValid">
+      <span [innerHTML] = "d.data.memberNames"></span>
+  </div>
+  </div>
+</dxi-column>
+
+
+<dxi-column  caption="Registered Member Names" cellTemplate="cellTemplateMemberNamesCorrect" dataField="correctName" dataType="string" [allowEditing]="false">
+  <div *dxTemplate="let d of 'cellTemplateMemberNamesCorrect'">
+    <div *ngIf="!d.data.isMemberNamesValid" class="bg-success text-white tooltip2">
+      <span [innerHTML] = "d.data.correctName" ></span>
+    </div>
+    <div *ngIf="d.data.isMemberNamesValid">
+      <span [innerHTML] = "d.data.correctName"></span>
+  </div>
+  </div>
+</dxi-column>
+
+  <!-- <dxi-column dataField="memberNames" dataType="string" caption="Member Name" sortOrder="asc" cssClass="cell-highlighted-member-name">
+  </dxi-column> -->
+
+  <dxi-column caption="Member Salary" dataField="memberSalary" dataType="number" [calculateCellValue]="memberSalaryFilter">
+
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+  <dxi-column
+  [allowEditing]="false"
+  dataField="employerNumber"
+  dataType="string"
+  caption="Employer Number"></dxi-column>
+  <dxi-column
+  [allowEditing]="false"
+  dataField="memberContribution"
+  caption="Member Contribution(7%)"
+  [calculateCellValue]="calculateMemberContribution">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+  
+  <dxi-column
+  [allowEditing]="false"
+  dataField="employerContribution"
+  caption="Employer Contribution(13%)"
+  [calculateCellValue]="calculateEmployerContribution">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+  
+  <dxi-column
+  [allowEditing]="false"
+  dataField="compensation"
+  caption="Compensation Contribution(1%)"
+  >
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+  
+  <dxi-column
+  [allowEditing]="false"
+  dataField="amountContributedG"
+  caption="Total Amount Contributed"
+  [calculateCellValue]="">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column>
+
+  <!-- SUMMARY -->
+
+  <dxo-summary [recalculateWhileEditing]="true">
+    <dxi-total-item
+        column="memberNumber"
+        summaryType="count"
+        [customizeText]="customizeText"
+        valueFormat="fixedPoint">
+    </dxi-total-item>
+
+    <dxi-total-item
+    column="memberSalary"
+    summaryType="sum"
+    valueFormat="fixedPoint"
+    precision="2">
+</dxi-total-item>
+
+
+<dxi-total-item
+column="memberContribution"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+<dxi-total-item
+column="employerContribution"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+<dxi-total-item
+column="compensation"
+summaryType="sum"
+valueFormat="fixedPoint"
+precision="2">
+</dxi-total-item>
+
+    <dxi-total-item
+        column="amountContributedG"
+        summaryType="sum"
+        valueFormat="fixedPoint"
+        precision="2">
+    </dxi-total-item>
+</dxo-summary>
+
+  </dx-data-grid>
+  </div>
+  <!-- end of tab -->
+
+
+  <!---Contribution year changed or contribution type-->
+  
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of new contribution upload layout -->
+
+<!-- INVOICE POST CONTROLS -->
+<div class="border p-3 mt-2">
+  <div class="d-flex flex-nowrap flex-row-reverse">
+    <div *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])" class="order-1 pr-2">
+      <dx-button
+      text="Create Invoice"
+        icon="fa fa-paper-plane"
+        type="default"
+        (click)="postInvoice()">
+     </dx-button>
+    </div>
+    <div class="order-2 pr-2">
+      <dx-button
+      text="Reset"
+      icon="fa fa-retweet"
+      type="normal"
+      (click)="resetContributionPage()">
+  </dx-button>
+    </div>
+  </div>
+</div>
+
+
+<!-- pop up dialogs -->
+
+<dx-popup class="popup" [width]="funcpopWidth(40)" [height]="funcpopHeigt(77)" [showTitle]="true"
+          title="Upload Excel (.csv, .xlsx or .xls) File" [dragEnabled]="false" [closeOnOutsideClick]="false"
+          [(visible)]="openFileUploadDialog">
+  <dx-scroll-view>
+        <!-- File uploader controls -->
+        <div class="container">
+          <dx-file-uploader #fileUploader [multiple]="false" accept=".csv,.xlsx,.xls" [allowedFileExtensions]="['.csv','.xlsx','.xls']"
+          hint="only excel file is allowed (.csv, .xlsx or .xls)"
+            [(value)]="value" uploadMode="useButtons" uploadUrl="#" [maxFileSize]="5000000" (onUploadStarted)="onFileValueChanged($event)"
+            [(uploadFailedMessage)]="uploadFailedMessage"></dx-file-uploader>
+          <span class="note">Allowed file extensions: <span>.csv, .xlsx and .xls</span></span>
+          <br />
+          <span class="note">Maximum file size: <span>5 MB</span></span>
+          <div class="content">
+            <div *ngIf="value.length > 0">
+              <h4>Selected File</h4>
+            </div>
+            <div *ngFor="let file of value">
+              <div class="selected-item">
+                Name:
+                <span>{{file.name}}</span><br /> Size:
+                <span>{{file.size}}</span>bytes<br /> Type:
+                <span>{{file.type}}</span><br /> Last Modified Date:
+                <span>{{file.lastModifiedDate}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    <hr />
+    <!-- <div class="col-lg-12">
+      <dx-button text="Close" type="danger" icon="fa fa-times-circle-o" [elementAttr]="{ class: 'custom-btn pull-right' }"
+                 (onClick)="closePopUp()">
+      </dx-button>
+    </div> -->
+  </dx-scroll-view>
+
+</dx-popup>
+
+<dx-popup class="popup" [width]="funcpopWidth(40)" [height]="funcpopHeigt(60)" [showTitle]="true" title="Alert"
+[dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showAlertDialog">
+<div *dxTemplate="let data of 'content'">
+  <dx-scroll-view>
+    <div>
+      <h1 class="text-center text-danger">
+        <i class="fa fa-minus-circle fa-3x"></i>
+      </h1>
+      <h3 class="text-center">{{alertReason}}</h3>
+
+      <h1 class="text-center">
+        <dx-button
+        text="Close"
+        type="danger"
+        (onClick)="hideDialog()">
+        </dx-button>
+      </h1>
+
+    </div>
+  </dx-scroll-view>
+</div>
+</dx-popup>
+
+<dx-popup class="popup" [width]="funcpopWidth(40)" [height]="funcpopHeigt(60)" [showTitle]="true" title="Alert"
+[dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showWarningDialog">
+
+<div *dxTemplate="let data of 'content'">
+  <dx-scroll-view>
+    <div>
+      <h1 class="text-center text-warning">
+        <i class="fa fa-exclamation-triangle fa-3x"></i>
+      </h1>
+      <h3 class="text-center">{{alertReason}}</h3>
+
+
+      <h1 class="text-center">
+        <dx-button
+        text="Make Adjustments"
+        type="success"
+        (onClick)="warningDecision(1)">
+        </dx-button>
+      </h1>
+
+      <h1 class="text-center">
+        <dx-button
+        text="Ignore and Continue"
+        stylingMode="outlined"
+        type="danger"
+        (onClick)="warningDecision(0)">
+        </dx-button>
+      </h1>
+
+    </div>
+  </dx-scroll-view>
+</div>
+</dx-popup>
+
+<dx-popup class="popup" [width]="funcpopWidth(67)" [height]="funcpopHeigt(80)" [showTitle]="true" title="Select previous contribution month to load."
+[dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="showDialog">
+
+<div *dxTemplate="let data of 'content'">
+  <dx-scroll-view>
+
+    <dx-data-grid
+    keyExpr="id"
+    [dataSource]="lastContributionsDataSet"
+    [showBorders]="false"
+    [focusedRowEnabled]="false"
+    [columnAutoWidth]="true"
+    [showRowLines]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false">
+    <dxo-search-panel [visible]="false"> </dxo-search-panel>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="false" fileName="Contribution Period" [allowExportSelectedData]="true">
+    </dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-header-filter [visible]="false"></dxo-header-filter>
+    <dxo-filter-panel [visible]="false"></dxo-filter-panel>
+    <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+
+    <!-- <dxi-column dataField="id" dataType="string" caption="S/N">
+    </dxi-column> -->
+
+  <dxi-column dataField="ContributionYear" dataType="string" caption="Year" >
+  </dxi-column>
+
+  <dxi-column dataField="ContributionMonth" dataType="string" caption="Month">
+  </dxi-column>
+
+  <!-- <dxi-column caption="Amount Contributed" dataField="InvoiceAmount" dataType="number">
+  <dxo-format type="fixedPoint" [precision]="2"> </dxo-format>
+  </dxi-column> -->
+
+  <!-- <dxi-column dataField="currency" dataType="string" caption="Currency" [width]="70">
+  </dxi-column> -->
+
+  <dxi-column
+  caption="Action"
+  dataType="string"
+  cellTemplate="cellTemplateIsPosted">
+  <div *dxTemplate="let d of 'cellTemplateIsPosted'">
+    <div class="text-center">
+      <button type="button" class="btn btn-primary btn-sm mr-2" (click)="loadSelectedContributionMonth(d.data)"><i class="fa fa-recycle" aria-hidden="true"></i> Load</button>
+    </div>
+  </div>
+</dxi-column>
+
+  </dx-data-grid>
+
+    <!-- <form [formGroup]="lastContributionDatasetForm" class="col-lg-12 row div-nopadding" (ngSubmit)="OnPasswordReset()" autocomplete="off">
+      <div class="col-lg-12 div-nopadding">
+        <label class="control-label">Select Previous Contribution Month</label>
+        <dx-select-box
+                [dataSource]="lastContributionsDataSet"
+                displayExpr="description"
+                valueExpr="ContributingPeriod">
+        </dx-select-box>
+      </div>
+
+        <hr />
+        <dx-button text="Load Contribution" type="success" icon="check" [elementAttr]="{ class: 'custom-btn pull-right' }"
+          (onClick)="OnPasswordReset()">
+        </dx-button>
+    </form> -->
+  </dx-scroll-view>
+</div>
+</dx-popup>

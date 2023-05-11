@@ -1,0 +1,119 @@
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          INSPECTION LIST
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="inspectionListForm">
+  
+          
+  
+            <div class="row p-3">
+
+               
+
+
+              <div class="col-12 col-md-3">
+                <label for="">Start Date:</label>
+                <dx-date-box
+                    formControlName="startDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="">End Date:</label>
+                <dx-date-box
+                    formControlName="endDate"
+                    [value]=""
+                    [max]="today"
+                    type="date">
+                </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="invoiceNo">Inspection Type</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="InspectionTypeID"
+                displayExpr="InspectionName"
+                formControlName="inspType"
+                [dataSource]="inspectionTypeList"
+                placeholder="">
+              </dx-select-box>
+              
+              </div>
+
+  
+              <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+               
+               
+                <dx-button
+                id="action"
+                text="Search"
+                type="default"
+                [useSubmitBehavior]="false"
+                (click)="filterList()">
+                </dx-button>
+              </div>
+            </div>
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="headerWrapper">
+  
+   
+  
+  </div>
+  <div class="row content-block">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+         
+        </div>
+        <div class="card-body card-nopadding">
+          <dx-data-grid
+          [dataSource]="inspectionList"
+          keyExpr="InspectionDate"
+          [showBorders]="true"
+          [focusedRowEnabled]="true"
+          [showRowLines] = "true"
+          [allowColumnResizing]="true"
+          [columnHidingEnabled]="false"
+          [columnAutoWidth]="true"
+         
+          height="funcpopHeigt(datagridHeight)">
+          <dxo-load-panel
+          [enabled]="false">
+         </dxo-load-panel>
+          <dxo-export [enabled]="true" fileName="Inspection-List" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-load-panel [enabled]="true"></dxo-load-panel>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager>
+          <dxo-search-panel [visible]="true"></dxo-search-panel>
+          <dxo-filter-row [visible]="false"></dxo-filter-row>
+  
+          
+  
+    
+      </dx-data-grid>
+  
+        </div>
+      </div>
+    </div>
+  </div>

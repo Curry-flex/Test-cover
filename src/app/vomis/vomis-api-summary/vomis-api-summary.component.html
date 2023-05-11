@@ -1,0 +1,98 @@
+
+  <div class="col">
+    <dx-data-grid
+    id="gridContainer2"
+    keyExpr="PQ_ID"
+    [dataSource]="vomisDataSet"
+    [showBorders]="false"
+    [focusedRowEnabled]="true"
+    [columnAutoWidth]="true"
+    (onToolbarPreparing)="onToolBarVomisPreparing($event, vomisApiReqRes, 'Vomis API Summary')"
+    height="funcpopHeigt(datagridHeight)"
+    [showRowLines]="true"
+    [allowColumnResizing]="true"
+    [columnHidingEnabled]="false">
+    <dxo-search-panel [visible]="true"> </dxo-search-panel>
+    <dxo-paging [pageSize]="15"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 15]"></dxo-pager>
+    <dxo-filter-row [visible]="false"></dxo-filter-row>
+    <dxo-export [enabled]="true" fileName="VOMIS API SUMMARY" [allowExportSelectedData]="true">
+    </dxo-export>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-filter-panel [visible]="true"></dxo-filter-panel>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+
+    <dxi-column
+    dataField="PQ_ID"
+    dataType="string">
+    </dxi-column>
+
+    <dxi-column
+    dataField="PQ_CREATED_AT"
+    dataType="date"
+    format="yyyy-MM-dd hh:mm:ss a">
+    </dxi-column>
+
+
+    <dxi-column
+    dataField="PQ_AMOUNT"
+    dataType="number">
+    <dxo-format type="fixedPoint" [precision]="2"></dxo-format>
+    </dxi-column>
+
+    <dxi-column
+    dataField="PQ_CURRENCY"
+    dataType="string">
+    </dxi-column>
+
+    <dxi-column
+    dataField="PQ_MEMBERSHIP_NUMBER"
+    dataType="string">
+    </dxi-column>
+
+    <dxi-column
+    dataField="PS_ID"
+    dataType="string">
+    </dxi-column>
+
+    <dxi-column
+    dataField="PS_CREATED_AT"
+    dataType="date"
+    format="yyyy-MM-dd hh:mm:ss a">
+    </dxi-column>
+
+    <dxi-column dataField="PS_MEMBERSHIP_TYPE" dataType="string"> </dxi-column>
+
+    <dxi-column dataField="PS_MEMBERSHIP_NAME" dataType="string"> </dxi-column>
+
+    <dxi-column dataField="PS_STATUS_CODE" dataType="string"> </dxi-column>
+
+    <dxi-column dataField="PS_STATUS_MSG" dataType="string"> </dxi-column>
+
+    <dxi-column dataField="NAV_REC_NO" dataType="string"> </dxi-column>
+
+    <dxi-column
+    dataField="NAV_RECEIPT"
+    dataType="string">
+    </dxi-column>
+
+
+    <dxi-column  caption="Action" cellTemplate="cellTemplateEnabled" dataField="PUSH_FLAG" dataType="string">
+      <div *dxTemplate="let d of 'cellTemplateEnabled'">
+        <div *ngIf="d.data.PUSH_FLAG == 1" class="text-center">
+          <div class="text-center" *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+            <button type="button" class="btn btn-danger btn-sm mr-2" (click)="onVomisPushHandler(d.data)">Push Txn</button>
+          </div>
+        </div>
+        <div *ngIf="d.data.PUSH_FLAG != 1" class="text-center">
+          <span class="text-white bg-success rounded pl-2 pr-2">Txn Completed</span>
+        </div>
+      </div>
+    </dxi-column>
+
+    </dx-data-grid>
+  </div>
+
+
+

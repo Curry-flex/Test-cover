@@ -1,0 +1,95 @@
+@import "../../../../themes/generated/variables.base.scss";
+
+.example-form, .card, .mat-card {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.card{
+  // border: 1px solid rgb(203,221,251);
+  border: 1px solid #04711d;
+}
+.card-header{
+  // background-color: #04711d !important;
+  text-transform: capitalize;
+  padding: .4rem 1rem;
+  color: #fff !important;
+  background: $card-header-color;
+  background-image: -webkit-linear-gradient(top, #dae7f6, #cddef3 45%, #abc7ec 46%, #abc7ec 50%, #b8cfee 51%, #cbddf3);
+}
+.card_border
+{
+  border: 1px solid $card-border-color;
+}
+.mat-card{
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  font-family: tahoma, arial, verdana, sans-serif;
+  transform: translate(-50%, -30%);
+  -webkit-transform: translate(-50%, -30%);
+  -moz-transform: translate(-50%, -30%);
+  -ms-transform: translate(-50%, -30%);
+  -o-transform: translate(-50%, -30%);
+}
+form .ng-invalid:before{
+  content:"";
+  display: none;
+  }
+.btn_presets{
+  height: 24px;
+  font: normal 11px/16px tahoma, arial, verdana, sans-serif;
+  color: #333;
+}
+::ng-deep .dx-button-text{
+  line-height: 0 !important;
+}
+.dx-icon.dx-icon-user{
+  color: #fff !important;
+}
+.login-btn {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  // padding: 2px 2px 2px 2px;
+  border-width: 1px;
+  border-style: solid;
+  background-image: none;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, top, bottom, color-stop(0%, #fff), color-stop(48%, #f9f9f9), color-stop(52%, #e2e2e2), color-stop(0%, #e7e7e7));
+  background-image: -webkit-linear-gradient(top, #fff, #f9f9f9 48%, #e2e2e2 52%, #e7e7e7);
+  transition: all .4s;
+  -webkit-transition: all .4s;
+  -moz-transition: all .4s;
+  -ms-transition: all .4s;
+  -o-transition: all .4s;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+}
+.login-btn:hover {
+  transform: scale(1.04);
+  -webkit-transform: scale(1.04);
+  -moz-transform: scale(1.04);
+  -ms-transform: scale(1.04);
+  -o-transform: scale(1.04);
+}
+.login-btn:focus{
+  outline: none;
+  border: 1px dotted #333;
+}
+label{
+  font-weight: 100 !important;
+}
+.error{
+  border-style: solid;
+  border-color: rgb(189, 5, 5);
+}

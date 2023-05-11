@@ -1,0 +1,450 @@
+
+<div class="card-header card_header_background">
+    <h4 class="tex-center">COMPENSATION CLAIM REGISTER.</h4>
+</div>
+
+
+<div class="content-block row">
+    <div class="col">
+      <div class="card card_border">
+        <div class="card-header card_header_background">
+          EMPLOYMENT DETAILS
+        </div>
+        <div class="card-body card-nopadding">
+  
+          <form [formGroup]="compensationRegisterForm">
+  
+          
+  
+            <div class="row p-3">
+
+         
+
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Employer Number</label>
+                <dx-text-box id="systemId" formControlName="empNo" placeholder="Employer Number">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Member Number</label>
+                <dx-text-box id="systemId" formControlName="memberNo" placeholder="Member Number">
+                </dx-text-box>
+              </div>
+    
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Employment Type</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="name"
+                displayExpr="name"
+                formControlName="employmentType"
+                [dataSource]="employmentTypesList"
+                placeholder="Choose ">
+              </dx-select-box>
+              </div>
+
+             
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Assaigned Department</label>
+                <dx-text-box id="systemId" formControlName="dept" placeholder="Assigned depertment">
+                </dx-text-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Returned To Work</label>
+                <dx-select-box
+                id="scope"
+                valueExpr="val"
+                displayExpr="name"
+                formControlName="retunedWork"
+                [dataSource]="returnedList"
+                placeholder="Choose ">
+              </dx-select-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Date Returned To Work</label>
+                <dx-date-box
+                formControlName="returnedDate"
+                [value]=""
+                placeholder="Select Date"
+                [max]="today"
+                type="date">
+              </dx-date-box>
+              </div>
+
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Anticipated Returned Date</label>
+                <dx-date-box
+                formControlName="AntireturnedDate"
+                [value]=""
+                placeholder="Select Date"
+                [max]="today"
+                type="date">
+              </dx-date-box>
+              </div>
+
+              
+              <div class="col-12 col-md-3">
+                <label for="controlNo">Date Last Worked</label>
+                <dx-date-box
+                formControlName="dateLastWorked"
+                [value]=""
+                placeholder="Select Date"
+                [max]="today"
+                type="date">
+              </dx-date-box>
+              </div>
+
+
+           
+            </div>
+
+
+            <div class="card card_border">
+            <div class="card-header card_header_background">
+              INCIDENT DETAILS
+            </div>
+
+            <div class="row p-3 ml-2">
+
+             
+                <div class="col-12 col-md-3">
+                    <label for="controlNo">Incident Date</label>
+                    <dx-date-box
+                    formControlName="incDate"
+                    [value]=""
+                    placeholder="Select Date"
+                    [max]="today"
+                    type="date">
+                  </dx-date-box>
+                  </div>
+    
+    
+                  <div class="col-12 col-md-3">
+                    <label for="invoiceNo">Incident Time</label>
+                    <input type="time" id="appt" name="appt" class="form-control" formControlName="incTime" placeholder="">
+                  
+                  </div>
+    
+                  <div class="col-12 col-md-3">
+                    <label for="scope">Region</label>
+                    <dx-select-box
+                    id="scope"
+                    valueExpr="id"
+                    displayExpr="name"
+                    formControlName="region"
+                    [dataSource]="regionList"
+                    (onValueChanged)="filterDistricts($event)"
+                    placeholder="Choose Region">
+                  </dx-select-box>
+                  </div>
+    
+    
+                  <div class="col-12 col-md-3">
+                    <label for="scope">District</label>
+                    <dx-select-box
+                    id="scope"
+                    valueExpr="id"
+                    displayExpr="name"
+                    formControlName="district"
+                    [dataSource]="districtListNew"
+                    placeholder="Choose district">
+                  </dx-select-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Accident Cause</label>
+                    <dx-text-box id="systemId" formControlName="accCause" placeholder="Accedent Cause">
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Injured On Work</label>
+                    <dx-select-box
+                    id="scope"
+                    valueExpr="val"
+                    displayExpr="name"
+                    formControlName="injured"
+                    [dataSource]="returnedList"
+                    placeholder="Choose ">
+                  </dx-select-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Occupation When Injured</label>
+                    <dx-text-box id="systemId" formControlName="occupationWhenInjured" placeholder="Occupation When Injured">
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">Injured Body Parts</label>
+                    <dx-text-box id="systemId" formControlName="injuredBodyParts" placeholder="Injured Body Parts">
+                    </dx-text-box>
+                  </div>
+
+                  <div class="col-12 col-md-3">
+                    <label for="controlNo">More Detalis</label>
+                    <dx-text-area [height]="70" formControlName="moreDetails"
+                            placeholder="More Details">
+                          </dx-text-area>
+                  </div>
+
+                  <!-- <div class="col-12 col-md-3">
+                    <label for="controlNo">Witnesses</label>
+                    <dx-text-box id="systemId" formControlName="injuredBodyParts" placeholder="Injured Body Parts">
+                    </dx-text-box>
+                  </div> -->
+
+                  
+
+              
+            
+              </div>
+            </div>
+
+            <div class="card card_border">
+                <div class="card-header card_header_background">
+                  WITNESSES
+                </div>
+                <div class="card-body card-nopadding">
+          
+                  <form [formGroup]="witnessForm">
+          
+                  
+          
+                    <div class="row p-3">
+        
+                        <div class="col-12 col-md-3">
+                            <label for="controlNo">Full Name</label>
+                            <dx-text-box id="controlNo" formControlName="fullname" placeholder="Full name">
+                            </dx-text-box>
+                          </div>
+                     
+                      
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Phone Number</label>
+                        <dx-text-box id="controlNo" formControlName="phone" placeholder="Phone Number">
+                        </dx-text-box>
+                      </div>
+
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Address</label>
+                        <dx-text-box id="controlNo" formControlName="address" placeholder="Phone address">
+                        </dx-text-box>
+                      </div>
+
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Position</label>
+                        <dx-text-box id="controlNo" formControlName="position" placeholder="Position">
+                        </dx-text-box>
+                      </div>
+        
+                     
+                           
+                      <div class="col-12 col-md-3 mt-2" style="padding-top: 15px;">
+                       
+                       
+                        <dx-button
+                        id="action"
+                        text="Add"
+                        type="default"
+                        [useSubmitBehavior]="false"
+                        (click)="addWitness()">
+                        </dx-button>
+                      </div>
+                    </div>
+                  </form>
+          
+                  <div>
+                  
+                  </div>
+          
+                </div>
+              </div>
+
+
+            <div class="card card_border">
+                <div class="card-header card_header_background">
+                  MEDICAL DETAILS
+                </div>
+    
+                <div class="row p-3 ml-2">
+    
+                 
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Facility Name</label>
+                        <dx-text-box id="systemId" formControlName="facilityName" placeholder="Facility name">
+                        </dx-text-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Facility Address</label>
+                        <dx-text-box id="systemId" formControlName="facilityAddress" placeholder="Facility address">
+                        </dx-text-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Facility Phone</label>
+                        <dx-text-box id="systemId" formControlName="facilityPhone" placeholder="Facility phone">
+                        </dx-text-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Physician Name</label>
+                        <dx-text-box id="systemId" formControlName="physicianName" placeholder="Physician name">
+                        </dx-text-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Physician Position</label>
+                        <dx-text-box id="systemId" formControlName="physicianPosition" placeholder="Physician position">
+                        </dx-text-box>
+                      </div>
+    
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Able to work again</label>
+                        <dx-select-box
+                        id="scope"
+                        valueExpr="val"
+                        displayExpr="name"
+                        formControlName="ableToWorkAgain"
+                        [dataSource]="returnedList"
+                        placeholder="Choose ">
+                      </dx-select-box>
+                      </div>
+    
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Incident Outcome</label>
+                    
+
+                        <dx-select-box
+                        id="scope"
+                        valueExpr="id"
+                        displayExpr="name"
+                        formControlName="incOutCome"
+                        [dataSource]="incidentOutcomeList"
+                        placeholder="Choose">
+                      </dx-select-box>
+                      </div>
+    
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Date of Birth</label>
+                        <dx-date-box
+                        formControlName="DOB"
+                        [value]=""
+                        placeholder="Select Date"
+                        [max]="today"
+                        type="date">
+                      </dx-date-box>
+                      </div>
+    
+                      
+    
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Injury Nature</label>
+                        <dx-text-box id="systemId" formControlName="injuryNature" placeholder="Injurey Nature">
+                        </dx-text-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Treatment Type</label>
+                        <dx-select-box
+                        id="scope"
+                        valueExpr="id"
+                        displayExpr="name"
+                        formControlName="treatmentType"
+                        [dataSource]="treatmenttypesList"
+                        placeholder="Choose">
+                      </dx-select-box>
+                      </div>
+
+                      <div class="col-12 col-md-3">
+                        <label for="controlNo">Uploads</label>
+                        <input type="file"  style="height:60%" class="form-control" (change)="onChange($event)" formControlName="uploads" id="exampleInputPassword1" >
+                      </div>
+    
+                      
+    
+                  
+                
+                  </div>
+                </div>
+
+                <div class="card card_border">
+                    <div class="card-header card_header_background">
+                      PAYMENT DETAILS
+                    </div>
+        
+                    <div class="row p-3 ml-2">
+        
+                     
+                          <div class="col-12 col-md-3">
+                            <label for="controlNo">Payment Mode</label>
+                            <dx-select-box [dataSource]="paymentModes" formControlName="paymentMode" valueExpr="id"
+                            displayExpr="paymentMode" [searchEnabled]="true" placeholder="--Select--">
+                          </dx-select-box>
+                          </div>
+    
+                          <div class="col-12 col-md-3">
+                            <label for="controlNo">Account Number</label>
+                            <dx-text-box id="systemId" formControlName="accNo" placeholder="Account number">
+                            </dx-text-box>
+                          </div>
+    
+                          <div class="col-12 col-md-3">
+                            <label for="controlNo">Account Name</label>
+                            <dx-text-box id="systemId" formControlName="accName" placeholder="Account name">
+                            </dx-text-box>
+                          </div>
+    
+                          <div class="col-12 col-md-3">
+                            <label for="controlNo">Bank </label>
+                            <dx-select-box
+                            id="scope"
+                            valueExpr="id"
+                            displayExpr="alias"
+                            formControlName="bankID"
+                            [searchEnabled]="true"
+                            [dataSource]="bankList"
+                            placeholder="Choose">
+                          </dx-select-box>
+                          </div>
+    
+                          <div class="col-12 col-md-3">
+                            <label for="controlNo">Bank Relation ID</label>
+                            <dx-text-box id="systemId" formControlName="bankReID" placeholder="">
+                            </dx-text-box>
+                          </div>
+        
+  
+                      </div>
+                    </div>
+
+            <div class="col-12 col-md-3 mt-2" style="padding-top: 15px; padding-bottom: 10px;">
+               
+               
+              <dx-button
+              id="action"
+              text="Submit"
+              type="default"
+              [useSubmitBehavior]="false"
+              (click)="register()">
+              </dx-button>
+            </div>
+            
+          </form>
+  
+          <div>
+          
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>

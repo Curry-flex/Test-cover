@@ -1,0 +1,251 @@
+<div class="headerWrapper">
+  <!-- <div class=" div-pagetitle ">
+    <h5 class="">{{title}}</h5>
+  </div> -->
+
+</div>
+<div class="row">
+  <div class="col">
+    <div class="card card_border">
+      <div class="card-header card_header_background">
+        {{title}}
+      </div>
+      <div class="card-body card-nopadding">
+
+        <dx-data-grid
+        id="gridContainer2"
+        class="dx-card wide-card"
+        (onToolbarPreparing)="toolBarPreparing($event, this.onGetNavigationList)"
+        [dataSource]="parentNavListData"
+        [showBorders]="false"
+        [focusedRowEnabled]="true"
+        (onRowClick)="previewData($event)"
+        [columnAutoWidth]="true"
+        [showRowLines] = "true"
+        [allowColumnResizing]="true"
+        keyExpr="id">
+
+        <dxo-search-panel [visible]="true">
+          </dxo-search-panel>
+          <!-- <dxo-paging [pageSize]="pageSize"></dxo-paging>
+          <dxo-pager
+          [showPageSizeSelector]="true"
+          [allowedPageSizes]="allowedPageSises"
+      ></dxo-pager> -->
+      <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-scrolling mode="virtual" columnRenderingMode="virtual"></dxo-scrolling>
+        <dxo-filter-row [visible]="false"></dxo-filter-row>
+        <dxo-export [enabled]="true" fileName="Navigations" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="single"></dxo-selection>
+
+        <dxi-column
+            caption="Navigation ID"
+            dataField="id"
+            [width]="100"
+            >
+        </dxi-column>
+        <dxi-column
+            caption="Parent Id"
+            dataField="parentId"
+            [width]="100"
+            >
+        </dxi-column>
+        <dxi-column
+            caption="Navigation Text"
+            dataField="name"
+            >
+        </dxi-column>
+        <dxi-column
+            caption="Navigation Order"
+            dataField="orderNo"
+            >
+        </dxi-column>
+        <dxi-column
+            dataField="level"
+            >
+        </dxi-column>
+        <dxi-column
+            caption="Navigation Icon"
+            dataField="icon"
+            >
+        </dxi-column>
+        <dxi-column
+            caption="Navigation Path"
+            dataField="path"
+            >
+        </dxi-column>
+
+
+        <dxi-column
+            caption="Status"
+            dataField="status"
+            [width]="90"
+
+            cellTemplate="cellTemplateEnabled">
+            <div *dxTemplate="let d of 'cellTemplateEnabled'">
+                <div *ngIf="d.data.status == 1">
+                  Active
+              </div>
+              <div *ngIf="d.data.status != 1">
+                  Inactive
+              </div>
+            </div>
+          </dxi-column>
+
+
+          <dxi-column
+          dataField="description"
+          >
+         </dxi-column>
+          <dxi-column
+          dataField="accessAll"
+          >
+         </dxi-column>
+          <!-- <dxi-column
+          dataField="createdAt"
+          [hidingPriority]="2">
+         </dxi-column>
+          <dxi-column
+          dataField="createdBy"
+          [hidingPriority]="2">
+         </dxi-column>
+          <dxi-column
+          dataField="modifiedAt"
+          [hidingPriority]="2">
+         </dxi-column>
+          <dxi-column
+          dataField="modifiedBy"
+          [hidingPriority]="2">
+         </dxi-column> -->
+
+      </dx-data-grid>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<dx-popup class="popup"  [width]="funcpopWidth(75)" [height]="funcpopHeigt(90)" [showTitle]="true" title="{{title}}" [dragEnabled]="false" [closeOnOutsideClick]="false" [(visible)]="paramswinpnl">
+
+  <div *dxTemplate="let data of 'content'">
+      <dx-scroll-view>
+        <form [formGroup]="paramwinfrm" class="col-lg-12  div-nopadding" style="background: #fff;" enctype="multipart/form-data" role="form">
+          <!-- <div class="col-sm-12 col-md-6 col-lg-6">
+            <label class="control-label">Navigation Type</label>
+            <dx-select-box [dataSource]="navigationTypes"  valueExpr="id" displayExpr="name"
+            [searchEnabled]="true" formControlName="navigation_type_id">
+            </dx-select-box>
+          </div> -->
+            <div class="col-12">
+              <label class="control-label">Navigation Name</label>
+              <dx-text-box formControlName="name" [showClearButton]="true">
+              </dx-text-box>
+            </div>
+            <div class="col-12">
+              <label class="control-label">Navigation Route Path</label>
+              <dx-text-box formControlName="path" [showClearButton]="true">
+              </dx-text-box>
+            </div>
+            <div class="col-12">
+              <label class="control-label">Navigation Icon</label>
+              <dx-text-box formControlName="icon" [showClearButton]="true">
+              </dx-text-box>
+            </div>
+
+            <div class="col-12">
+              <label class="control-label">Navigation Order Number</label>
+              <dx-number-box formControlName="orderNo">
+              </dx-number-box>
+            </div>
+            <div class="col-12">
+              <label class="control-label">Navigation Level</label>
+              <dx-select-box [dataSource]="navigationLevels"  valueExpr="id" displayExpr="name"  (onValueChanged)="onChangeNavigationLevel($event)"
+              [searchEnabled]="true" formControlName="level">
+              </dx-select-box>
+            </div>
+            <div class="col-12">
+              <label [hidden]= "isParentHidden" class="control-label">Parent Navigation</label>
+                <dx-select-box [hidden]="isParentHidden" [dataSource]="parentNavListData" valueExpr="id" displayExpr="name"
+              [searchEnabled]="true" formControlName="parentId">
+              </dx-select-box>
+            </div>
+            <!-- <div class="col-12">
+              <hr>
+              <label  class="control-label">Online</label>
+            <dx-check-box text="Online" (onValueChanged)="onChangeParamCheckbox($event,'on_line')" formControlName="on_line">
+              </dx-check-box>
+
+            </div> -->
+            <div class="col-12">
+              <label class="control-label">Navigation Access</label>
+              <dx-select-box [dataSource]="accessAllData"  valueExpr="accessId" displayExpr="accessName"
+              [searchEnabled]="true" formControlName="accessAll">
+              </dx-select-box>
+            </div>
+
+            <div class="col-12">
+              <label for="usergroup">Allowed User Groups</label>
+              <dx-tag-box
+              id="usergroup"
+              formControlName="usergroup"
+              [dataSource]="userGroupDataSource"
+              [value]="availableUserGroupsDatasource"
+              [showSelectionControls]="true"
+              [hideSelectedItems]="false"
+              applyValueMode="useButtons"
+              displayExpr="desc"
+              valueExpr="id"
+              placeholder="Choose usergroup...">
+            </dx-tag-box>
+            </div>
+
+            <div class="col-12">
+              <label class="control-label">Desciption</label>
+              <dx-text-area formControlName="description">
+              </dx-text-area>
+            </div>
+
+            <input type='hidden' formControlName="id"/>
+            <input type='hidden' formControlName="navId"/>
+
+              <div class="col-lg-12">
+                <hr />
+              <div class="row">
+                <div class="col-sm-12 col-md-6" *ngIf="checkUserAccessRight(['DELETE'])">
+                  <dx-button
+                  [elementAttr]="{class: 'custom-btn'}"
+                  [visible]="hideButton"
+                  text="Delete Navigation"
+                  type="danger"
+                  icon="fa fa-user-times"
+                  (onClick)="createNavigation('NAVIGATION_DELETE')">
+              </dx-button>
+                </div>
+                <div class="col-sm-12 col-md-6" *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+                  <dx-button
+                  [elementAttr]="{class: 'custom-btn'}"
+                  [visible]="hideButton"
+                  text="Update Navigation Details"
+                  type="default"
+                  icon="fa fa-pencil-square-o"
+                  (onClick)="createNavigation('NAVIGATION_UPDATE')">
+              </dx-button>
+                </div>
+                <div class="col-sm-12 col-md-6" *ngIf="checkUserAccessRight(['DELETE', 'EDIT'])">
+                  <dx-button
+                  [elementAttr]="{class: 'custom-btn'}"
+                  [visible]="hideSaveButton"
+                  text="Save Navigation Details"
+                  type="success"
+                  icon="fa fa-save"
+                  (onClick)="createNavigation('NAVIGATION_CREATE')">
+              </dx-button>
+                </div>
+              </div>
+
+              </div>
+          </form>
+      </dx-scroll-view>
+  </div>
+</dx-popup>
